@@ -108,7 +108,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 
-# Ignore CLAUDE and GEMINI config files
+# Ignore CLAUDE and GEMINI  and docs config files
 CLAUDE.md
 GEMINI.md
 docs/
