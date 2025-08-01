@@ -18,12 +18,12 @@ import time
 from typing import Tuple, List, Dict, Optional
 
 
-def initialise_spark_session(app_name: str = "HMDataPreprocessing") -> SparkSession:
+def initialise_spark_session(app_name: str = "HMDataExamination") -> SparkSession:
     """
-    Initialise and configure Spark session with optimised memory settings for data preprocessing and cleaning.
+    Initialise and configure Spark session with optimised memory settings for data examination.
     
     Args:
-        app_name (str): Name of the Spark data preprocessing application
+        app_name (str): Name of the Spark data examination application
         
     Returns:
         SparkSession: Configured Spark session with performance optimisations
@@ -50,7 +50,7 @@ def initialise_spark_session(app_name: str = "HMDataPreprocessing") -> SparkSess
 def load_transactions_data(spark: SparkSession, file_path: str, sample_fraction: float = 0.1, 
                           random_seed: int = 42) -> Tuple[object, int]:
     """
-    Load and sample transaction data from CSV file for preprocessing and cleaning operations.
+    Load and sample transaction data from CSV file for examination.
     
     Args:
         spark (SparkSession): Active Spark session
@@ -85,7 +85,7 @@ def load_transactions_data(spark: SparkSession, file_path: str, sample_fraction:
 
 def load_customers_data(spark: SparkSession, file_path: str) -> Tuple[object, int]:
     """
-    Load customer demographic and preference data from CSV file for preprocessing operations.
+    Load customer demographic and preference data from CSV file for examination.
     
     Args:
         spark (SparkSession): Active Spark session
@@ -114,7 +114,7 @@ def load_customers_data(spark: SparkSession, file_path: str) -> Tuple[object, in
 
 def load_articles_data(spark: SparkSession, file_path: str) -> Tuple[object, int]:
     """
-    Load product/article information and metadata from CSV file for preprocessing operations.
+    Load product/article information and metadata from CSV file for examination.
     
     Args:
         spark (SparkSession): Active Spark session
@@ -143,7 +143,7 @@ def load_articles_data(spark: SparkSession, file_path: str) -> Tuple[object, int
 
 def integrate_datasets(df_transactions: object, df_customers: object, df_articles: object) -> Tuple[object, Dict[str, int]]:
     """
-    Integrate transaction, customer, and article datasets into a single dataset for preprocessing.
+    Integrate transaction, customer, and article datasets into a single dataset for examination.
 
     Also analyses the integrated dataset structure and categorises features.
     
@@ -215,7 +215,7 @@ def integrate_datasets(df_transactions: object, df_customers: object, df_article
 
 def assess_data_quality(df: object) -> Dict[str, any]:
     """
-    Perform comprehensive data quality assessment including missing values, duplicates, and outliers for preprocessing.
+    Perform comprehensive data quality assessment including missing values, duplicates, and outliers.
     
     Args:
         df (DataFrame): Input DataFrame to assess
@@ -226,7 +226,7 @@ def assess_data_quality(df: object) -> Dict[str, any]:
             - duplicate_count: Number of duplicate records
             - price_stats: Price distribution statistics if price column exists
     """
-    print("Analysing existing data quality issues in H&M dataset for preprocessing...")
+    print("Analysing existing data quality issues in H&M dataset...")
     
     # Check for missing values
     print(f"\n• Missing Values Analysis:")
@@ -244,7 +244,7 @@ def assess_data_quality(df: object) -> Dict[str, any]:
         for col_name, missing_count, missing_percentage in missing_summary:
             print(f"  {col_name}: {missing_count:,} ({missing_percentage:.2f}%)")
     else:
-        print("  ✓ No missing values found in original dataset - ready for preprocessing")
+        print("  ✓ No missing values found in original dataset")
     
     # Analyse duplicates
     print(f"\n• Duplicate Analysis:")
@@ -268,155 +268,16 @@ def assess_data_quality(df: object) -> Dict[str, any]:
     return quality_report
 
 
-def preprocess_and_clean_data(df: object, quality_report: Dict[str, any], 
-                             data_dir: str = './data') -> Tuple[object, Dict[str, any]]:
+def examine_hm_data(data_dir: str = './data', sample_fraction: float = 0.1, 
+                   random_seed: int = 42) -> Dict[str, any]:
     """
-    Data preprocessing and cleaning pipeline including duplicate removal, missing value imputation, and outlier handling.
+    Main function to examine the H&M dataset structure and quality.
     
-    Args:
-        df (DataFrame): Input DataFrame to preprocess
-        quality_report (Dict): Quality assessment report from assess_data_quality()
-        data_dir (str): Directory to save cleaned data
-        
-    Returns:
-        Tuple[DataFrame, Dict]: Tuple containing (cleaned DataFrame, processing summary)
-    """
-    print(f"Starting data preprocessing and cleaning pipeline on {df.count():,} records...")
-    
-    missing_summary = quality_report['missing_summary']
-    duplicate_count = quality_report['duplicate_count']
-    
-    # Step 1: Remove duplicates if any exist
-    if duplicate_count > 0:
-        print(f"\n• Removing Duplicates:")
-        df_no_duplicates = df.dropDuplicates()
-        final_count = df_no_duplicates.count()
-        print(f"  - Removed {duplicate_count:,} duplicate records")
-        print(f"  - Remaining records: {final_count:,}")
-    else:
-        df_no_duplicates = df
-        print(f"\n• No duplicates found - proceeding with original dataset for preprocessing")
-    
-    # Step 2: Handle missing values if any exist
-    if missing_summary:
-        print(f"\n• Handling Missing Values:")
-        
-        # For numerical columns, use median imputation
-        numerical_cols = [col_name for col_name, _, _ in missing_summary 
-                         if df_no_duplicates.select(col_name).dtypes[0][1] in ['int', 'double', 'float']]
-        
-        for col_name in numerical_cols:
-            # Calculate median excluding nulls
-            median_val = df_no_duplicates.select(col_name).filter(col(col_name).isNotNull()) \
-                                        .approxQuantile(col_name, [0.5], 0.01)[0]
-            
-            # Fill missing values with median
-            df_no_duplicates = df_no_duplicates.fillna({col_name: median_val})
-            print(f"  - {col_name}: filled with median value {median_val:.2f}")
-        
-        # For categorical columns, use mode imputation or default values
-        categorical_cols = [col_name for col_name, _, _ in missing_summary 
-                           if df_no_duplicates.select(col_name).dtypes[0][1] in ['string']]
-        
-        for col_name in categorical_cols:
-            # Calculate mode (most frequent value) excluding nulls
-            mode_result = df_no_duplicates.select(col_name).filter(col(col_name).isNotNull()) \
-                                         .groupBy(col_name).count().orderBy(col('count').desc()).first()
-            
-            if mode_result:
-                mode_val = mode_result[0]
-                # Fill missing values with mode
-                df_no_duplicates = df_no_duplicates.fillna({col_name: mode_val})
-                print(f"  - {col_name}: filled with mode value '{mode_val}'")
-            else:
-                # If no mode available, use default value
-                default_val = "Unknown"
-                df_no_duplicates = df_no_duplicates.fillna({col_name: default_val})
-                print(f"  - {col_name}: filled with default value '{default_val}'")
-    
-    # Step 3: Handle outliers in price column
-    outlier_count = 0
-    if 'price' in df_no_duplicates.columns:
-        print(f"\n• Handling Outliers (IQR Method):")
-        
-        # Calculate quartiles for price
-        quartiles = df_no_duplicates.select('price').approxQuantile('price', [0.25, 0.75], 0.01)
-        Q1, Q3 = quartiles[0], quartiles[1]
-        IQR = Q3 - Q1
-        
-        # Define outlier bounds
-        lower_bound = Q1 - 1.5 * IQR
-        upper_bound = Q3 + 1.5 * IQR
-        
-        # Count outliers before removal
-        outlier_count = df_no_duplicates.filter(
-            (col('price') < lower_bound) | (col('price') > upper_bound)
-        ).count()
-        
-        # Cap outliers at bounds (keeping original data structure)
-        df_no_duplicates = df_no_duplicates.withColumn(
-            'price',
-            when(col('price') < lower_bound, lower_bound)
-            .when(col('price') > upper_bound, upper_bound)
-            .otherwise(col('price'))
-        )
-        
-        print(f"  - price: {outlier_count:,} outliers capped (bounds: {lower_bound:.1f} - {upper_bound:.1f})")
-    
-    # Data validation and final quality check
-    print(f"\n• Final Data Quality Check:")
-    final_record_count = df_no_duplicates.count()
-    print(f"  - Final dataset size: {final_record_count:,} records")
-    
-    # Check for remaining missing values
-    remaining_nulls = 0
-    for col_name in df_no_duplicates.columns:
-        null_count = df_no_duplicates.filter(col(col_name).isNull()).count()
-        remaining_nulls += null_count
-    
-    print(f"  - Remaining missing values: {remaining_nulls}")
-    print(f"  - Data integrity: {'✓ PASSED' if remaining_nulls == 0 else '✗ FAILED'}")
-    
-    # Save cleaned dataset
-    output_path = os.path.join(data_dir, 'processed', 'hm_customer_data_cleaned.parquet')
-    df_no_duplicates.write.mode('overwrite').parquet(output_path)
-    print(f"✓ Saved preprocessed and cleaned dataset as Parquet file")
-    
-    # Create summary statistics
-    print(f"\n• Dataset Summary Statistics:")
-    
-    # Show basic statistics for key numerical columns
-    numerical_columns = [col for col, dtype in df_no_duplicates.dtypes if dtype in ['int', 'double', 'float']]
-    if numerical_columns:
-        print("Summary statistics for numerical columns:")
-        summary_stats = df_no_duplicates.select(numerical_columns[:5]).describe()  # Limit to first 5 for readability
-        summary_stats.show()
-    
-    # Cache cleaned dataframe for further analysis
-    df_cleaned = df_no_duplicates.cache()
-    
-    processing_summary = {
-        'final_record_count': final_record_count,
-        'duplicates_removed': duplicate_count,
-        'outliers_handled': outlier_count,
-        'remaining_nulls': remaining_nulls,
-        'data_integrity_passed': remaining_nulls == 0
-    }
-    
-    return df_cleaned, processing_summary
-
-
-def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float = 0.1, 
-                        random_seed: int = 42) -> Dict[str, any]:
-    """
-    Main function to control the complete H&M customer data preprocessing and cleaning pipeline.
-    
-    This function coordinates the entire data preprocessing workflow including:
+    This function coordinates the data examination workflow including:
     1. Spark session initialisation
     2. Data loading from CSV files
     3. Dataset integration and feature analysis
     4. Data quality assessment
-    5. Data preprocessing and cleaning
     
     Args:
         data_dir (str): Directory containing the H&M dataset files
@@ -424,18 +285,17 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
         random_seed (int): Random seed for reproducible sampling
         
     Returns:
-        Dict[str, any]: Comprehensive preprocessing results including:
+        Dict[str, any]: Comprehensive examination results including:
             - spark_session: Active Spark session
             - datasets: Dictionary of loaded DataFrames
             - integration_stats: Dataset integration statistics
             - quality_report: Data quality assessment results
-            - processing_summary: Data preprocessing results
             
     Raises:
         FileNotFoundError: If required data files are not found
-        Exception: If any step in the preprocessing pipeline fails
+        Exception: If any step in the examination pipeline fails
     """
-    print("=== CONL722 Assignment 1: Customer Data Preprocessing and Cleaning Report ===")
+    print("=== H&M Data Examination Report ===")
     print("Using PySpark and PyArrow with H&M Kaggle Dataset\n")
     
     try:
@@ -443,7 +303,7 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
         spark = initialise_spark_session()
         
         print("\n" + "=" * 60)
-        print("1. DATA LOADING AND PREPROCESSING")
+        print("1. DATA LOADING AND EXAMINATION")
         print("=" * 60)
         
         print("\n1.1 Loading H&M Dataset Files")
@@ -457,7 +317,7 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
         print("Loading dataset components:")
         print(f"  🔬 Using {sample_fraction*100:.0f}% sample for memory optimisation")
         
-        # Load all datasets for preprocessing
+        # Load all datasets for examination
         df_transactions, transaction_count = load_transactions_data(spark, transactions_path, sample_fraction, random_seed)
         df_customers, customer_count = load_customers_data(spark, customers_path)
         df_articles, article_count = load_articles_data(spark, articles_path)
@@ -465,26 +325,20 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
         print(f"\n1.2 Dataset Overview and Integration")
         print("-" * 42)
         
-        # Integrate datasets for preprocessing
+        # Integrate datasets for examination
         df_integrated, integration_stats = integrate_datasets(df_transactions, df_customers, df_articles)
         
         print(f"\n1.3 Data Quality Assessment")
         print("-" * 35)
         
-        # Assess data quality for preprocessing
+        # Assess data quality
         quality_report = assess_data_quality(df_integrated)
         
-        print(f"\n1.4 Data Preprocessing and Cleaning")
-        print("-" * 40)
-        
-        # Run preprocessing and cleaning pipeline
-        df_cleaned, processing_summary = preprocess_and_clean_data(df_integrated, quality_report, data_dir)
-        
-        print(f"\n✓ Data Loading, Preprocessing and Cleaning Complete")
-        print(f"  - Original transaction records: {transaction_count:,}")
-        print(f"  - After preprocessing and cleaning: {processing_summary['final_record_count']:,}")
-        print(f"  - Data quality: {'High' if processing_summary['data_integrity_passed'] else 'Needs attention'}")
-        print(f"  - Dataset ready for downstream analysis and modelling")
+        print(f"\n✓ Data Examination Complete")
+        print(f"  - Total transaction records: {transaction_count:,}")
+        print(f"  - Integrated records: {integration_stats['total_records']:,}")
+        print(f"  - Unique customers: {integration_stats['unique_customers']:,}")
+        print(f"  - Unique articles: {integration_stats['unique_articles']:,}")
         
         # Compile results
         results = {
@@ -493,8 +347,7 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
                 'transactions': df_transactions,
                 'customers': df_customers,
                 'articles': df_articles,
-                'integrated': df_integrated,
-                'cleaned': df_cleaned
+                'integrated': df_integrated
             },
             'counts': {
                 'transactions': transaction_count,
@@ -502,14 +355,13 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
                 'articles': article_count
             },
             'integration_stats': integration_stats,
-            'quality_report': quality_report,
-            'processing_summary': processing_summary
+            'quality_report': quality_report
         }
         
         return results
         
     except Exception as e:
-        print(f"\n⚠ Error during preprocessing: {str(e)}")
+        print(f"\n⚠ Error during examination: {str(e)}")
         if 'spark' in locals():
             spark.stop()
         raise
@@ -517,32 +369,28 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
 
 if __name__ == "__main__":
     """
-    Main execution block - runs the complete H&M data preprocessing and cleaning pipeline.
-    
-    This block demonstrates how to use the preprocessing functions and handles
-    Spark session cleanup automatically.
+    Main execution block - runs the H&M data examination pipeline.
     """
     try:
-        # Run the complete preprocessing pipeline
-        preprocessing_results = run_hm_data_preprocessing(
+        examination_results = examine_hm_data(
             data_dir='./data',
             sample_fraction=0.1,  # Use 10% sample for demonstration
             random_seed=42
         )
         
         print("\n" + "=" * 60)
-        print("PREPROCESSING PIPELINE COMPLETED SUCCESSFULLY")
+        print("DATA EXAMINATION COMPLETED SUCCESSFULLY")
         print("=" * 60)
-        print(f"Results available in preprocessing_results dictionary")
-        print(f"Access cleaned data with: preprocessing_results['datasets']['cleaned']")
+        print(f"Results available in examination_results dictionary")
+        print(f"Access integrated data with: examination_results['datasets']['integrated']")
         
     except Exception as e:
-        print(f"\nPreprocessing failed: {e}")
+        print(f"\nExamination failed: {e}")
         
     finally:
         # Clean up Spark session
-        if 'preprocessing_results' in locals() and 'spark_session' in preprocessing_results:
-            preprocessing_results['spark_session'].stop()
+        if 'examination_results' in locals() and 'spark_session' in examination_results:
+            examination_results['spark_session'].stop()
             print("\n✓ Spark session stopped")
         else:
             # Fallback cleanup
