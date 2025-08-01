@@ -143,9 +143,8 @@ def load_articles_data(spark: SparkSession, file_path: str) -> Tuple[object, int
 
 def integrate_datasets(df_transactions: object, df_customers: object, df_articles: object) -> Tuple[object, Dict[str, int]]:
     """
-    Integrate transaction, customer, and article datasets into a comprehensive dataset for preprocessing.
-    
-    Performs left joins to combine all datasets whilst preserving transaction records.
+    Integrate transaction, customer, and article datasets into a single dataset for preprocessing.
+
     Also analyses the integrated dataset structure and categorises features.
     
     Args:
@@ -315,12 +314,25 @@ def preprocess_and_clean_data(df: object, quality_report: Dict[str, any],
             df_no_duplicates = df_no_duplicates.fillna({col_name: median_val})
             print(f"  - {col_name}: filled with median value {median_val:.2f}")
         
-        # Handle detail_desc column specifically
-        if 'detail_desc' in df_no_duplicates.columns:
-            detail_desc_nulls = df_no_duplicates.filter(col('detail_desc').isNull()).count()
-            if detail_desc_nulls > 0:
-                df_no_duplicates = df_no_duplicates.fillna({'detail_desc': 'No Description'})
-                print(f"  - detail_desc: filled {detail_desc_nulls:,} missing values with 'No Description'")
+        # For categorical columns, use mode imputation or default values
+        categorical_cols = [col_name for col_name, _, _ in missing_summary 
+                           if df_no_duplicates.select(col_name).dtypes[0][1] in ['string']]
+        
+        for col_name in categorical_cols:
+            # Calculate mode (most frequent value) excluding nulls
+            mode_result = df_no_duplicates.select(col_name).filter(col(col_name).isNotNull()) \
+                                         .groupBy(col_name).count().orderBy(col('count').desc()).first()
+            
+            if mode_result:
+                mode_val = mode_result[0]
+                # Fill missing values with mode
+                df_no_duplicates = df_no_duplicates.fillna({col_name: mode_val})
+                print(f"  - {col_name}: filled with mode value '{mode_val}'")
+            else:
+                # If no mode available, use default value
+                default_val = "Unknown"
+                df_no_duplicates = df_no_duplicates.fillna({col_name: default_val})
+                print(f"  - {col_name}: filled with default value '{default_val}'")
     
     # Step 3: Handle outliers in price column
     outlier_count = 0
