@@ -27,10 +27,6 @@ def initialise_spark_session(app_name: str = "HMDataPreprocessing") -> SparkSess
         
     Returns:
         SparkSession: Configured Spark session with performance optimisations
-        
-    Examples:
-        >>> spark = initialise_spark_session("DataPreprocessing")
-        >>> print(f"Spark version: {spark.version}")
     """
     spark = SparkSession.builder \
         .appName(app_name) \
@@ -67,11 +63,6 @@ def load_transactions_data(spark: SparkSession, file_path: str, sample_fraction:
         
     Raises:
         FileNotFoundError: If the specified file path doesn't exist
-        
-    Examples:
-        >>> spark = initialise_spark_session()
-        >>> df_trans, count = load_transactions_data(spark, "./data/raw/transactions_train.csv")
-        >>> print(f"Loaded {count:,} transaction records for preprocessing")
     """
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Transaction file not found: {file_path}")
@@ -105,11 +96,6 @@ def load_customers_data(spark: SparkSession, file_path: str) -> Tuple[object, in
         
     Raises:
         FileNotFoundError: If the specified file path doesn't exist
-        
-    Examples:
-        >>> spark = initialise_spark_session()
-        >>> df_customers, count = load_customers_data(spark, "./data/raw/customers.csv")
-        >>> print(f"Loaded {count:,} customer records for preprocessing")
     """
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Customers file not found: {file_path}")
@@ -139,11 +125,6 @@ def load_articles_data(spark: SparkSession, file_path: str) -> Tuple[object, int
         
     Raises:
         FileNotFoundError: If the specified file path doesn't exist
-        
-    Examples:
-        >>> spark = initialise_spark_session()
-        >>> df_articles, count = load_articles_data(spark, "./data/raw/articles.csv")
-        >>> print(f"Loaded {count:,} article records for preprocessing")
     """
     if not os.path.exists(file_path):
         raise FileNotFoundError(f"Articles file not found: {file_path}")
@@ -174,10 +155,6 @@ def integrate_datasets(df_transactions: object, df_customers: object, df_article
         
     Returns:
         Tuple[DataFrame, Dict]: Tuple containing (integrated DataFrame, dataset statistics)
-        
-    Examples:
-        >>> df_full, stats = integrate_datasets(df_trans, df_customers, df_articles)
-        >>> print(f"Integrated dataset has {stats['total_records']:,} records for preprocessing")
     """
     print("Creating integrated customer interaction dataset...")
     
@@ -249,10 +226,6 @@ def assess_data_quality(df: object) -> Dict[str, any]:
             - missing_summary: List of (column_name, missing_count, missing_percentage)
             - duplicate_count: Number of duplicate records
             - price_stats: Price distribution statistics if price column exists
-            
-    Examples:
-        >>> quality_report = assess_data_quality(df_integrated)
-        >>> print(f"Found {quality_report['duplicate_count']} duplicate records to clean")
     """
     print("Analysing existing data quality issues in H&M dataset for preprocessing...")
     
@@ -308,11 +281,6 @@ def preprocess_and_clean_data(df: object, quality_report: Dict[str, any],
         
     Returns:
         Tuple[DataFrame, Dict]: Tuple containing (cleaned DataFrame, processing summary)
-        
-    Examples:
-        >>> quality_report = assess_data_quality(df_raw)
-        >>> df_clean, summary = preprocess_and_clean_data(df_raw, quality_report)
-        >>> print(f"Cleaned dataset has {summary['final_record_count']:,} records")
     """
     print(f"Starting data preprocessing and cleaning pipeline on {df.count():,} records...")
     
@@ -347,7 +315,7 @@ def preprocess_and_clean_data(df: object, quality_report: Dict[str, any],
             df_no_duplicates = df_no_duplicates.fillna({col_name: median_val})
             print(f"  - {col_name}: filled with median value {median_val:.2f}")
     
-    # Step 3: Handle outliers in price column if it exists
+    # Step 3: Handle outliers in price column
     outlier_count = 0
     if 'price' in df_no_duplicates.columns:
         print(f"\n• Handling Outliers (IQR Method):")
@@ -376,7 +344,7 @@ def preprocess_and_clean_data(df: object, quality_report: Dict[str, any],
         
         print(f"  - price: {outlier_count:,} outliers capped (bounds: {lower_bound:.1f} - {upper_bound:.1f})")
     
-    # Step 4: Data validation and final quality check
+    # Data validation and final quality check
     print(f"\n• Final Data Quality Check:")
     final_record_count = df_no_duplicates.count()
     print(f"  - Final dataset size: {final_record_count:,} records")
@@ -447,11 +415,6 @@ def run_hm_data_preprocessing(data_dir: str = './data', sample_fraction: float =
     Raises:
         FileNotFoundError: If required data files are not found
         Exception: If any step in the preprocessing pipeline fails
-        
-    Examples:
-        >>> results = run_hm_data_preprocessing(data_dir='./data', sample_fraction=0.05)
-        >>> print(f"Preprocessing complete. Processed {results['processing_summary']['final_record_count']:,} records")
-        >>> results['spark_session'].stop()  # Don't forget to stop Spark when done
     """
     print("=== CONL722 Assignment 1: Customer Data Preprocessing and Cleaning Report ===")
     print("Using PySpark and PyArrow with H&M Kaggle Dataset\n")
