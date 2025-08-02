@@ -9,6 +9,7 @@ setuptools==69.0.3
 # Data Visualisation
 matplotlib==3.8.3
 seaborn==0.13.2
+plotly>=5.0.0
 
 # Machine Learning & Analytics (for future segmentation work)
 scikit-learn==1.4.0
