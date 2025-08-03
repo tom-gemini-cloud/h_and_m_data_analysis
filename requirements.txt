@@ -1,25 +1,24 @@
 # Core Data Processing
-pyspark==3.5.1
-pyarrow==15.0.0
-polars>=0.20.0
-pandas==2.2.0
-numpy==1.26.4
-setuptools==69.0.3
+pyarrow
+polars
+pandas
+numpy
+setuptools
 
 # Data Visualisation
-matplotlib==3.8.3
-seaborn==0.13.2
-plotly>=5.0.0
+matplotlib
+seaborn
+plotly
 
 # Machine Learning & Analytics (for future segmentation work)
-scikit-learn==1.4.0
+scikit-learn
 
 # Performance Monitoring
-py4j==0.10.9.7
+py4j
 
 # Jupyter Notebook Support
-jupyter==1.0.0
-ipykernel==6.29.0
+jupyter
+ipykernel
 
 # Development & Utilities
-typing-extensions==4.9.0
+typing-extensions
