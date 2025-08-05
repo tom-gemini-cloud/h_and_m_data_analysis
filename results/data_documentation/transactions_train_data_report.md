@@ -1,5 +1,5 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 15:19:41
+**Generated on:** 2025-08-05 15:29:56
 **File:** transactions_train.csv
 
 ## 📄 File Information
@@ -39,21 +39,21 @@
 - **Unique Values:** 734
 - **Average Length:** 10.0 characters
 - **Top Values:**
-  - `2019-09-06`: 38,762 occurrences
-  - `2019-01-22`: 36,878 occurrences
-  - `2019-03-07`: 44,575 occurrences
-  - `2019-02-03`: 45,259 occurrences
-  - `2019-10-08`: 37,840 occurrences
+  - `2019-04-20`: 55,558 occurrences
+  - `2020-02-02`: 31,387 occurrences
+  - `2019-12-14`: 32,329 occurrences
+  - `2020-04-21`: 30,862 occurrences
+  - `2019-09-02`: 33,078 occurrences
 
 ### customer_id
 - **Unique Values:** 1,362,281
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `accf866263abe85a4dbe7e15ff60e00631ef6782512b9ba7e7305d16071166bc`: 18 occurrences
-  - `32239b7324a9215ba5fe6b84c73c4d094e8fb3d748d00d1acd6a17ca73246060`: 1 occurrences
-  - `3a9dc3761f618f1efa30c13ffd35c316ce47ab2d07c02385e1712cacb6a0a135`: 1 occurrences
-  - `efe2ca69575ff7db3249a058169108b98c7d6546133c220bfd5ff13433df7ff2`: 3 occurrences
-  - `4f877e1f3769cb78010923f8e95a0e4ad48fd694faccb60d3514b8ef401710c1`: 86 occurrences
+  - `671bd8c4b63812bb2ee58a782d8229604c0b89908304c3bbceb1d2337062dda5`: 4 occurrences
+  - `d56eb02e60f33e093f06ad72cf70a35995a3324ee5277af2856dc7c901802d3e`: 5 occurrences
+  - `20ef28241bf2323bfa53abe85be41b5f461afd6f09b4480eb6501f9432b9cda4`: 89 occurrences
+  - `6564c1ba88c6b456933805b4cd1cacd29bd94ba841a2c6371b380661911ade54`: 4 occurrences
+  - `4ab8207b174baec7ad438d067b82fbf215793903e183246b4c2d8a98d1266a70`: 2 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 2970.94 MB

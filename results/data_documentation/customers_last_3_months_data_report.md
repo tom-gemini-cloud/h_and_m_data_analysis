@@ -1,11 +1,11 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 15:19:43
-**File:** customers_last_3_months.csv
+**Generated on:** 2025-08-05 15:29:58
+**File:** customers_last_3_months.parquet
 
 ## 📄 File Information
-- **File Path:** `..\data\processed\customers_last_3_months.csv`
-- **File Type:** CSV
-- **File Size:** 75.94 MB
+- **File Path:** `..\data\processed\customers_last_3_months.parquet`
+- **File Type:** PARQUET
+- **File Size:** 30.0 MB
 - **Last Modified:** 2025-08-05 13:24:29
 
 ## 📊 Dataset Overview
@@ -41,52 +41,52 @@
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `dfce581451106f0abe486188c9d26fbf46b7e8aa32ca4c6e519525e1b52bb035`: 1 occurrences
-  - `9282b366ff0b12e8a5553d1c6469f7c3889b79f053267141fe9e1c6b220dbec5`: 1 occurrences
-  - `fb762bd8a3df8f6491025d3819108c162ef6252bef730731e8b989be5297343b`: 1 occurrences
-  - `18df4b8a2c464bdedb0be9fa7b9b2b6c950161be341dca9d500eaac865f8817e`: 1 occurrences
-  - `7afa4521ff4ced5ffe06be00135bf2c229c199067a2f0a54a705fcca10106572`: 1 occurrences
+  - `08af206b1835ff30691a8d51efffb1ebc46f43c9e905a9b69d3f2c5c764950d5`: 1 occurrences
+  - `01d88ba133902647e3d0f99ceda43c83bba303c3667c5b509a054a199ab340f9`: 1 occurrences
+  - `883503902aaafdd642df50471bdf34bcd5f301f58991ace72afda102b11c4688`: 1 occurrences
+  - `d80ba8b62527322b03cf1e2435bc74211f0052899407cf338c8e770ebacd5547`: 1 occurrences
+  - `fcf06a7bc387818e4c7f383776291e1283b7ab43da1c567944523b2ad93ce4ab`: 1 occurrences
 
 ### club_member_status
 - **Unique Values:** 4
 - **Average Length:** 6.08 characters
 - **Top Values:**
   - `LEFT CLUB`: 65 occurrences
-  - `None`: 745 occurrences
-  - `PRE-CREATE`: 10,707 occurrences
   - `ACTIVE`: 513,558 occurrences
+  - `PRE-CREATE`: 10,707 occurrences
+  - `None`: 745 occurrences
 
 ### fashion_news_frequency
 - **Unique Values:** 4
 - **Average Length:** 6.11 characters
 - **Top Values:**
-  - `NONE`: 301,797 occurrences
-  - `None`: 2,024 occurrences
-  - `Monthly`: 165 occurrences
   - `Regularly`: 221,089 occurrences
+  - `NONE`: 301,797 occurrences
+  - `Monthly`: 165 occurrences
+  - `None`: 2,024 occurrences
 
 ### postal_code
 - **Unique Values:** 246,741
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `ccb965048f7c0f285a6df40659f1d1277c91ff12fe76924b3111f00966989c69`: 3 occurrences
-  - `da579811ef8a4cc36412439cd9d7648c831436f9242a4dbea666b0694536084a`: 6 occurrences
-  - `774f67a6a3ebd6f3fe229aed9dfad300c9a6fdae245afe19a19f7970af7b0e4a`: 3 occurrences
-  - `44c66ba088dc680d3a726ee1d198e0aef70bbba4cd168b920aef89cbc80437a8`: 1 occurrences
-  - `49a6e0f79e5a7d207ee8c8d04a10c7ef9864ec2b8d3126b746ee089d94a85331`: 2 occurrences
+  - `76ce153b8fcb32ab09f7b1d2eeb53dea441810f52b98b9cbd9a59a33375c59d2`: 2 occurrences
+  - `a671c4d610c78ebee9422283ffcb9b09bf5437372bbcd18eaa52fef3b71fe1af`: 2 occurrences
+  - `65e46f3cdfb76910afbadcfadf1875328b4597c87b56b3562b66e8ab3b69edd0`: 1 occurrences
+  - `2973abc54daa8a5f8ccfe9362140c63247c5eee03f1d93f4c830291c32bc3057`: 1 occurrences
+  - `1c3318c269a6f343f2a4f950a4c40266cbc94fad7b4511e26a3a529b9dcb5c9a`: 1 occurrences
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 82.39 MB
+- **Estimated Total Memory:** 82.41 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
 |--------|-------------|
 | customer_id | 32.048 |
-| FN | 4.0687 |
-| Active | 4.0687 |
-| club_member_status | 3.0413 |
-| fashion_news_frequency | 3.05 |
-| age | 4.0687 |
+| FN | 4.0686 |
+| Active | 4.0686 |
+| club_member_status | 3.0455 |
+| fashion_news_frequency | 3.0618 |
+| age | 4.0686 |
 | postal_code | 32.048 |
 
 ## 💡 Data Quality Recommendations

@@ -1,5 +1,5 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 15:19:42
+**Generated on:** 2025-08-05 15:29:57
 **File:** articles.csv
 
 ## 📄 File Information
@@ -67,141 +67,141 @@
 - **Unique Values:** 45,875
 - **Average Length:** 15.54 characters
 - **Top Values:**
-  - `Billy fluffy`: 1 occurrences
-  - `BB Adam Wind Jkt`: 1 occurrences
-  - `VANJA`: 2 occurrences
-  - `Wired Push`: 1 occurrences
-  - `LINDA RIBBED BEANIE`: 3 occurrences
+  - `ANDREA romper set`: 1 occurrences
+  - `ANDY L/S PRICE TEE`: 1 occurrences
+  - `LS flip flop`: 1 occurrences
+  - `Cayla fancy jogger`: 2 occurrences
+  - `Mel Tulle Dress`: 1 occurrences
 
 ### product_type_name
 - **Unique Values:** 131
 - **Average Length:** 7.53 characters
 - **Top Values:**
-  - `Wallet`: 77 occurrences
-  - `Headband`: 1 occurrences
-  - `Watch`: 73 occurrences
-  - `Clothing mist`: 1 occurrences
-  - `Socks`: 1,889 occurrences
+  - `Hair/alice band`: 854 occurrences
+  - `Underwear body`: 174 occurrences
+  - `Eyeglasses`: 2 occurrences
+  - `Night gown`: 171 occurrences
+  - `Other accessories`: 1,034 occurrences
 
 ### product_group_name
 - **Unique Values:** 19
 - **Average Length:** 15.44 characters
 - **Top Values:**
-  - `Shoes`: 5,283 occurrences
-  - `Bags`: 25 occurrences
-  - `Garment Full body`: 13,292 occurrences
+  - `Fun`: 2 occurrences
+  - `Underwear`: 5,490 occurrences
   - `Furniture`: 13 occurrences
-  - `Unknown`: 121 occurrences
+  - `Garment Upper body`: 42,741 occurrences
+  - `Garment Full body`: 13,292 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Average Length:** 8.29 characters
 - **Top Values:**
-  - `Transparent`: 86 occurrences
-  - `Application/3D`: 1,341 occurrences
-  - `Placement print`: 3,098 occurrences
-  - `Melange`: 5,938 occurrences
-  - `Jacquard`: 830 occurrences
+  - `Lace`: 1,513 occurrences
+  - `Hologram`: 8 occurrences
+  - `Metallic`: 346 occurrences
+  - `All over pattern`: 17,165 occurrences
+  - `Solid`: 49,747 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Average Length:** 7.48 characters
 - **Top Values:**
-  - `Dark Green`: 2,106 occurrences
-  - `Dark Red`: 2,340 occurrences
-  - `Gold`: 1,377 occurrences
-  - `Unknown`: 28 occurrences
-  - `Other Red`: 114 occurrences
+  - `Light Pink`: 5,811 occurrences
+  - `Dark Orange`: 886 occurrences
+  - `Pink`: 2,063 occurrences
+  - `Green`: 815 occurrences
+  - `Other Pink`: 750 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Average Length:** 6.81 characters
 - **Top Values:**
-  - `Medium`: 5,711 occurrences
-  - `Unknown`: 28 occurrences
-  - `Undefined`: 105 occurrences
   - `Medium Dusty`: 12,630 occurrences
-  - `Bright`: 6,471 occurrences
+  - `Unknown`: 28 occurrences
+  - `Dark`: 42,706 occurrences
+  - `Dusty Light`: 22,152 occurrences
+  - `Light`: 15,739 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Average Length:** 4.92 characters
 - **Top Values:**
-  - `Pink`: 9,403 occurrences
-  - `Beige`: 5,657 occurrences
-  - `Yellowish Green`: 5 occurrences
-  - `Orange`: 2,734 occurrences
-  - `Green`: 3,526 occurrences
+  - `Lilac Purple`: 1,100 occurrences
+  - `Mole`: 1,223 occurrences
+  - `Unknown`: 685 occurrences
+  - `undefined`: 105 occurrences
+  - `Turquoise`: 1,829 occurrences
 
 ### department_name
 - **Unique Values:** 250
 - **Average Length:** 13.14 characters
 - **Top Values:**
-  - `Girls Projects`: 7 occurrences
-  - `Belts`: 374 occurrences
-  - `Knit & Woven`: 512 occurrences
-  - `Young Girl Swimwear`: 175 occurrences
-  - `Baby Boy Jersey Fancy`: 872 occurrences
+  - `Blazer S&T`: 142 occurrences
+  - `Woven inactive from s1`: 62 occurrences
+  - `Shoes`: 443 occurrences
+  - `Girls Local Relevance`: 70 occurrences
+  - `Young Boy Shirt`: 290 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
-  - `C`: 6,961 occurrences
-  - `F`: 12,553 occurrences
-  - `I`: 9,214 occurrences
   - `A`: 26,001 occurrences
-  - `B`: 6,775 occurrences
+  - `S`: 3,392 occurrences
+  - `I`: 9,214 occurrences
+  - `H`: 12,007 occurrences
+  - `D`: 15,149 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Average Length:** 13.76 characters
 - **Top Values:**
-  - `Ladieswear`: 26,001 occurrences
-  - `Menswear`: 12,553 occurrences
-  - `Children Sizes 92-140`: 12,007 occurrences
+  - `Sport`: 3,392 occurrences
   - `Ladies Accessories`: 6,961 occurrences
-  - `Children Sizes 134-170`: 9,214 occurrences
+  - `Divided`: 15,149 occurrences
+  - `Menswear`: 12,553 occurrences
+  - `Baby Sizes 50-98`: 8,875 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Average Length:** 10.16 characters
 - **Top Values:**
+  - `Menswear`: 12,553 occurrences
+  - `Baby/Children`: 34,711 occurrences
+  - `Divided`: 15,149 occurrences
   - `Sport`: 3,392 occurrences
   - `Ladieswear`: 39,737 occurrences
-  - `Divided`: 15,149 occurrences
-  - `Baby/Children`: 34,711 occurrences
-  - `Menswear`: 12,553 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Average Length:** 16.74 characters
 - **Top Values:**
-  - `Kids & Baby Shoes`: 2,142 occurrences
-  - `Special Collections`: 682 occurrences
-  - `Men Edition`: 330 occurrences
-  - `Ladies Other`: 4 occurrences
-  - `Womens Tailoring`: 3,376 occurrences
+  - `Divided Basics`: 1,723 occurrences
+  - `Mens Outerwear`: 629 occurrences
+  - `Men H&M Sport`: 872 occurrences
+  - `Divided Asia keys`: 280 occurrences
+  - `EQ Divided`: 26 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Average Length:** 10.95 characters
 - **Top Values:**
-  - `Special Offers`: 1,061 occurrences
-  - `Dresses/Skirts girls`: 1,541 occurrences
+  - `Accessories`: 11,519 occurrences
+  - `Shoes`: 5,145 occurrences
+  - `Blouses`: 5,838 occurrences
+  - `Unknown`: 3,873 occurrences
   - `Shirts`: 2,116 occurrences
-  - `Jersey Basic`: 8,126 occurrences
-  - `Woven/Jersey/Knitted mix Baby`: 1,965 occurrences
 
 ### detail_desc
 - **Unique Values:** 43,405
 - **Average Length:** 142.16 characters
 - **Top Values:**
-  - `Fitted,off-the-shoulder mesh top with decorative gathers at the front and long sleeves. Jersey lining front and back.`: 1 occurrences
-  - `3/4-length sports tights in fast-drying functional fabric with an elasticated waist and reflective details.`: 2 occurrences
-  - `Leather bag with two handles and a zip at the top and a detachable, adjustable shoulder strap. Tab and press-stud at the sides to adjust the size of the bag and a detachable address label on one handle. Padded compartment to fit laptops up to 15”, a zipped inner compartment and studs on the bottom. Lined. Size approx. 14x34x40 cm.`: 1 occurrences
-  - `Hat in braided paper straw with a grosgrain band. Width of brim 3.5 cm.`: 2 occurrences
-  - `Short, straight-cut dress in woven fabric with a round neckline that has a small opening and concealed button at the back of the neck. Long sleeves and cuffs with two buttons. Unlined.`: 5 occurrences
+  - `Pyjamas with a top and shorts in soft, patterned jersey. Top with a lace-trimmed V-neck, and short sleeves with overlocked edges. Shorts with narrow elastication at the waist and overlocked hems.`: 3 occurrences
+  - `5-pocket slim-fit jeans in washed, stretch, flexible denim for high comfort with an adjustable, elasticated waist, zip fly and button and straight hems.`: 2 occurrences
+  - `Padded parka with a pile-lined hood with a faux fur trim. Zip and wind flap with press-studs down the front and a drawstring at the waist and hem. Handwarmer pockets and flap front pockets with a press-stud, tab with adjustable fastening and inner ribbing at the cuffs and a single back vent. Lined.`: 1 occurrences
+  - `Patterned softshell jacket in windproof, water-repellent functional fabric with folded seams, a detachable hood and zip down the front. Side pockets, reflective details and narrow elastication at the cuffs and hem. Brushed thermal inside. The jacket has a water-repellent coating without fluorocarbons.`: 3 occurrences
+  - `High-waisted jeans in washed, superstretch denim with a print motif, zip fly and button, fake front pockets, real back pockets and super-skinny legs.`: 1 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 36.38 MB

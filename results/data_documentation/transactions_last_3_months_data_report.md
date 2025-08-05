@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 15:19:47
-**File:** transactions_last_3_months.csv
+**Generated on:** 2025-08-05 15:30:02
+**File:** transactions_last_3_months.parquet
 
 ## 📄 File Information
-- **File Path:** `..\data\processed\transactions_last_3_months.csv`
-- **File Type:** CSV
-- **File Size:** 405.02 MB
-- **Last Modified:** 2025-08-05 13:24:05
+- **File Path:** `..\data\processed\transactions_last_3_months.parquet`
+- **File Type:** PARQUET
+- **File Size:** 52.83 MB
+- **Last Modified:** 2025-08-05 13:24:06
 
 ## 📊 Dataset Overview
 - **Rows:** 3,904,391
@@ -21,7 +21,7 @@
 ## 📋 Schema Information
 | Column | Data Type | Null Count | Null % | Unique Count | Unique % |
 |--------|-----------|------------|---------|--------------|----------|
-| t_dat | String | 0 | 0.0% | 91 | 0.0% |
+| t_dat | Date | 0 | 0.0% | 91 | 0.0% |
 | customer_id | String | 0 | 0.0% | 525,075 | 13.45% |
 | article_id | Int64 | 0 | 0.0% | 42,298 | 1.08% |
 | price | Float64 | 0 | 0.0% | 5,622 | 0.14% |
@@ -35,33 +35,23 @@
 | sales_channel_id | 3904391 | 1.653 | N/A | 1 | N/A | N/A | N/A | 2 |
 
 ## 📝 Categorical Column Analysis
-### t_dat
-- **Unique Values:** 91
-- **Average Length:** 10.0 characters
-- **Top Values:**
-  - `2020-09-01`: 38,060 occurrences
-  - `2020-09-21`: 32,130 occurrences
-  - `2020-07-04`: 46,408 occurrences
-  - `2020-09-08`: 36,415 occurrences
-  - `2020-08-28`: 39,546 occurrences
-
 ### customer_id
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `e8be97af1301a1bdcda9d554c6f3c7259c6d3ab2c902c81239ab4910a2d0b6fb`: 2 occurrences
-  - `dd7cde075ac488534e5e834ac163cacdc949a232c40fc14da5c002aca95c8cc0`: 2 occurrences
-  - `952c16e5653973942b3d29b805ee68adaba5ad4f8006b052a7283301733acc64`: 4 occurrences
-  - `546ded77ba74020f3e565becdd5b953be61442d36a0eceb687261717fa88fc04`: 22 occurrences
-  - `24ae6de3a284047ac6a7815627feab468ae5c3c50d947ff92aa3576a07a7545b`: 2 occurrences
+  - `d702d08296bf8a9deef9b48a66dfddf7d21774060248c1053adaffa790e5d766`: 7 occurrences
+  - `b38f815771fa6d1a754161f193effd569dfeee321e59bb2f2b2dac0714a9784d`: 2 occurrences
+  - `7723987c3160f42d45636d93ac4f4065204aa59c21b9863ceb35acdbb36e692c`: 24 occurrences
+  - `ee4dc7ef4e49f96a1275aed58f38a0541a0029221d288c72ba2bf8e040f37e67`: 4 occurrences
+  - `6cae7fbdb8d894f1c2136314d55fa2c1ee4b1a18936daf1bd251812e87c1fdb7`: 3 occurrences
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 364.9 MB
+- **Estimated Total Memory:** 342.56 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
 |--------|-------------|
-| t_dat | 37.2352 |
+| t_dat | 14.8941 |
 | customer_id | 238.3051 |
 | article_id | 29.7881 |
 | price | 29.7881 |

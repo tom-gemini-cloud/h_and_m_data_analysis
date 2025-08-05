@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 15:19:47
-**File:** articles_last_3_months.csv
+**Generated on:** 2025-08-05 15:30:02
+**File:** articles_last_3_months.parquet
 
 ## 📄 File Information
-- **File Path:** `..\data\processed\articles_last_3_months.csv`
-- **File Type:** CSV
-- **File Size:** 13.92 MB
-- **Last Modified:** 2025-08-05 13:24:28
+- **File Path:** `..\data\processed\articles_last_3_months.parquet`
+- **File Type:** PARQUET
+- **File Size:** 1.5 MB
+- **Last Modified:** 2025-08-05 13:24:29
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -67,144 +67,144 @@
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `PQ ILON CTN/CASH SHORTS`: 2 occurrences
-  - `CE Sete blouse print`: 1 occurrences
-  - `Karen chinos`: 2 occurrences
-  - `Ellen shorts`: 11 occurrences
-  - `MINDY Cardigan`: 4 occurrences
+  - `Aruba`: 1 occurrences
+  - `FREDRIKA SNEAKER`: 1 occurrences
+  - `SCARLETT frill dress`: 2 occurrences
+  - `Camy  Tank`: 1 occurrences
+  - `Daphne midi dress`: 1 occurrences
 
 ### product_type_name
 - **Unique Values:** 124
 - **Average Length:** 7.46 characters
 - **Top Values:**
-  - `Wallet`: 26 occurrences
-  - `Toy`: 2 occurrences
-  - `Outdoor trousers`: 30 occurrences
-  - `Backpack`: 6 occurrences
-  - `Pyjama jumpsuit/playsuit`: 106 occurrences
+  - `Keychain`: 1 occurrences
+  - `Bikini top`: 665 occurrences
+  - `Flat shoe`: 75 occurrences
+  - `Earring`: 505 occurrences
+  - `Sewing kit`: 1 occurrences
 
 ### product_group_name
 - **Unique Values:** 18
 - **Average Length:** 15.34 characters
 - **Top Values:**
-  - `Underwear/nightwear`: 7 occurrences
-  - `Accessories`: 4,179 occurrences
-  - `Items`: 15 occurrences
   - `Garment and Shoe care`: 8 occurrences
-  - `Socks & Tights`: 1,005 occurrences
+  - `Furniture`: 1 occurrences
+  - `Stationery`: 4 occurrences
+  - `Underwear/nightwear`: 7 occurrences
+  - `Items`: 15 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Average Length:** 7.86 characters
 - **Top Values:**
-  - `Unknown`: 6 occurrences
+  - `Denim`: 2,569 occurrences
   - `Glittering/Metallic`: 314 occurrences
-  - `Colour blocking`: 533 occurrences
-  - `Jacquard`: 258 occurrences
-  - `Metallic`: 147 occurrences
+  - `Transparent`: 45 occurrences
+  - `Placement print`: 878 occurrences
+  - `Argyle`: 3 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Average Length:** 7.43 characters
 - **Top Values:**
-  - `Light Green`: 303 occurrences
-  - `Light Grey`: 671 occurrences
-  - `Gold`: 675 occurrences
-  - `Yellow`: 624 occurrences
-  - `Purple`: 99 occurrences
+  - `Unknown`: 5 occurrences
+  - `Light Blue`: 1,247 occurrences
+  - `Greyish Beige`: 129 occurrences
+  - `Dark Green`: 755 occurrences
+  - `Silver`: 318 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Average Length:** 6.95 characters
 - **Top Values:**
   - `Medium Dusty`: 5,777 occurrences
-  - `Dark`: 16,807 occurrences
-  - `Dusty Light`: 9,135 occurrences
   - `Light`: 6,424 occurrences
-  - `Medium`: 1,748 occurrences
+  - `Unknown`: 5 occurrences
+  - `Undefined`: 29 occurrences
+  - `Dusty Light`: 9,135 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Average Length:** 5.01 characters
 - **Top Values:**
+  - `Pink`: 3,474 occurrences
+  - `Brown`: 1,083 occurrences
   - `Green`: 1,339 occurrences
-  - `Red`: 1,635 occurrences
-  - `Black`: 10,050 occurrences
-  - `Lilac Purple`: 518 occurrences
-  - `Turquoise`: 504 occurrences
+  - `Grey`: 2,892 occurrences
+  - `Blue`: 6,343 occurrences
 
 ### department_name
 - **Unique Values:** 238
 - **Average Length:** 12.04 characters
 - **Top Values:**
-  - `Shirt S&T`: 81 occurrences
-  - `Baby Boy Outdoor`: 62 occurrences
-  - `Special Collection`: 9 occurrences
-  - `Take Care External`: 87 occurrences
-  - `EQ Divided Blue`: 1 occurrences
+  - `Tops Fancy Jersey`: 592 occurrences
+  - `Outdoor/Blazers`: 311 occurrences
+  - `Kids Boy Trouser`: 113 occurrences
+  - `Young Boy Socks`: 31 occurrences
+  - `Conscious Exclusive`: 58 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
-  - `D`: 7,111 occurrences
-  - `B`: 3,919 occurrences
-  - `H`: 2,832 occurrences
-  - `G`: 2,428 occurrences
+  - `S`: 1,328 occurrences
   - `J`: 1,156 occurrences
+  - `I`: 2,471 occurrences
+  - `A`: 12,862 occurrences
+  - `G`: 2,428 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Average Length:** 12.66 characters
 - **Top Values:**
-  - `Lingeries/Tights`: 3,919 occurrences
-  - `Divided`: 7,111 occurrences
   - `Baby Sizes 50-98`: 2,428 occurrences
+  - `Ladies Accessories`: 3,474 occurrences
+  - `Sport`: 1,328 occurrences
+  - `Lingeries/Tights`: 3,919 occurrences
   - `Ladieswear`: 12,862 occurrences
-  - `Children Sizes 92-140`: 2,832 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Average Length:** 9.75 characters
 - **Top Values:**
+  - `Baby/Children`: 8,887 occurrences
   - `Menswear`: 4,717 occurrences
   - `Ladieswear`: 20,255 occurrences
   - `Divided`: 7,111 occurrences
-  - `Baby/Children`: 8,887 occurrences
   - `Sport`: 1,328 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Average Length:** 17.17 characters
 - **Top Values:**
-  - `Womens Premium`: 487 occurrences
-  - `Baby Boy`: 498 occurrences
-  - `Womens Everyday Collection`: 3,867 occurrences
-  - `Kids Girl`: 1,031 occurrences
   - `Men Suits & Tailoring`: 572 occurrences
+  - `Divided Collection`: 3,489 occurrences
+  - `Womens Shoes`: 1,084 occurrences
+  - `Men Underwear`: 1,085 occurrences
+  - `Kids & Baby Shoes`: 559 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Average Length:** 10.82 characters
 - **Top Values:**
-  - `Blouses`: 3,121 occurrences
-  - `Socks and Tights`: 947 occurrences
-  - `Dresses Ladies`: 2,513 occurrences
+  - `Under-, Nightwear`: 3,214 occurrences
   - `Jersey Basic`: 3,185 occurrences
+  - `Woven/Jersey/Knitted mix Baby`: 558 occurrences
   - `Special Offers`: 336 occurrences
+  - `Socks and Tights`: 947 occurrences
 
 ### detail_desc
 - **Unique Values:** 19,739
 - **Average Length:** 149.28 characters
 - **Top Values:**
-  - `Treggings in soft, stretch fabric, one pair in denim, and one pair in twill. Skinny fit with an easy pull-on, adjustable, elasticated waist, fake fly, fake front pockets and real back pockets.`: 3 occurrences
-  - `Long bandeau dress in a crêpe weave with a silicone trim at the top and support panels in the bodice. Draping at the top with a twisted detail that creates a softly draping front, detachable, adjustable shoulder straps and a concealed zip at the back. Lined.`: 1 occurrences
-  - `Suit trousers in woven fabric with a regular waist, pleats at the top and a zip fly with a hook-and-eye fastening. Diagonal side pockets, fake back pockets and wide, straight legs with creases.`: 1 occurrences
-  - `Fully lined bikini top with removable inserts, a knot at the front and a fastener at the back.`: 3 occurrences
-  - `Calf-length, pleated skirt in an airy weave with a high waist, concealed zip in one side and asymmetric hem with longer sides. Lined.`: 1 occurrences
+  - `Long, fitted jumper in a soft, heavily draping rib-knit viscose blend with long sleeves and ribbing around the neckline.`: 1 occurrences
+  - `Blouse in an airy crêpe weave. Stand-up collar with gathers front and back, a V-neck opening at the front with narrow ties at the top and flutter sleeves. Unlined.`: 2 occurrences
+  - `Short V-neck dress in airy chiffon with short, flounced sleeves and an opening with a button at the back of the neck. Elasticated seam at the waist and an asymmetric skirt with billowing flounces. Lined.`: 2 occurrences
+  - `Belt in imitation suede with a button stud fastening. Large, engraved metal buckle decorated with plastic beads and a faceted glass stone.`: 1 occurrences
+  - `Pool shoes with a wide strap and moulded insoles in leather. Rubber soles.`: 1 occurrences
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 14.79 MB
+- **Estimated Total Memory:** 14.8 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
@@ -233,7 +233,7 @@
 | section_name | 0.6925 |
 | garment_group_no | 0.3227 |
 | garment_group_name | 0.4366 |
-| detail_desc | 6.0167 |
+| detail_desc | 6.0256 |
 
 ## 💡 Data Quality Recommendations
 - **Potential ID columns detected:** article_id - Verify if these should be used as identifiers
