@@ -5,4 +5,3 @@ This project analyzes customer transaction data to derive insights and build pre
 ## Setup
 
 1.  Install dependencies: `pip install -r requirements.txt`
-2.  Run the analysis: `python src/hm_big_data_analysis.py`
