@@ -1,11 +1,11 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 14:28:30
-**File:** customers_last_3_months.parquet
+**Generated on:** 2025-08-05 15:19:43
+**File:** customers_last_3_months.csv
 
 ## 📄 File Information
-- **File Path:** `data\processed\customers_last_3_months.parquet`
-- **File Type:** PARQUET
-- **File Size:** 30.0 MB
+- **File Path:** `..\data\processed\customers_last_3_months.csv`
+- **File Type:** CSV
+- **File Size:** 75.94 MB
 - **Last Modified:** 2025-08-05 13:24:29
 
 ## 📊 Dataset Overview
@@ -32,61 +32,61 @@
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
-| FN | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| Active | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| age | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| FN | 220658 | 1.0 | N/A | 1.0 | N/A | N/A | N/A | 1.0 |
+| Active | 217039 | 1.0 | N/A | 1.0 | N/A | N/A | N/A | 1.0 |
+| age | 522122 | 35.0471 | N/A | 16 | N/A | N/A | N/A | 99 |
 
 ## 📝 Categorical Column Analysis
 ### customer_id
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `0a5a9438171930351d57348cc68d9f00193bbb221de851e6b207c999f8b31fab`: 1 occurrences
-  - `3c6631e7161ffc984e6fa9eba80ca8c8f70d4da740caf4470b2601b6c87366e9`: 1 occurrences
-  - `1dbb0603d74b4d181bd213432ca660dea5ef638711fcf006d4e9db51b1cef840`: 1 occurrences
-  - `4048164699c2e564a603334a5761f53c5a010e53459b892fa0c29998e1b04480`: 1 occurrences
-  - `35be01d11ee76d27685a06a46ee6c9c98ccd0218f9d234121fcd3a204320a576`: 1 occurrences
+  - `dfce581451106f0abe486188c9d26fbf46b7e8aa32ca4c6e519525e1b52bb035`: 1 occurrences
+  - `9282b366ff0b12e8a5553d1c6469f7c3889b79f053267141fe9e1c6b220dbec5`: 1 occurrences
+  - `fb762bd8a3df8f6491025d3819108c162ef6252bef730731e8b989be5297343b`: 1 occurrences
+  - `18df4b8a2c464bdedb0be9fa7b9b2b6c950161be341dca9d500eaac865f8817e`: 1 occurrences
+  - `7afa4521ff4ced5ffe06be00135bf2c229c199067a2f0a54a705fcca10106572`: 1 occurrences
 
 ### club_member_status
 - **Unique Values:** 4
 - **Average Length:** 6.08 characters
 - **Top Values:**
+  - `LEFT CLUB`: 65 occurrences
   - `None`: 745 occurrences
   - `PRE-CREATE`: 10,707 occurrences
-  - `LEFT CLUB`: 65 occurrences
   - `ACTIVE`: 513,558 occurrences
 
 ### fashion_news_frequency
 - **Unique Values:** 4
 - **Average Length:** 6.11 characters
 - **Top Values:**
-  - `None`: 2,024 occurrences
-  - `Regularly`: 221,089 occurrences
   - `NONE`: 301,797 occurrences
+  - `None`: 2,024 occurrences
   - `Monthly`: 165 occurrences
+  - `Regularly`: 221,089 occurrences
 
 ### postal_code
 - **Unique Values:** 246,741
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `33b06b036fe46559c9fa47273c57919fca18139aff5949da3aa1eb4a8dbe0326`: 5 occurrences
-  - `b14f34d69261b568d867f127121337c63711af3fc9105b1ea53d8124e5a507c2`: 4 occurrences
-  - `a191b0a8e448c8ca4f0c663fc6c48ff839e437a3aa30a9edd4dc2c34ce6c3feb`: 3 occurrences
-  - `15c89f529956a05ebaf6b43bf4e412b4c41280ff25b8e40a35f2c73e0fc23bef`: 4 occurrences
-  - `849ac0c73165bb4c3f51d34fde5f32473fa191a846dc7e9447144304b616f450`: 2 occurrences
+  - `ccb965048f7c0f285a6df40659f1d1277c91ff12fe76924b3111f00966989c69`: 3 occurrences
+  - `da579811ef8a4cc36412439cd9d7648c831436f9242a4dbea666b0694536084a`: 6 occurrences
+  - `774f67a6a3ebd6f3fe229aed9dfad300c9a6fdae245afe19a19f7970af7b0e4a`: 3 occurrences
+  - `44c66ba088dc680d3a726ee1d198e0aef70bbba4cd168b920aef89cbc80437a8`: 1 occurrences
+  - `49a6e0f79e5a7d207ee8c8d04a10c7ef9864ec2b8d3126b746ee089d94a85331`: 2 occurrences
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 82.41 MB
+- **Estimated Total Memory:** 82.39 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
 |--------|-------------|
 | customer_id | 32.048 |
-| FN | 4.0686 |
-| Active | 4.0686 |
-| club_member_status | 3.0455 |
-| fashion_news_frequency | 3.0618 |
-| age | 4.0686 |
+| FN | 4.0687 |
+| Active | 4.0687 |
+| club_member_status | 3.0413 |
+| fashion_news_frequency | 3.05 |
+| age | 4.0687 |
 | postal_code | 32.048 |
 
 ## 💡 Data Quality Recommendations

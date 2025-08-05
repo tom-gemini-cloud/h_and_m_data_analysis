@@ -28,7 +28,7 @@ class DataReportGenerator:
     
     def __init__(self, file_path: str, sample_size: Optional[int] = None):
         """
-        Initialize the data report generator.
+        Initialise the data report generator.
         
         Args:
             file_path: Path to the CSV or Parquet file
@@ -125,24 +125,43 @@ class DataReportGenerator:
         stats_summary = {}
         for col in numeric_cols:
             try:
-                col_stats = self.df[col].describe()
+                # Use individual methods instead of describe() to avoid access issues
+                col_series = self.df[col]
+                
+                # Calculate statistics using individual methods
+                count_val = col_series.count()
+                mean_val = col_series.mean()
+                std_val = col_series.std()
+                min_val = col_series.min()
+                max_val = col_series.max()
+                
+                # Calculate quantiles
+                quantiles = col_series.quantile([0.25, 0.50, 0.75])
+                q25 = quantiles[0] if len(quantiles) > 0 else None
+                q50 = quantiles[1] if len(quantiles) > 1 else None
+                q75 = quantiles[2] if len(quantiles) > 2 else None
+                
                 stats_summary[col] = {
-                    'count': col_stats['count'][0] if 'count' in col_stats else None,
-                    'mean': round(col_stats['mean'][0], 4) if 'mean' in col_stats else None,
-                    'std': round(col_stats['std'][0], 4) if 'std' in col_stats else None,
-                    'min': col_stats['min'][0] if 'min' in col_stats else None,
-                    'max': col_stats['max'][0] if 'max' in col_stats else None,
-                    '25%': col_stats['25%'][0] if '25%' in col_stats else None,
-                    '50%': col_stats['50%'][0] if '50%' in col_stats else None,
-                    '75%': col_stats['75%'][0] if '75%' in col_stats else None
+                    'count': count_val,
+                    'mean': round(mean_val, 4) if mean_val is not None else None,
+                    'std': round(std_val, 4) if std_val is not None else None,
+                    'min': min_val,
+                    'max': max_val,
+                    '25%': q25,
+                    '50%': q50,
+                    '75%': q75
                 }
-            except Exception:
-                # Fallback for columns that don't support describe()
+            except Exception as e:
+                # Fallback for columns that don't support the operations above
                 stats_summary[col] = {
-                    'count': self.df[col].count(),
-                    'min': self.df[col].min(),
-                    'max': self.df[col].max(),
-                    'mean': round(self.df[col].mean(), 4) if self.df[col].mean() is not None else None
+                    'count': self.df[col].count() if hasattr(self.df[col], 'count') else None,
+                    'min': self.df[col].min() if hasattr(self.df[col], 'min') else None,
+                    'max': self.df[col].max() if hasattr(self.df[col], 'max') else None,
+                    'mean': round(self.df[col].mean(), 4) if hasattr(self.df[col], 'mean') and self.df[col].mean() is not None else None,
+                    'std': None,
+                    '25%': None,
+                    '50%': None,
+                    '75%': None
                 }
         
         return stats_summary

@@ -1,5 +1,5 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 14:23:50
+**Generated on:** 2025-08-05 15:19:42
 **File:** articles.csv
 
 ## 📄 File Information
@@ -50,68 +50,68 @@
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
-| article_id | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| product_code | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| product_type_no | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| graphical_appearance_no | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| colour_group_code | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| perceived_colour_value_id | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| perceived_colour_master_id | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| department_no | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| index_group_no | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| section_no | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| garment_group_no | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| article_id | 105542 | 698424569.0969 | N/A | 108775015 | N/A | N/A | N/A | 959461001 |
+| product_code | 105542 | 698424.5634 | N/A | 108775 | N/A | N/A | N/A | 959461 |
+| product_type_no | 105542 | 234.8619 | N/A | -1 | N/A | N/A | N/A | 762 |
+| graphical_appearance_no | 105542 | 1009515.0757 | N/A | -1 | N/A | N/A | N/A | 1010029 |
+| colour_group_code | 105542 | 32.2338 | N/A | -1 | N/A | N/A | N/A | 93 |
+| perceived_colour_value_id | 105542 | 3.2062 | N/A | -1 | N/A | N/A | N/A | 7 |
+| perceived_colour_master_id | 105542 | 7.808 | N/A | -1 | N/A | N/A | N/A | 20 |
+| department_no | 105542 | 4532.7778 | N/A | 1201 | N/A | N/A | N/A | 9989 |
+| index_group_no | 105542 | 3.1715 | N/A | 1 | N/A | N/A | N/A | 26 |
+| section_no | 105542 | 42.6642 | N/A | 2 | N/A | N/A | N/A | 97 |
+| garment_group_no | 105542 | 1010.4383 | N/A | 1001 | N/A | N/A | N/A | 1025 |
 
 ## 📝 Categorical Column Analysis
 ### prod_name
 - **Unique Values:** 45,875
 - **Average Length:** 15.54 characters
 - **Top Values:**
-  - `Easy shorts (D/W)`: 2 occurrences
-  - `Ted Runner AOP SB`: 1 occurrences
-  - `Bracelet Skull`: 1 occurrences
-  - `Assa`: 1 occurrences
-  - `Elise Belted top`: 1 occurrences
+  - `Billy fluffy`: 1 occurrences
+  - `BB Adam Wind Jkt`: 1 occurrences
+  - `VANJA`: 2 occurrences
+  - `Wired Push`: 1 occurrences
+  - `LINDA RIBBED BEANIE`: 3 occurrences
 
 ### product_type_name
 - **Unique Values:** 131
 - **Average Length:** 7.53 characters
 - **Top Values:**
-  - `Tote bag`: 2 occurrences
-  - `Pyjama bottom`: 220 occurrences
-  - `Hair string`: 238 occurrences
-  - `Belt`: 458 occurrences
-  - `Outdoor Waistcoat`: 154 occurrences
+  - `Wallet`: 77 occurrences
+  - `Headband`: 1 occurrences
+  - `Watch`: 73 occurrences
+  - `Clothing mist`: 1 occurrences
+  - `Socks`: 1,889 occurrences
 
 ### product_group_name
 - **Unique Values:** 19
 - **Average Length:** 15.44 characters
 - **Top Values:**
-  - `Accessories`: 11,158 occurrences
-  - `Garment and Shoe care`: 9 occurrences
-  - `Fun`: 2 occurrences
-  - `Interior textile`: 3 occurrences
+  - `Shoes`: 5,283 occurrences
+  - `Bags`: 25 occurrences
   - `Garment Full body`: 13,292 occurrences
+  - `Furniture`: 13 occurrences
+  - `Unknown`: 121 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Average Length:** 8.29 characters
 - **Top Values:**
-  - `Jacquard`: 830 occurrences
-  - `Check`: 2,178 occurrences
+  - `Transparent`: 86 occurrences
   - `Application/3D`: 1,341 occurrences
-  - `Colour blocking`: 1,830 occurrences
-  - `Mesh`: 86 occurrences
+  - `Placement print`: 3,098 occurrences
+  - `Melange`: 5,938 occurrences
+  - `Jacquard`: 830 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Average Length:** 7.48 characters
 - **Top Values:**
-  - `Other Purple`: 46 occurrences
-  - `Dark Yellow`: 574 occurrences
-  - `Greenish Khaki`: 2,767 occurrences
-  - `Black`: 22,670 occurrences
-  - `Green`: 815 occurrences
+  - `Dark Green`: 2,106 occurrences
+  - `Dark Red`: 2,340 occurrences
+  - `Gold`: 1,377 occurrences
+  - `Unknown`: 28 occurrences
+  - `Other Red`: 114 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
@@ -119,8 +119,8 @@
 - **Top Values:**
   - `Medium`: 5,711 occurrences
   - `Unknown`: 28 occurrences
-  - `Dark`: 42,706 occurrences
-  - `Light`: 15,739 occurrences
+  - `Undefined`: 105 occurrences
+  - `Medium Dusty`: 12,630 occurrences
   - `Bright`: 6,471 occurrences
 
 ### perceived_colour_master_name
@@ -128,80 +128,80 @@
 - **Average Length:** 4.92 characters
 - **Top Values:**
   - `Pink`: 9,403 occurrences
-  - `Green`: 3,526 occurrences
-  - `Grey`: 8,924 occurrences
-  - `undefined`: 105 occurrences
+  - `Beige`: 5,657 occurrences
   - `Yellowish Green`: 5 occurrences
+  - `Orange`: 2,734 occurrences
+  - `Green`: 3,526 occurrences
 
 ### department_name
 - **Unique Values:** 250
 - **Average Length:** 13.14 characters
 - **Top Values:**
-  - `Kids Dress-up/Football`: 262 occurrences
-  - `EQ Divided Basics`: 14 occurrences
-  - `Kids Boy Outdoor`: 394 occurrences
-  - `Tops Fancy Jersey`: 1,429 occurrences
+  - `Girls Projects`: 7 occurrences
+  - `Belts`: 374 occurrences
+  - `Knit & Woven`: 512 occurrences
   - `Young Girl Swimwear`: 175 occurrences
+  - `Baby Boy Jersey Fancy`: 872 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
+  - `C`: 6,961 occurrences
+  - `F`: 12,553 occurrences
   - `I`: 9,214 occurrences
+  - `A`: 26,001 occurrences
   - `B`: 6,775 occurrences
-  - `D`: 15,149 occurrences
-  - `J`: 4,615 occurrences
-  - `S`: 3,392 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Average Length:** 13.76 characters
 - **Top Values:**
-  - `Menswear`: 12,553 occurrences
-  - `Ladies Accessories`: 6,961 occurrences
   - `Ladieswear`: 26,001 occurrences
-  - `Sport`: 3,392 occurrences
-  - `Divided`: 15,149 occurrences
+  - `Menswear`: 12,553 occurrences
+  - `Children Sizes 92-140`: 12,007 occurrences
+  - `Ladies Accessories`: 6,961 occurrences
+  - `Children Sizes 134-170`: 9,214 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Average Length:** 10.16 characters
 - **Top Values:**
-  - `Ladieswear`: 39,737 occurrences
-  - `Menswear`: 12,553 occurrences
   - `Sport`: 3,392 occurrences
-  - `Baby/Children`: 34,711 occurrences
+  - `Ladieswear`: 39,737 occurrences
   - `Divided`: 15,149 occurrences
+  - `Baby/Children`: 34,711 occurrences
+  - `Menswear`: 12,553 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Average Length:** 16.74 characters
 - **Top Values:**
-  - `Men Suits & Tailoring`: 1,428 occurrences
-  - `Collaborations`: 559 occurrences
-  - `Womens Small accessories`: 3,270 occurrences
+  - `Kids & Baby Shoes`: 2,142 occurrences
   - `Special Collections`: 682 occurrences
-  - `Divided Selected`: 991 occurrences
+  - `Men Edition`: 330 occurrences
+  - `Ladies Other`: 4 occurrences
+  - `Womens Tailoring`: 3,376 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Average Length:** 10.95 characters
 - **Top Values:**
-  - `Knitwear`: 7,490 occurrences
+  - `Special Offers`: 1,061 occurrences
+  - `Dresses/Skirts girls`: 1,541 occurrences
+  - `Shirts`: 2,116 occurrences
   - `Jersey Basic`: 8,126 occurrences
-  - `Blouses`: 5,838 occurrences
-  - `Skirts`: 1,254 occurrences
-  - `Trousers`: 6,727 occurrences
+  - `Woven/Jersey/Knitted mix Baby`: 1,965 occurrences
 
 ### detail_desc
 - **Unique Values:** 43,405
 - **Average Length:** 142.16 characters
 - **Top Values:**
-  - `Bomber jacket woven in a nylon blend with a stand-up collar that has a decorative zip and tab with press-studs. Zip down the front, a chest pocket, zipped side pockets and one inner pocket with a concealed press-stud. Ribbing at the cuffs and hem. Lined.`: 2 occurrences
-  - `Short, bell-shaped skirt in woven fabric with a concealed zip and button at the back, and seam with a flare to the hem. Unlined.`: 3 occurrences
-  - `Warm-lined boots in imitation leather with lacing at the front, a zip in one side and a loop at the back. Pile linings and insoles.`: 9 occurrences
-  - `Suede boots with lacing at the front. Fabric linings, leather insoles and thermoplastic rubber (TPR) soles.`: 4 occurrences
-  - `Calf-length jersey dress with a wrapover front, deep V-neck and a seam at the waist with pleats that go all the way round. Yoke at the back, a press-stud fastening at the waist, dropped shoulders and long, tapered sleeves. Unlined.`: 2 occurrences
+  - `Fitted,off-the-shoulder mesh top with decorative gathers at the front and long sleeves. Jersey lining front and back.`: 1 occurrences
+  - `3/4-length sports tights in fast-drying functional fabric with an elasticated waist and reflective details.`: 2 occurrences
+  - `Leather bag with two handles and a zip at the top and a detachable, adjustable shoulder strap. Tab and press-stud at the sides to adjust the size of the bag and a detachable address label on one handle. Padded compartment to fit laptops up to 15”, a zipped inner compartment and studs on the bottom. Lined. Size approx. 14x34x40 cm.`: 1 occurrences
+  - `Hat in braided paper straw with a grosgrain band. Width of brim 3.5 cm.`: 2 occurrences
+  - `Short, straight-cut dress in woven fabric with a round neckline that has a small opening and concealed button at the back of the neck. Long sleeves and cuffs with two buttons. Unlined.`: 5 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 36.38 MB

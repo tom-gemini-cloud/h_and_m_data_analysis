@@ -1,7 +1,6 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 14:23:50
+**Generated on:** 2025-08-05 15:19:41
 **File:** transactions_train.csv
-**Note:** Analysis based on sample of 10,000 records
 
 ## 📄 File Information
 - **File Path:** `..\data\raw\transactions_train.csv`
@@ -10,66 +9,66 @@
 - **Last Modified:** 2022-01-17 22:14:08
 
 ## 📊 Dataset Overview
-- **Rows:** 10,000
+- **Rows:** 31,788,324
 - **Columns:** 5
-- **Total Cells:** 50,000
+- **Total Cells:** 158,941,620
 
 ## 🔍 Data Quality Summary
 - **Completeness Score:** 100.0%
 - **Missing Values:** 0 (0.0%)
-- **Duplicate Rows:** 0 (0.0%)
+- **Duplicate Rows:** 2,974,905 (9.36%)
 
 ## 📋 Schema Information
 | Column | Data Type | Null Count | Null % | Unique Count | Unique % |
 |--------|-----------|------------|---------|--------------|----------|
-| t_dat | String | 0 | 0.0% | 734 | 7.34% |
-| customer_id | String | 0 | 0.0% | 9,873 | 98.73% |
-| article_id | Int64 | 0 | 0.0% | 7,817 | 78.17% |
-| price | Float64 | 0 | 0.0% | 1,071 | 10.71% |
-| sales_channel_id | Int64 | 0 | 0.0% | 2 | 0.02% |
+| t_dat | String | 0 | 0.0% | 734 | 0.0% |
+| customer_id | String | 0 | 0.0% | 1,362,281 | 4.29% |
+| article_id | Int64 | 0 | 0.0% | 104,547 | 0.33% |
+| price | Float64 | 0 | 0.0% | 9,857 | 0.03% |
+| sales_channel_id | Int64 | 0 | 0.0% | 2 | 0.0% |
 
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
-| article_id | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| price | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
-| sales_channel_id | N/A | N/A | N/A | N/A | N/A | N/A | N/A | N/A |
+| article_id | 31788324 | 696227219.1338 | N/A | 108775015 | N/A | N/A | N/A | 956217002 |
+| price | 31788324 | 0.0278 | N/A | 1.694915254237288e-05 | N/A | N/A | N/A | 0.5915254237288136 |
+| sales_channel_id | 31788324 | 1.704 | N/A | 1 | N/A | N/A | N/A | 2 |
 
 ## 📝 Categorical Column Analysis
 ### t_dat
 - **Unique Values:** 734
 - **Average Length:** 10.0 characters
 - **Top Values:**
-  - `2019-01-21`: 9 occurrences
-  - `2020-07-04`: 15 occurrences
-  - `2019-08-16`: 15 occurrences
-  - `2019-08-26`: 14 occurrences
-  - `2020-06-29`: 16 occurrences
+  - `2019-09-06`: 38,762 occurrences
+  - `2019-01-22`: 36,878 occurrences
+  - `2019-03-07`: 44,575 occurrences
+  - `2019-02-03`: 45,259 occurrences
+  - `2019-10-08`: 37,840 occurrences
 
 ### customer_id
-- **Unique Values:** 9,873
+- **Unique Values:** 1,362,281
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `7d9ebb98c6e63965b4d6060d808eba4a06fe1c5d5bc8dc62c8a6af7362291583`: 1 occurrences
-  - `b8129f353e8cfa4610c803994b9d675655bf7697bb6ed136c84bd173092d16b6`: 1 occurrences
-  - `10411ac70c80005a535783ede440e0de5df6a1d7ff25fde5f58ac00ca97d8e55`: 1 occurrences
-  - `8080cb7a75d9b4aee609e498d22000c4f5e343e955123e70720757fbca8bedbf`: 1 occurrences
-  - `5384b5e03b2c67670580dbe4338d00ef4d02337c9ce8fd5fef95c9b5dc1ea6bd`: 1 occurrences
+  - `accf866263abe85a4dbe7e15ff60e00631ef6782512b9ba7e7305d16071166bc`: 18 occurrences
+  - `32239b7324a9215ba5fe6b84c73c4d094e8fb3d748d00d1acd6a17ca73246060`: 1 occurrences
+  - `3a9dc3761f618f1efa30c13ffd35c316ce47ab2d07c02385e1712cacb6a0a135`: 1 occurrences
+  - `efe2ca69575ff7db3249a058169108b98c7d6546133c220bfd5ff13433df7ff2`: 3 occurrences
+  - `4f877e1f3769cb78010923f8e95a0e4ad48fd694faccb60d3514b8ef401710c1`: 86 occurrences
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 0.93 MB
+- **Estimated Total Memory:** 2970.94 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
 |--------|-------------|
-| t_dat | 0.0954 |
-| customer_id | 0.6104 |
-| article_id | 0.0763 |
-| price | 0.0763 |
-| sales_channel_id | 0.0763 |
+| t_dat | 303.1571 |
+| customer_id | 1940.2053 |
+| article_id | 242.5257 |
+| price | 242.5257 |
+| sales_channel_id | 242.5257 |
 
 ## 💡 Data Quality Recommendations
-- **Potential ID columns detected:** customer_id - Verify if these should be used as identifiers
+- **Significant duplicates found** - Review and consider deduplication
 - **Low cardinality columns:** sales_channel_id - Good candidates for categorical encoding
 
 ---
