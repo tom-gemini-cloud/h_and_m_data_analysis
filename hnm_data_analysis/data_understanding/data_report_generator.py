@@ -349,20 +349,20 @@ class DataReportGenerator:
         
         Args:
             output_path: Optional custom output path. If not provided, 
-                        saves to results/data_documentation/ directory
+                        saves to results/data_documentation/data_reports/ directory
         
         Returns:
             Path to the saved report file
         """
         if output_path is None:
-            # Default to results/data_documentation directory
+            # Default to results/data_documentation/data_reports directory
             project_root = self.file_path
             while project_root.parent != project_root:
                 if (project_root / "CLAUDE.md").exists():
                     break
                 project_root = project_root.parent
             
-            results_dir = project_root / "results" / "data_documentation"
+            results_dir = project_root / "results" / "data_documentation" / "data_reports"
             results_dir.mkdir(parents=True, exist_ok=True)
             output_path = results_dir / f"{self.file_path.stem}_data_report.md"
         else:
@@ -378,7 +378,13 @@ class DataReportGenerator:
         print(f"Analyzed file: {self.file_path}")
         print(f"Report saved to: {output_path}")
         
-        return str(output_path)
+        # Return relative path from project root
+        try:
+            relative_path = output_path.relative_to(project_root)
+            return str(relative_path)
+        except (ValueError, NameError):
+            # Fallback if project_root not found
+            return str(output_path)
 
 
 def generate_data_report(file_path: str, output_path: Optional[str] = None, sample_size: Optional[int] = None) -> str:

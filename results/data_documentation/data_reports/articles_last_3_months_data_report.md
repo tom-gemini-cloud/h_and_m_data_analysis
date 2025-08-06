@@ -1,5 +1,5 @@
 # Data Understanding Report
-**Generated on:** 2025-08-05 15:30:02
+**Generated on:** 2025-08-06 13:47:25
 **File:** articles_last_3_months.parquet
 
 ## 📄 File Information
@@ -67,141 +67,141 @@
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `Aruba`: 1 occurrences
-  - `FREDRIKA SNEAKER`: 1 occurrences
-  - `SCARLETT frill dress`: 2 occurrences
-  - `Camy  Tank`: 1 occurrences
-  - `Daphne midi dress`: 1 occurrences
+  - `Apollo barell leg trouser`: 3 occurrences
+  - `Detroit sweater`: 6 occurrences
+  - `Tank sweater Fast buy`: 1 occurrences
+  - `2P Fearow Click Clack`: 1 occurrences
+  - `COLAB C.KIJAK ESA TEE`: 3 occurrences
 
 ### product_type_name
 - **Unique Values:** 124
 - **Average Length:** 7.46 characters
 - **Top Values:**
-  - `Keychain`: 1 occurrences
-  - `Bikini top`: 665 occurrences
-  - `Flat shoe`: 75 occurrences
-  - `Earring`: 505 occurrences
-  - `Sewing kit`: 1 occurrences
+  - `Night gown`: 60 occurrences
+  - `Long John`: 11 occurrences
+  - `Dress`: 4,863 occurrences
+  - `Hair ties`: 24 occurrences
+  - `Earrings`: 11 occurrences
 
 ### product_group_name
 - **Unique Values:** 18
 - **Average Length:** 15.34 characters
 - **Top Values:**
-  - `Garment and Shoe care`: 8 occurrences
+  - `Nightwear`: 631 occurrences
+  - `Bags`: 25 occurrences
+  - `Garment Full body`: 5,796 occurrences
   - `Furniture`: 1 occurrences
-  - `Stationery`: 4 occurrences
-  - `Underwear/nightwear`: 7 occurrences
-  - `Items`: 15 occurrences
+  - `Garment and Shoe care`: 8 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Average Length:** 7.86 characters
 - **Top Values:**
-  - `Denim`: 2,569 occurrences
-  - `Glittering/Metallic`: 314 occurrences
-  - `Transparent`: 45 occurrences
-  - `Placement print`: 878 occurrences
   - `Argyle`: 3 occurrences
+  - `Chambray`: 101 occurrences
+  - `Hologram`: 7 occurrences
+  - `Sequin`: 242 occurrences
+  - `Mesh`: 64 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Average Length:** 7.43 characters
 - **Top Values:**
-  - `Unknown`: 5 occurrences
-  - `Light Blue`: 1,247 occurrences
-  - `Greyish Beige`: 129 occurrences
-  - `Dark Green`: 755 occurrences
-  - `Silver`: 318 occurrences
+  - `Light Pink`: 1,998 occurrences
+  - `Dark Yellow`: 215 occurrences
+  - `Other Orange`: 82 occurrences
+  - `White`: 4,115 occurrences
+  - `Red`: 754 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Average Length:** 6.95 characters
 - **Top Values:**
-  - `Medium Dusty`: 5,777 occurrences
   - `Light`: 6,424 occurrences
-  - `Unknown`: 5 occurrences
-  - `Undefined`: 29 occurrences
   - `Dusty Light`: 9,135 occurrences
+  - `Medium Dusty`: 5,777 occurrences
+  - `Undefined`: 29 occurrences
+  - `Medium`: 1,748 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Average Length:** 5.01 characters
 - **Top Values:**
-  - `Pink`: 3,474 occurrences
-  - `Brown`: 1,083 occurrences
-  - `Green`: 1,339 occurrences
-  - `Grey`: 2,892 occurrences
-  - `Blue`: 6,343 occurrences
+  - `Mole`: 705 occurrences
+  - `Beige`: 2,972 occurrences
+  - `Bluish Green`: 1 occurrences
+  - `Orange`: 1,174 occurrences
+  - `Turquoise`: 504 occurrences
 
 ### department_name
 - **Unique Values:** 238
 - **Average Length:** 12.04 characters
 - **Top Values:**
-  - `Tops Fancy Jersey`: 592 occurrences
-  - `Outdoor/Blazers`: 311 occurrences
-  - `Kids Boy Trouser`: 113 occurrences
-  - `Young Boy Socks`: 31 occurrences
-  - `Conscious Exclusive`: 58 occurrences
+  - `Shirt S&T`: 81 occurrences
+  - `Young Girl Jersey Basic`: 217 occurrences
+  - `Young Girl S&T`: 36 occurrences
+  - `Young Boy Denim`: 140 occurrences
+  - `Kids Boy Swimwear`: 34 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
-  - `S`: 1,328 occurrences
-  - `J`: 1,156 occurrences
-  - `I`: 2,471 occurrences
   - `A`: 12,862 occurrences
-  - `G`: 2,428 occurrences
+  - `J`: 1,156 occurrences
+  - `S`: 1,328 occurrences
+  - `F`: 4,717 occurrences
+  - `C`: 3,474 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Average Length:** 12.66 characters
 - **Top Values:**
-  - `Baby Sizes 50-98`: 2,428 occurrences
   - `Ladies Accessories`: 3,474 occurrences
   - `Sport`: 1,328 occurrences
+  - `Menswear`: 4,717 occurrences
+  - `Divided`: 7,111 occurrences
   - `Lingeries/Tights`: 3,919 occurrences
-  - `Ladieswear`: 12,862 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Average Length:** 9.75 characters
 - **Top Values:**
-  - `Baby/Children`: 8,887 occurrences
-  - `Menswear`: 4,717 occurrences
-  - `Ladieswear`: 20,255 occurrences
   - `Divided`: 7,111 occurrences
   - `Sport`: 1,328 occurrences
+  - `Menswear`: 4,717 occurrences
+  - `Ladieswear`: 20,255 occurrences
+  - `Baby/Children`: 8,887 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Average Length:** 17.17 characters
 - **Top Values:**
-  - `Men Suits & Tailoring`: 572 occurrences
-  - `Divided Collection`: 3,489 occurrences
-  - `Womens Shoes`: 1,084 occurrences
-  - `Men Underwear`: 1,085 occurrences
-  - `Kids & Baby Shoes`: 559 occurrences
+  - `Baby Girl`: 476 occurrences
+  - `Divided Projects`: 968 occurrences
+  - `Divided Basics`: 872 occurrences
+  - `Kids Accessories, Swimwear & D`: 526 occurrences
+  - `Kids Outerwear`: 547 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Average Length:** 10.82 characters
 - **Top Values:**
-  - `Under-, Nightwear`: 3,214 occurrences
-  - `Jersey Basic`: 3,185 occurrences
-  - `Woven/Jersey/Knitted mix Baby`: 558 occurrences
-  - `Special Offers`: 336 occurrences
-  - `Socks and Tights`: 947 occurrences
+  - `Skirts`: 712 occurrences
+  - `Shorts`: 877 occurrences
+  - `Dressed`: 385 occurrences
+  - `Knitwear`: 2,417 occurrences
+  - `Trousers Denim`: 1,505 occurrences
 
 ### detail_desc
 - **Unique Values:** 19,739
 - **Average Length:** 149.28 characters
 - **Top Values:**
-  - `Long, fitted jumper in a soft, heavily draping rib-knit viscose blend with long sleeves and ribbing around the neckline.`: 1 occurrences
-  - `Blouse in an airy crêpe weave. Stand-up collar with gathers front and back, a V-neck opening at the front with narrow ties at the top and flutter sleeves. Unlined.`: 2 occurrences
-  - `Short V-neck dress in airy chiffon with short, flounced sleeves and an opening with a button at the back of the neck. Elasticated seam at the waist and an asymmetric skirt with billowing flounces. Lined.`: 2 occurrences
-  - `Belt in imitation suede with a button stud fastening. Large, engraved metal buckle decorated with plastic beads and a faceted glass stone.`: 1 occurrences
-  - `Pool shoes with a wide strap and moulded insoles in leather. Rubber soles.`: 1 occurrences
+  - `Long-sleeved nursing top in a soft viscose weave with a boat neck and practical inner top for easier nursing access.`: 2 occurrences
+  - `Long-sleeved blouse in a crêpe weave with a collar, buttons down the front, a yoke with a pleat at the back, buttoned cuffs and a rounded hem.`: 5 occurrences
+  - `Rugby shirt in soft jersey with a contrasting colour collar, concealed buttons at the top, long sleeves with ribbed cuffs, and slits in the sides.`: 1 occurrences
+  - `Ankle-length trousers in an airy viscose weave. High waist with covered elastication, a small frill trim and decorative ties, side pockets and slightly wider, tapered legs.`: 2 occurrences
+  - `Playsuit in a patterned weave with a V-neck, wrapover front with a concealed press-stud at the top and 3/4-length, cuffed sleeves. Elasticated seam and a detachable tie belt at the waist, side pockets and short legs. Partly lined.`: 1 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 14.8 MB
