@@ -1,6 +1,6 @@
 # Data Cleaning Report
 
-**Generated on:** 2025-08-06 14:05:42
+**Generated on:** 2025-08-07 10:35:47
 **Project:** H&M Customer Data Analytics
 
 ## 📋 Executive Summary
@@ -26,7 +26,7 @@
 - **Original shape:** 3,904,391 rows × 5 columns
 - **Cleaned shape:** 3,904,391 rows × 7 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-06 14:05:36
+- **Cleaning timestamp:** 2025-08-07 10:35:44
 
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
@@ -47,7 +47,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 525,075 rows × 7 columns
 - **Cleaned shape:** 525,075 rows × 13 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-06 14:05:38
+- **Cleaning timestamp:** 2025-08-07 10:35:45
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -76,7 +76,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 42,298 rows × 25 columns
 - **Cleaned shape:** 42,298 rows × 30 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-06 14:05:40
+- **Cleaning timestamp:** 2025-08-07 10:35:46
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |

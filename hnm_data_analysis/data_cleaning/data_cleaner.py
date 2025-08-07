@@ -35,7 +35,7 @@ class CleaningReport:
 
 class DataCleaner:
     """
-    Comprehensive data cleaning system for H&M retail analytics datasets.
+    Data cleaning for the H&M retail analytics datasets.
     
     This class implements systematic cleaning procedures for transactions, customers,
     and articles datasets, following retail data best practices and handling missing
@@ -55,7 +55,7 @@ class DataCleaner:
                 'postal_code': {'pattern': r'^\d{5}$', 'allow_unknown': True}
             },
             'transactions': {
-                'price': {'min': 0.001, 'max': 1.0},  # Assuming normalised prices
+                'price': {'min': 0.001, 'max': 1.0},
                 'sales_channel_id': {'valid_values': [1, 2]}
             },
             'articles': {
@@ -267,38 +267,56 @@ class DataCleaner:
         # FN: Fill with 0
         if 'FN' in df.columns and df['FN'].null_count() > 0:
             missing_count = df['FN'].null_count()
-            df = df.with_columns(pl.col('FN').fill_null(0))
+            df = df.with_columns([
+                pl.col('FN').fill_null(0),
+                pl.col('FN').is_null().alias('FN_imputed')
+            ])
             missing_handled['FN'] = missing_count
         
-        # Active: Fill with "UNKNOWN"
+        # Active: Fill with 0
         if 'Active' in df.columns and df['Active'].null_count() > 0:
             missing_count = df['Active'].null_count()
-            df = df.with_columns(pl.col('Active').fill_null("UNKNOWN"))
+            df = df.with_columns([
+                pl.col('Active').fill_null(0),
+                pl.col('Active').is_null().alias('Active_imputed')
+            ])
             missing_handled['Active'] = missing_count
         
-        # club_member_status: Fill with "INACTIVE"
+        # club_member_status: Fill with "NONE"
         if 'club_member_status' in df.columns and df['club_member_status'].null_count() > 0:
             missing_count = df['club_member_status'].null_count()
-            df = df.with_columns(pl.col('club_member_status').fill_null("INACTIVE"))
+            df = df.with_columns([
+                pl.col('club_member_status').fill_null("NONE"),
+                pl.col('club_member_status').is_null().alias('club_member_status_imputed')
+            ])
             missing_handled['club_member_status'] = missing_count
         
         # fashion_news_frequency: Fill with "NONE"
         if 'fashion_news_frequency' in df.columns and df['fashion_news_frequency'].null_count() > 0:
             missing_count = df['fashion_news_frequency'].null_count()
-            df = df.with_columns(pl.col('fashion_news_frequency').fill_null("NONE"))
+            df = df.with_columns([
+                pl.col('fashion_news_frequency').fill_null("NONE"),
+                pl.col('fashion_news_frequency').is_null().alias('fashion_news_frequency_imputed')
+            ])
             missing_handled['fashion_news_frequency'] = missing_count
         
         # age: Fill with median age
         if 'age' in df.columns and df['age'].null_count() > 0:
             missing_count = df['age'].null_count()
             median_age = df['age'].median()
-            df = df.with_columns(pl.col('age').fill_null(median_age))
+            df = df.with_columns([
+                pl.col('age').fill_null(median_age),
+                pl.col('age').is_null().alias('age_imputed')
+            ])
             missing_handled['age'] = missing_count
         
-        # postal_code: Fill with "UNKNOWN"
+        # postal_code: Fill with "NONE"
         if 'postal_code' in df.columns and df['postal_code'].null_count() > 0:
             missing_count = df['postal_code'].null_count()
-            df = df.with_columns(pl.col('postal_code').fill_null("UNKNOWN"))
+            df = df.with_columns([
+                pl.col('postal_code').fill_null("NONE"),
+                pl.col('postal_code').is_null().alias('postal_code_imputed')
+            ])
             missing_handled['postal_code'] = missing_count
         
         return df, missing_handled
@@ -517,14 +535,14 @@ class DataCleaner:
         """Add data quality flags to customers."""
         quality_flags = []
         
-        # Add imputation flags
-        imputed_columns = ['FN', 'Active', 'club_member_status', 'fashion_news_frequency', 'age']
+        # Add imputation flags for columns that don't already have them
+        imputed_columns = ['FN', 'Active', 'club_member_status', 'fashion_news_frequency', 'age', 'postal_code']
         for col in imputed_columns:
-            if col in df.columns:
-                flag_name = f'{col}_imputed'
-                if flag_name not in df.columns:
-                    # This would need to be tracked during imputation for accuracy
-                    df = df.with_columns(pl.lit(False).alias(flag_name))
+            flag_name = f'{col}_imputed'
+            if col in df.columns and flag_name not in df.columns:
+                # Add flag as False for columns that weren't imputed
+                df = df.with_columns(pl.lit(False).alias(flag_name))
+            if flag_name in df.columns:
                 quality_flags.append(flag_name)
         
         if 'age_corrected' not in df.columns:
@@ -565,8 +583,11 @@ class DataCleaner:
     
     def _optimise_customer_types(self, df: pl.DataFrame) -> pl.DataFrame:
         """Optimise data types for customers."""
+        # Active should remain as Float64 (binary 0.0/1.0 field)
+        # Don't convert Active to categorical
+        
         # Convert categorical columns to categorical type
-        categorical_cols = ['Active', 'club_member_status', 'fashion_news_frequency', 'postal_code']
+        categorical_cols = ['club_member_status', 'fashion_news_frequency', 'postal_code']
         
         for col in categorical_cols:
             if col in df.columns:
