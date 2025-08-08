@@ -1,6 +1,6 @@
 # H&M Transactional Data Analysis Project
 
-This project analyzes customer transaction data to derive insights and build predictive models.
+This project analyses customer transaction data to derive insights and build predictive models.
 
 ## Setup
 

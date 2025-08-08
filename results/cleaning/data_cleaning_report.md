@@ -1,6 +1,6 @@
 # Data Cleaning Report
 
-**Generated on:** 2025-08-07 10:35:47
+**Generated on:** 2025-08-07 16:44:32
 **Project:** H&M Customer Data Analytics
 
 ## 📋 Executive Summary
@@ -26,7 +26,7 @@
 - **Original shape:** 3,904,391 rows × 5 columns
 - **Cleaned shape:** 3,904,391 rows × 7 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-07 10:35:44
+- **Cleaning timestamp:** 2025-08-07 16:44:26
 
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
@@ -45,9 +45,9 @@ The following columns were added to track data quality and cleaning operations:
 
 #### Overview
 - **Original shape:** 525,075 rows × 7 columns
-- **Cleaned shape:** 525,075 rows × 13 columns
+- **Cleaned shape:** 525,075 rows × 14 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-07 10:35:45
+- **Cleaning timestamp:** 2025-08-07 16:44:27
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -66,6 +66,7 @@ The following columns were added to track data quality and cleaning operations:
 - **club_member_status_imputed**: Indicates imputed membership status
 - **fashion_news_frequency_imputed**: Indicates imputed newsletter frequency
 - **age_imputed**: Indicates imputed age values
+- **postal_code_imputed**: Quality tracking flag
 - **age_corrected**: Indicates ages that were corrected to valid ranges
 
 ---
@@ -76,7 +77,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 42,298 rows × 25 columns
 - **Cleaned shape:** 42,298 rows × 30 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-07 10:35:46
+- **Cleaning timestamp:** 2025-08-07 16:44:29
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |

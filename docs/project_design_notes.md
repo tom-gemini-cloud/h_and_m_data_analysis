@@ -63,7 +63,7 @@ tfidf = TfidfVectorizer(
 )
 ```
 
-**PySpark Optimization Mastery:**
+**PySpark Optimisation Mastery:**
 Demonstrate production-level PySpark configuration knowledge:
 
 ```python
@@ -291,7 +291,7 @@ Translate technical results into actionable business segments:
 
 **Phase 1: Foundation (Weeks 1-2)**
 
-1. Set up PySpark cluster with proper memory configuration and optimization
+1. Set up PySpark cluster with proper memory configuration and optimisation
 2. Implement comprehensive data preprocessing pipeline with feature engineering
 3. Deploy MLflow for experiment tracking and reproducibility
 

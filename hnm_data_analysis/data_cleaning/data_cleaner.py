@@ -63,18 +63,20 @@ class DataCleaner:
             }
         }
     
-    def clean_transactions(self, file_path: str, outlier_method: str = 'iqr') -> Tuple[pl.DataFrame, CleaningReport]:
+    def clean_transactions(self, file_path: str, outlier_method: str = 'iqr', save_csv: bool = False, csv_output_path: Optional[str] = None) -> Tuple[pl.DataFrame, CleaningReport]:
         """
         Clean transactions dataset with outlier handling and validation.
         
         Args:
             file_path: Path to transactions parquet file
             outlier_method: Method for outlier treatment ('iqr', 'cap', 'remove')
+            save_csv: Whether to save cleaned data as CSV file
+            csv_output_path: Path for CSV output (optional)
             
         Returns:
             Tuple of (cleaned_dataframe, cleaning_report)
         """
-        print("🧹 Cleaning transactions dataset...")
+        print("Cleaning transactions dataset...")
         df = pl.read_parquet(file_path)
         original_shape = df.shape
         
@@ -109,20 +111,29 @@ class DataCleaner:
         report.cleaned_shape = df.shape
         self.cleaning_reports['transactions'] = report
         
-        print(f"✅ Transactions cleaned: {original_shape[0]:,} → {df.shape[0]:,} rows")
+        # Save as CSV if requested
+        if save_csv:
+            if csv_output_path is None:
+                csv_output_path = file_path.replace('.parquet', '_cleaned.csv')
+            df.write_csv(csv_output_path)
+            print(f"Transactions saved as CSV: {csv_output_path}")
+        
+        print(f"Transactions cleaned: {original_shape[0]:,} -> {df.shape[0]:,} rows")
         return df, report
     
-    def clean_customers(self, file_path: str) -> Tuple[pl.DataFrame, CleaningReport]:
+    def clean_customers(self, file_path: str, save_csv: bool = False, csv_output_path: Optional[str] = None) -> Tuple[pl.DataFrame, CleaningReport]:
         """
         Clean customers dataset with missing value imputation and duplicate removal.
         
         Args:
             file_path: Path to customers parquet file
+            save_csv: Whether to save cleaned data as CSV file
+            csv_output_path: Path for CSV output (optional)
             
         Returns:
             Tuple of (cleaned_dataframe, cleaning_report)
         """
-        print("🧹 Cleaning customers dataset...")
+        print("Cleaning customers dataset...")
         df = pl.read_parquet(file_path)
         original_shape = df.shape
         
@@ -156,21 +167,30 @@ class DataCleaner:
         report.cleaned_shape = df.shape
         self.cleaning_reports['customers'] = report
         
-        print(f"✅ Customers cleaned: {original_shape[0]:,} → {df.shape[0]:,} rows")
+        # Save as CSV if requested
+        if save_csv:
+            if csv_output_path is None:
+                csv_output_path = file_path.replace('.parquet', '_cleaned.csv')
+            df.write_csv(csv_output_path)
+            print(f"Customers saved as CSV: {csv_output_path}")
+        
+        print(f"Customers cleaned: {original_shape[0]:,} -> {df.shape[0]:,} rows")
         return df, report
     
-    def clean_articles(self, file_path: str, outlier_method: str = 'cap') -> Tuple[pl.DataFrame, CleaningReport]:
+    def clean_articles(self, file_path: str, outlier_method: str = 'cap', save_csv: bool = False, csv_output_path: Optional[str] = None) -> Tuple[pl.DataFrame, CleaningReport]:
         """
         Clean articles dataset with outlier treatment and duplicate removal.
         
         Args:
             file_path: Path to articles parquet file
             outlier_method: Method for outlier treatment ('cap', 'remove', 'flag')
+            save_csv: Whether to save cleaned data as CSV file
+            csv_output_path: Path for CSV output (optional)
             
         Returns:
             Tuple of (cleaned_dataframe, cleaning_report)
         """
-        print("🧹 Cleaning articles dataset...")
+        print("Cleaning articles dataset...")
         df = pl.read_parquet(file_path)
         original_shape = df.shape
         
@@ -208,7 +228,14 @@ class DataCleaner:
         report.cleaned_shape = df.shape
         self.cleaning_reports['articles'] = report
         
-        print(f"✅ Articles cleaned: {original_shape[0]:,} → {df.shape[0]:,} rows")
+        # Save as CSV if requested
+        if save_csv:
+            if csv_output_path is None:
+                csv_output_path = file_path.replace('.parquet', '_cleaned.csv')
+            df.write_csv(csv_output_path)
+            print(f"Articles saved as CSV: {csv_output_path}")
+        
+        print(f"Articles cleaned: {original_shape[0]:,} -> {df.shape[0]:,} rows")
         return df, report
     
     def _handle_transactions_missing_values(self, df: pl.DataFrame) -> Tuple[pl.DataFrame, Dict[str, int]]:
@@ -890,7 +917,9 @@ def clean_all_datasets(transactions_path: str, customers_path: str, articles_pat
         generate_report: Whether to generate cleaning report
         
     Returns:
-        Dictionary mapping dataset names to output file paths
+        Dictionary mapping dataset names to output file paths (both Parquet and CSV formats)
+        Keys: 'transactions_parquet', 'transactions_csv', 'customers_parquet', 'customers_csv', 
+              'articles_parquet', 'articles_csv', 'cleaning_report'
         
     Example:
         ```python
@@ -904,21 +933,24 @@ def clean_all_datasets(transactions_path: str, customers_path: str, articles_pat
         )
         
         print("Cleaned datasets saved to:", output_paths)
+        # Output includes both Parquet and CSV files:
+        # {'transactions_parquet': 'data/cleaned/transactions_last_3_months_cleaned.parquet',
+        #  'transactions_csv': 'data/cleaned/transactions_last_3_months_cleaned.csv', ...}
         ```
     """
     cleaner = DataCleaner()
     output_paths = {}
     
+    # Find project root
+    current_path = Path.cwd()
+    project_root = current_path
+    
+    while project_root != project_root.parent:
+        if (project_root / "CLAUDE.md").exists() or (project_root / "hnm_data_analysis").exists():
+            break
+        project_root = project_root.parent
+    
     if output_dir is None:
-        # Find project root
-        current_path = Path.cwd()
-        project_root = current_path
-        
-        while project_root != project_root.parent:
-            if (project_root / "CLAUDE.md").exists() or (project_root / "hnm_data_analysis").exists():
-                break
-            project_root = project_root.parent
-        
         output_dir = project_root / "data" / "cleaned"
     else:
         output_dir = Path(output_dir)
@@ -926,34 +958,56 @@ def clean_all_datasets(transactions_path: str, customers_path: str, articles_pat
     output_dir.mkdir(parents=True, exist_ok=True)
     
     # Clean each dataset
-    print("🚀 Starting comprehensive data cleaning process...\n")
+    print("Starting comprehensive data cleaning process...\n")
     
     # Clean transactions
     df_trans, _ = cleaner.clean_transactions(transactions_path, outlier_method='iqr')
-    trans_output = output_dir / "transactions_last_3_months_cleaned.parquet"
-    df_trans.write_parquet(trans_output)
-    output_paths['transactions'] = str(trans_output.relative_to(project_root))
+    trans_parquet_output = output_dir / "transactions_last_3_months_cleaned.parquet"
+    trans_csv_output = output_dir / "transactions_last_3_months_cleaned.csv"
+    df_trans.write_parquet(trans_parquet_output)
+    df_trans.write_csv(trans_csv_output)
+    try:
+        output_paths['transactions_parquet'] = str(trans_parquet_output.relative_to(project_root))
+        output_paths['transactions_csv'] = str(trans_csv_output.relative_to(project_root))
+    except ValueError:
+        # If relative path fails, use absolute path
+        output_paths['transactions_parquet'] = str(trans_parquet_output)
+        output_paths['transactions_csv'] = str(trans_csv_output)
     
     # Clean customers
     df_customers, _ = cleaner.clean_customers(customers_path)
-    customers_output = output_dir / "customers_last_3_months_cleaned.parquet"
-    df_customers.write_parquet(customers_output)
-    output_paths['customers'] = str(customers_output.relative_to(project_root))
+    customers_parquet_output = output_dir / "customers_last_3_months_cleaned.parquet"
+    customers_csv_output = output_dir / "customers_last_3_months_cleaned.csv"
+    df_customers.write_parquet(customers_parquet_output)
+    df_customers.write_csv(customers_csv_output)
+    try:
+        output_paths['customers_parquet'] = str(customers_parquet_output.relative_to(project_root))
+        output_paths['customers_csv'] = str(customers_csv_output.relative_to(project_root))
+    except ValueError:
+        output_paths['customers_parquet'] = str(customers_parquet_output)
+        output_paths['customers_csv'] = str(customers_csv_output)
     
     # Clean articles
     df_articles, _ = cleaner.clean_articles(articles_path, outlier_method='cap')
-    articles_output = output_dir / "articles_last_3_months_cleaned.parquet"
-    df_articles.write_parquet(articles_output)
-    output_paths['articles'] = str(articles_output.relative_to(project_root))
+    articles_parquet_output = output_dir / "articles_last_3_months_cleaned.parquet"
+    articles_csv_output = output_dir / "articles_last_3_months_cleaned.csv"
+    df_articles.write_parquet(articles_parquet_output)
+    df_articles.write_csv(articles_csv_output)
+    try:
+        output_paths['articles_parquet'] = str(articles_parquet_output.relative_to(project_root))
+        output_paths['articles_csv'] = str(articles_csv_output.relative_to(project_root))
+    except ValueError:
+        output_paths['articles_parquet'] = str(articles_parquet_output)
+        output_paths['articles_csv'] = str(articles_csv_output)
     
-    print(f"\n✅ All datasets cleaned successfully!")
-    print(f"📁 Output directory: {output_dir}")
+    print(f"\nAll datasets cleaned successfully!")
+    print(f"Output directory: {output_dir}")
     
     # Generate cleaning report
     if generate_report:
         report_path = cleaner.generate_cleaning_report()
         output_paths['cleaning_report'] = report_path
-        print(f"📊 Cleaning report generated: {report_path}")
+        print(f"Cleaning report generated: {report_path}")
     
     return output_paths
 
@@ -972,10 +1026,10 @@ if __name__ == "__main__":
     
     try:
         output_paths = clean_all_datasets(transactions_path, customers_path, articles_path, output_dir)
-        print("\n🎉 Data cleaning completed successfully!")
+        print("\nData cleaning completed successfully!")
         print("Output files:")
         for dataset, path in output_paths.items():
             print(f"  {dataset}: {path}")
     except Exception as e:
-        print(f"❌ Error during cleaning: {e}")
+        print(f"Error during cleaning: {e}")
         sys.exit(1)
