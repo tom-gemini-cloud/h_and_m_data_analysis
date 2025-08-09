@@ -1,6 +1,6 @@
 # Data Cleaning Report
 
-**Generated on:** 2025-08-09 11:48:57
+**Generated on:** 2025-08-09 13:02:42
 **Project:** H&M Customer Data Analytics
 
 ## 📋 Executive Summary
@@ -24,9 +24,9 @@
 
 #### Overview
 - **Original shape:** 3,904,391 rows × 5 columns
-- **Cleaned shape:** 3,904,391 rows × 7 columns
+- **Cleaned shape:** 3,904,391 rows × 8 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 11:48:51
+- **Cleaning timestamp:** 2025-08-09 13:02:36
 
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
@@ -38,6 +38,7 @@ The following columns were added to track data quality and cleaning operations:
 
 - **price_outlier_capped**: Indicates prices that were capped due to extreme values
 - **sales_channel_corrected**: Indicates sales channel IDs that were corrected
+- **price_percentile_calibrated**: Quality tracking flag
 
 ---
 
@@ -47,7 +48,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 525,075 rows × 7 columns
 - **Cleaned shape:** 525,075 rows × 14 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 11:48:52
+- **Cleaning timestamp:** 2025-08-09 13:02:38
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -77,7 +78,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 42,298 rows × 25 columns
 - **Cleaned shape:** 42,298 rows × 30 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 11:48:54
+- **Cleaning timestamp:** 2025-08-09 13:02:40
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |

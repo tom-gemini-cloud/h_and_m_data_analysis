@@ -75,6 +75,11 @@ class DataCleaner:
         round_decimals: int = 2,
         overwrite_price_with_eur: bool = True,
         keep_aux_price_columns: bool = False,
+        target_median_eur: Optional[float] = None,
+        target_quantile_eur: Optional[Tuple[float, float]] = (0.99, 250.0),
+        target_min_eur: Optional[float] = 4.99,
+        cap_eur_prices: bool = True,
+        eur_cap_bounds: Tuple[float, float] = (0.99, 399.0),
     ) -> Tuple[pl.DataFrame, CleaningReport]:
         """
         Clean transactions dataset with outlier handling and validation.
@@ -110,16 +115,16 @@ class DataCleaner:
         df, validation_fixes = self._validate_transactions(df)
         report.validation_issues_fixed = validation_fixes
         
-        # 4. Convert anonymised price to SEK and EUR (optional)
+        # 4. Convert anonymised price to EUR using percentile-based calibration
         if compute_eur_price:
-            df = self._compute_price_eur(
+            df = self._compute_price_eur_percentile_based(
                 df,
-                price_scale_factor=price_scale_factor,
-                sek_per_eur=sek_per_eur,
-                round_decimals=round_decimals,
                 overwrite_price_with_eur=overwrite_price_with_eur,
-                keep_aux_price_columns=keep_aux_price_columns,
+                round_decimals=round_decimals
             )
+
+        # Note: EUR capping no longer needed with percentile-based calibration
+        # The new approach ensures realistic price ranges without artificial boundaries
 
         # 5. Add quality flags
         df, quality_flags = self._add_transaction_quality_flags(df)
@@ -129,7 +134,7 @@ class DataCleaner:
         df = self._optimise_transaction_types(df)
         
         # Note: Duplicates in transactions are legitimate (multiple quantities)
-        # so we don't remove them
+        # so they don't get removed
         
         report.cleaned_shape = df.shape
         self.cleaning_reports['transactions'] = report
@@ -578,8 +583,52 @@ class DataCleaner:
         if 'sales_channel_corrected' not in df.columns:
             df = df.with_columns(pl.lit(False).alias('sales_channel_corrected'))
         quality_flags.append('sales_channel_corrected')
+
+        # Add percentile calibration flag
+        if 'price_percentile_calibrated' not in df.columns:
+            df = df.with_columns(pl.lit(True).alias('price_percentile_calibrated'))
+        quality_flags.append('price_percentile_calibrated')
         
         return df, quality_flags
+
+    def _cap_eur_price_outliers(self, df: pl.DataFrame, lower_eur: float, upper_eur: float) -> Tuple[pl.DataFrame, int]:
+        """Cap EUR prices to a realistic retail range and flag capped rows.
+
+        Assumes the `price` column is already in EUR (overwrite_price_with_eur=True).
+        If not, and a `price_eur` column exists, will operate on it and overwrite `price` as well.
+        """
+        target_col = 'price'
+        source_col = None
+        if 'price' not in df.columns and 'price_eur' in df.columns:
+            target_col = 'price_eur'
+        elif 'price' in df.columns and 'price_eur' in df.columns:
+            source_col = 'price_eur'
+
+        # Determine which column to cap and ensure we cap the active price column
+        col_to_cap = source_col or target_col
+
+        outlier_mask = (pl.col(col_to_cap) < pl.lit(lower_eur)) | (pl.col(col_to_cap) > pl.lit(upper_eur))
+        out_count = df.filter(outlier_mask).height
+
+        if out_count == 0:
+            # Ensure flag column exists
+            if 'price_eur_outlier_capped' not in df.columns:
+                df = df.with_columns(pl.lit(False).alias('price_eur_outlier_capped'))
+            return df, 0
+
+        # Cap and flag
+        df = df.with_columns([
+            pl.when(pl.col(col_to_cap) < pl.lit(lower_eur)).then(pl.lit(lower_eur))
+              .when(pl.col(col_to_cap) > pl.lit(upper_eur)).then(pl.lit(upper_eur))
+              .otherwise(pl.col(col_to_cap)).alias(col_to_cap),
+            outlier_mask.alias('price_eur_outlier_capped')
+        ])
+
+        # If we capped `price_eur` while `price` is the serving column, mirror it
+        if source_col == 'price_eur' and 'price' in df.columns:
+            df = df.with_columns(pl.col('price_eur').alias('price'))
+
+        return df, out_count
     
     def _add_customer_quality_flags(self, df: pl.DataFrame) -> Tuple[pl.DataFrame, List[str]]:
         """Add data quality flags to customers."""
@@ -623,11 +672,38 @@ class DataCleaner:
         """Optimise data types for transactions."""
         optimisations = {}
         
-        # Convert sales_channel_id to categorical
+        # Ensure column dtypes align with raw schema and reporting expectations
+        # t_dat → Date
+        if 't_dat' in df.columns:
+            try:
+                if df['t_dat'].dtype == pl.Utf8:
+                    df = df.with_columns(
+                        pl.col('t_dat').str.strptime(pl.Date, format="%Y-%m-%d", strict=False).alias('t_dat')
+                    )
+                elif df['t_dat'].dtype == pl.Datetime:
+                    df = df.with_columns(pl.col('t_dat').cast(pl.Date).alias('t_dat'))
+            except Exception:
+                # Best-effort cast; if already Date this is a no-op
+                try:
+                    df = df.with_columns(pl.col('t_dat').cast(pl.Date).alias('t_dat'))
+                except Exception:
+                    pass
+
+        # customer_id → Utf8 (String)
+        if 'customer_id' in df.columns:
+            df = df.with_columns(pl.col('customer_id').cast(pl.Utf8).alias('customer_id'))
+
+        # article_id → Int64
+        if 'article_id' in df.columns:
+            df = df.with_columns(pl.col('article_id').cast(pl.Int64).alias('article_id'))
+
+        # price → Float64 (EUR after conversion)
+        if 'price' in df.columns:
+            df = df.with_columns(pl.col('price').cast(pl.Float64).alias('price'))
+
+        # sales_channel_id → Int64
         if 'sales_channel_id' in df.columns:
-            df = df.with_columns(
-                pl.col('sales_channel_id').cast(pl.Categorical).alias('sales_channel_id')
-            )
+            df = df.with_columns(pl.col('sales_channel_id').cast(pl.Int64).alias('sales_channel_id'))
         
         return df
     
@@ -665,7 +741,77 @@ class DataCleaner:
         
         return df
 
-    def _compute_price_eur(
+    def _compute_price_eur_percentile_based(
+        self,
+        df: pl.DataFrame,
+        target_percentiles: Optional[Dict[float, float]] = None,
+        overwrite_price_with_eur: bool = True,
+        round_decimals: int = 2
+    ) -> pl.DataFrame:
+        """
+        Compute EUR prices using percentile-based calibration.
+        
+        This new strategy preserves the natural price distribution while mapping
+        to realistic H&M price ranges, avoiding artificial clustering.
+        """
+        if target_percentiles is None:
+            # H&M-realistic price targets based on retail analysis
+            target_percentiles = {
+                0.01: 2.99,   # 1st percentile: Basics/accessories
+                0.05: 4.99,   # 5th percentile: Entry-level items  
+                0.10: 7.99,   # 10th percentile: Basic clothing
+                0.25: 12.99,  # 25th percentile: Standard items
+                0.50: 19.99,  # 50th percentile: Mid-range
+                0.75: 29.99,  # 75th percentile: Premium basics
+                0.90: 49.99,  # 90th percentile: Higher-end items
+                0.95: 79.99,  # 95th percentile: Premium pieces
+                0.99: 149.99  # 99th percentile: High-end/special items
+            }
+        
+        # Calculate original percentiles
+        original_percentiles = {}
+        for p in target_percentiles.keys():
+            original_percentiles[p] = df['price'].quantile(p)
+        
+        # Create mapping using numpy interpolation
+        orig_values = np.array(list(original_percentiles.values()))
+        target_values = np.array(list(target_percentiles.values()))
+        
+        # Add boundary points for better interpolation
+        min_price = df['price'].min()
+        max_price = df['price'].max()
+        
+        if orig_values[0] > min_price:
+            orig_values = np.insert(orig_values, 0, min_price)
+            target_values = np.insert(target_values, 0, target_values[0] * 0.8)
+        
+        if orig_values[-1] < max_price:
+            orig_values = np.append(orig_values, max_price)
+            target_values = np.append(target_values, target_values[-1] * 1.2)
+        
+        # Convert original prices to numpy for interpolation
+        original_prices = df['price'].to_numpy()
+        
+        # Apply linear interpolation using numpy
+        calibrated_prices = np.interp(original_prices, orig_values, target_values)
+        
+        # Ensure positive prices and round
+        calibrated_prices = np.maximum(calibrated_prices, 0.99)  # Minimum 0.99 EUR
+        calibrated_prices = np.round(calibrated_prices, round_decimals)
+        
+        # Add calibrated prices to dataframe
+        if overwrite_price_with_eur:
+            df = df.with_columns([
+                pl.Series('price', calibrated_prices)
+            ])
+        else:
+            df = df.with_columns([
+                pl.Series('price_eur', calibrated_prices)
+            ])
+        
+        return df
+
+    def _compute_price_eur_legacy(
         self,
         df: pl.DataFrame,
         price_scale_factor: float = 1000.0,
@@ -673,6 +819,9 @@ class DataCleaner:
         round_decimals: int = 2,
         overwrite_price_with_eur: bool = True,
         keep_aux_price_columns: bool = False,
+        target_median_eur: Optional[float] = None,
+        target_quantile_eur: Optional[Tuple[float, float]] = None,
+        target_min_eur: Optional[float] = None,
     ) -> pl.DataFrame:
         """Compute SEK and EUR prices from anonymised `price`.
 
@@ -697,10 +846,54 @@ class DataCleaner:
             warnings.warn("sek_per_eur must be > 0. Skipping EUR conversion.")
             return df
 
+        # Optionally auto-calibrate scale to target a median EUR price
+        effective_scale = price_scale_factor
+        if target_median_eur is not None and target_median_eur > 0:
+            try:
+                current_median = (
+                    df.select((pl.col('price') * pl.lit(price_scale_factor) / pl.lit(sek_per_eur)).alias('eur'))
+                      .select(pl.col('eur').median().alias('median_eur'))
+                      .to_dict(as_series=False)['median_eur'][0]
+                )
+                if current_median and current_median > 0:
+                    # Adjust scale proportionally: new_scale = old_scale * (target / current)
+                    effective_scale = price_scale_factor * (target_median_eur / current_median)
+            except Exception:
+                pass
+
+        # Optionally calibrate based on a target quantile value (e.g., q=0.99 ~ 250 EUR)
+        if target_quantile_eur is not None:
+            try:
+                q, target_val = target_quantile_eur
+                if 0 < q < 1 and target_val > 0:
+                    current_q = (
+                        df.select((pl.col('price') * pl.lit(effective_scale) / pl.lit(sek_per_eur)).alias('eur'))
+                          .select(pl.col('eur').quantile(q).alias('q_eur'))
+                          .to_dict(as_series=False)['q_eur'][0]
+                    )
+                    if current_q and current_q > 0:
+                        effective_scale = effective_scale * (target_val / current_q)
+            except Exception:
+                pass
+
+        # Optionally calibrate to achieve a target minimum EUR price (e.g., ~3.99)
+        if target_min_eur is not None and target_min_eur > 0:
+            try:
+                current_min = (
+                    df.select((pl.col('price') * pl.lit(effective_scale) / pl.lit(sek_per_eur)).alias('eur'))
+                      .select(pl.col('eur').min().alias('min_eur'))
+                      .to_dict(as_series=False)['min_eur'][0]
+                )
+                if current_min and current_min > 0:
+                    # Scale so that min ≈ target_min_eur
+                    effective_scale = effective_scale * (target_min_eur / current_min)
+            except Exception:
+                pass
+
         # Compute SEK and EUR
         df = df.with_columns([
-            (pl.col('price') * pl.lit(price_scale_factor)).alias('price_sek_raw'),
-            ((pl.col('price') * pl.lit(price_scale_factor)) / pl.lit(sek_per_eur)).alias('price_eur_raw'),
+            (pl.col('price') * pl.lit(effective_scale)).alias('price_sek_raw'),
+            ((pl.col('price') * pl.lit(effective_scale)) / pl.lit(sek_per_eur)).alias('price_eur_raw'),
         ])
 
         # Round and finalise columns

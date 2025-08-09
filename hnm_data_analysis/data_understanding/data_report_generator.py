@@ -375,7 +375,7 @@ class DataReportGenerator:
         
         # Print confirmation message
         print(f"Data report generated successfully!")
-        print(f"Analyzed file: {self.file_path}")
+        print(f"Analysed file: {self.file_path}")
         print(f"Report saved to: {output_path}")
         
         # Return relative path from project root
