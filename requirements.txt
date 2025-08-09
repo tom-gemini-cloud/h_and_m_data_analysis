@@ -4,6 +4,7 @@ polars
 pandas
 numpy
 setuptools
+pyspark>=3.5.0
 
 # Data Visualisation
 matplotlib

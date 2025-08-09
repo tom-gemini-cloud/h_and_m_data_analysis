@@ -83,7 +83,7 @@ class DataCleaner:
         report = CleaningReport(
             dataset_name="transactions",
             original_shape=original_shape,
-            cleaned_shape=original_shape  # Will update at end
+            cleaned_shape=original_shape 
         )
         
         # 1. Handle missing values (following cleaning_notes.md)
@@ -905,7 +905,8 @@ class DataCleaner:
 
 
 def clean_all_datasets(transactions_path: str, customers_path: str, articles_path: str,
-                      output_dir: Optional[str] = None, generate_report: bool = True) -> Dict[str, str]:
+                      output_dir: Optional[str] = None, generate_report: bool = True,
+                      write_csv: bool = False) -> Dict[str, str]:
     """
     Convenience function to clean all H&M datasets in one operation.
     
@@ -915,21 +916,24 @@ def clean_all_datasets(transactions_path: str, customers_path: str, articles_pat
         articles_path: Path to articles parquet file
         output_dir: Optional custom output directory for cleaned data
         generate_report: Whether to generate cleaning report
+        write_csv: If True, also write CSV files (can be memory intensive on large datasets)
         
     Returns:
-        Dictionary mapping dataset names to output file paths (both Parquet and CSV formats)
-        Keys: 'transactions_parquet', 'transactions_csv', 'customers_parquet', 'customers_csv', 
-              'articles_parquet', 'articles_csv', 'cleaning_report'
+        Dictionary mapping dataset names to output file paths. Always includes Parquet keys.
+        Parquet keys: 'transactions_parquet', 'customers_parquet', 'articles_parquet'.
+        If write_csv=True, also includes: 'transactions_csv', 'customers_csv', 'articles_csv'.
+        'cleaning_report' is included when generate_report=True.
         
     Example:
         ```python
         from hnm_data_analysis.data_cleaning import clean_all_datasets
         
-        # Clean all datasets
+        # Clean all datasets (CSV disabled by default to reduce memory pressure)
         output_paths = clean_all_datasets(
             'data/processed/transactions_last_3_months.parquet',
             'data/processed/customers_last_3_months.parquet',
-            'data/processed/articles_last_3_months.parquet'
+            'data/processed/articles_last_3_months.parquet',
+            write_csv=False
         )
         
         print("Cleaned datasets saved to:", output_paths)
@@ -965,40 +969,49 @@ def clean_all_datasets(transactions_path: str, customers_path: str, articles_pat
     trans_parquet_output = output_dir / "transactions_last_3_months_cleaned.parquet"
     trans_csv_output = output_dir / "transactions_last_3_months_cleaned.csv"
     df_trans.write_parquet(trans_parquet_output)
-    df_trans.write_csv(trans_csv_output)
+    if write_csv:
+        df_trans.write_csv(trans_csv_output)
     try:
         output_paths['transactions_parquet'] = str(trans_parquet_output.relative_to(project_root))
-        output_paths['transactions_csv'] = str(trans_csv_output.relative_to(project_root))
+        if write_csv:
+            output_paths['transactions_csv'] = str(trans_csv_output.relative_to(project_root))
     except ValueError:
         # If relative path fails, use absolute path
         output_paths['transactions_parquet'] = str(trans_parquet_output)
-        output_paths['transactions_csv'] = str(trans_csv_output)
+        if write_csv:
+            output_paths['transactions_csv'] = str(trans_csv_output)
     
     # Clean customers
     df_customers, _ = cleaner.clean_customers(customers_path)
     customers_parquet_output = output_dir / "customers_last_3_months_cleaned.parquet"
     customers_csv_output = output_dir / "customers_last_3_months_cleaned.csv"
     df_customers.write_parquet(customers_parquet_output)
-    df_customers.write_csv(customers_csv_output)
+    if write_csv:
+        df_customers.write_csv(customers_csv_output)
     try:
         output_paths['customers_parquet'] = str(customers_parquet_output.relative_to(project_root))
-        output_paths['customers_csv'] = str(customers_csv_output.relative_to(project_root))
+        if write_csv:
+            output_paths['customers_csv'] = str(customers_csv_output.relative_to(project_root))
     except ValueError:
         output_paths['customers_parquet'] = str(customers_parquet_output)
-        output_paths['customers_csv'] = str(customers_csv_output)
+        if write_csv:
+            output_paths['customers_csv'] = str(customers_csv_output)
     
     # Clean articles
     df_articles, _ = cleaner.clean_articles(articles_path, outlier_method='cap')
     articles_parquet_output = output_dir / "articles_last_3_months_cleaned.parquet"
     articles_csv_output = output_dir / "articles_last_3_months_cleaned.csv"
     df_articles.write_parquet(articles_parquet_output)
-    df_articles.write_csv(articles_csv_output)
+    if write_csv:
+        df_articles.write_csv(articles_csv_output)
     try:
         output_paths['articles_parquet'] = str(articles_parquet_output.relative_to(project_root))
-        output_paths['articles_csv'] = str(articles_csv_output.relative_to(project_root))
+        if write_csv:
+            output_paths['articles_csv'] = str(articles_csv_output.relative_to(project_root))
     except ValueError:
         output_paths['articles_parquet'] = str(articles_parquet_output)
-        output_paths['articles_csv'] = str(articles_csv_output)
+        if write_csv:
+            output_paths['articles_csv'] = str(articles_csv_output)
     
     print(f"\nAll datasets cleaned successfully!")
     print(f"Output directory: {output_dir}")

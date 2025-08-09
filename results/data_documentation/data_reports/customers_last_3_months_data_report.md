@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-06 13:47:22
+**Generated on:** 2025-08-09 11:24:33
 **File:** customers_last_3_months.parquet
 
 ## 📄 File Information
 - **File Path:** `..\data\processed\customers_last_3_months.parquet`
 - **File Type:** PARQUET
 - **File Size:** 30.0 MB
-- **Last Modified:** 2025-08-05 13:24:29
+- **Last Modified:** 2025-08-09 11:18:30
 
 ## 📊 Dataset Overview
 - **Rows:** 525,075
@@ -41,39 +41,39 @@
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `50f4713d609cad682a67dcc61aa07dccef64a6d6356897e965a89669f644332d`: 1 occurrences
-  - `edc289546ac7eb31043cad21e67ae8c04ca605eee5108d09051bffc6dfa080ee`: 1 occurrences
-  - `3841c97a8c78eb9db47274f682104794864010ac2b39c3df3f541f52a13290c7`: 1 occurrences
-  - `923d170dcbf526c9e94b3310dc543aa116705bbcb540162a708f512d7bab90b3`: 1 occurrences
-  - `2f0591d62d7d4c3a5908ef63fdb744ac18ec6d2ae06b92f05c2b247aa323f064`: 1 occurrences
+  - `e2bde14542cf4dc8cc161167b2406478eefb07256cd4c4541fb250b07ff57841`: 1 occurrences
+  - `88a27a9b098012246444cdaeeb846ba84a38bfe840007442538c4d9726492bb3`: 1 occurrences
+  - `a658c98f027d9c94b6a1f01dea9a9e86bcbbdc9a8700012eecbd252d743a1109`: 1 occurrences
+  - `b1dbd2e8b78eddfc2e3812168ca34ed1926907ec75a748fe620da69ab74e12f8`: 1 occurrences
+  - `88f85f882781202f65b814feab9b405def8d9e4a544e6cff8edcf6f2e7d46606`: 1 occurrences
 
 ### club_member_status
 - **Unique Values:** 4
 - **Average Length:** 6.08 characters
 - **Top Values:**
+  - `PRE-CREATE`: 10,707 occurrences
+  - `LEFT CLUB`: 65 occurrences
   - `None`: 745 occurrences
   - `ACTIVE`: 513,558 occurrences
-  - `LEFT CLUB`: 65 occurrences
-  - `PRE-CREATE`: 10,707 occurrences
 
 ### fashion_news_frequency
 - **Unique Values:** 4
 - **Average Length:** 6.11 characters
 - **Top Values:**
+  - `Regularly`: 221,089 occurrences
   - `Monthly`: 165 occurrences
   - `NONE`: 301,797 occurrences
-  - `Regularly`: 221,089 occurrences
   - `None`: 2,024 occurrences
 
 ### postal_code
 - **Unique Values:** 246,741
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `e9f109175452cb8057124fa2576ba5b4dc4cc43cb4b6ff7882387d54af4beb21`: 2 occurrences
-  - `6c0a05f4e0aa4bcb37cec38782a47d808a9fd2d05ef968f1bc26b87d792ffe76`: 1 occurrences
-  - `81a1f27dbc73292a0739967580271d73ce5ea8b9d38058391f1547c1266f62f1`: 1 occurrences
-  - `8a98be5ce9d80eb4c02a432aeb04806455e840377d0f30596a85ff9a869a0d0d`: 2 occurrences
-  - `717c182043c9f3aa1b6b991845ae82b5cde3bb40891f779cf9f104a7a23af126`: 2 occurrences
+  - `3e598af0bc7109514b0848b4f12a3ebd7c2c35a2d348a9c9e86c4b0ee1cc09a1`: 2 occurrences
+  - `a7acf16a8907d0d1d9621c1ef3b86191f44049c762999418e8e1a43e9c534548`: 1 occurrences
+  - `b8410e20731e06211fe9f405faa9ee338a99ce0a54aeb3ae12c2428857766243`: 7 occurrences
+  - `f7e81065c55073f20602bd290afcc989f8043eec13c6c2b9f5bd19685aa8e3f9`: 1 occurrences
+  - `577c2c90023a845156208433c923a299169c418b70ceddf09799d3cfb2f4843d`: 4 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 82.41 MB

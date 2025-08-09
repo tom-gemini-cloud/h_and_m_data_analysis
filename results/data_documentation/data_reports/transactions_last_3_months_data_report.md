@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-06 13:47:25
+**Generated on:** 2025-08-09 11:24:36
 **File:** transactions_last_3_months.parquet
 
 ## 📄 File Information
 - **File Path:** `..\data\processed\transactions_last_3_months.parquet`
 - **File Type:** PARQUET
 - **File Size:** 52.83 MB
-- **Last Modified:** 2025-08-05 13:24:06
+- **Last Modified:** 2025-08-09 11:18:04
 
 ## 📊 Dataset Overview
 - **Rows:** 3,904,391
@@ -39,11 +39,11 @@
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `2c77f4f7d2823aacb8545d5cb745ea58650892947282175486bdeb6e6ba0e153`: 11 occurrences
-  - `f41e7f5af89f365d06ed46bf5d68733a119f748f237680bb79d5a11880afd7dd`: 11 occurrences
-  - `2fdb86688873a2d902489508b9f9eff8aa264c16f81db198e0870840b65e0629`: 3 occurrences
-  - `5ebf70a3a7e1e18c199cd54f23d7ae4f6b06fdc61a42c30fc2ab95e4e71b76f2`: 4 occurrences
-  - `d5347b0e0a11468707115d12d2174678ed85d2eeab213032e492e5889fc0d921`: 1 occurrences
+  - `dd09bb5f8bb45148ec3782d285c9ee529fac6f716d2b5fc49c347a29bf5d16b0`: 1 occurrences
+  - `2fc8bd6e99b38abab0738e562e5cd39fc178ac7ad61b88a2af3535d08f787333`: 9 occurrences
+  - `47404ea70bede3acf49f92c79155108c069e1b555f6f16ccb754f1daa10a95ca`: 7 occurrences
+  - `e513d2e65838bd77daa1ddf1032522f369189195507e705d80b9927d018ce3e8`: 3 occurrences
+  - `5a77b64a0b103ce1ba742d5a62345b7c28e4e8bbd88d46a6dbe26c6fc278ec16`: 28 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 342.56 MB

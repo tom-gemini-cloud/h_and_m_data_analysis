@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-07 16:44:34
+**Generated on:** 2025-08-09 11:20:41
 **File:** transactions_last_3_months_cleaned.parquet
 
 ## 📄 File Information
 - **File Path:** `..\data\cleaned\transactions_last_3_months_cleaned.parquet`
 - **File Type:** PARQUET
 - **File Size:** 52.6 MB
-- **Last Modified:** 2025-08-07 16:44:27
+- **Last Modified:** 2025-08-09 11:20:33
 
 ## 📊 Dataset Overview
 - **Rows:** 3,904,391
@@ -40,11 +40,11 @@
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `a8e1e22b3fa9eef9ce86feb31ef81ba6dfbaef1d98603db82e6e1b94d74fbb03`: 9 occurrences
-  - `fc3cfa4d46c423f84ab9ce391335906e64e53ba9be51d9684c881b3f73730bed`: 13 occurrences
-  - `5aba6562dc8b6a1f6f5e709e5f1d0927150a453d639e6b39296a135725457f23`: 3 occurrences
-  - `65111c4198b2538354afa24d3dc170f5189efb1e9b7ecdf6849d01a6bad70571`: 4 occurrences
-  - `961f465dc81e89e9b61cf80c4c173d177d688cf5694f9436ad480f3010512425`: 5 occurrences
+  - `1b8ac63273d6405d16421451d55cdeec57be2ece3639286c62d8d09d6d74c38e`: 1 occurrences
+  - `9dd24c07abd3cf5a91280c2cca62e2f47ef85c275955fc0def6c568b40e67639`: 8 occurrences
+  - `8a8a93d92395cea147abaa1479b8ef698a9c222b3f5d8e043d58afda4364a8ba`: 2 occurrences
+  - `f9fe07e4685446e2e41af2b4ecbc864f034b6da6ab20b034249a9ad969dbbb03`: 1 occurrences
+  - `cb791824fda0f57baad04dc940eabeef5e6f5f4dce17b415aca82c2e1d105185`: 2 occurrences
 
 ### sales_channel_id
 - **Unique Values:** 1
