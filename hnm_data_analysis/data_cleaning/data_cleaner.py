@@ -21,7 +21,7 @@ import warnings
 
 @dataclass
 class CleaningReport:
-    """Comprehensive report of all cleaning operations performed."""
+    """Create a report of all cleaning operations performed."""
     dataset_name: str
     original_shape: Tuple[int, int]
     cleaned_shape: Tuple[int, int]
@@ -63,7 +63,19 @@ class DataCleaner:
             }
         }
     
-    def clean_transactions(self, file_path: str, outlier_method: str = 'iqr', save_csv: bool = False, csv_output_path: Optional[str] = None) -> Tuple[pl.DataFrame, CleaningReport]:
+    def clean_transactions(
+        self,
+        file_path: str,
+        outlier_method: str = 'iqr',
+        save_csv: bool = False,
+        csv_output_path: Optional[str] = None,
+        compute_eur_price: bool = True,
+        price_scale_factor: float = 1000.0,
+        sek_per_eur: float = 10.5,
+        round_decimals: int = 2,
+        overwrite_price_with_eur: bool = True,
+        keep_aux_price_columns: bool = False,
+    ) -> Tuple[pl.DataFrame, CleaningReport]:
         """
         Clean transactions dataset with outlier handling and validation.
         
@@ -98,11 +110,22 @@ class DataCleaner:
         df, validation_fixes = self._validate_transactions(df)
         report.validation_issues_fixed = validation_fixes
         
-        # 4. Add quality flags
+        # 4. Convert anonymised price to SEK and EUR (optional)
+        if compute_eur_price:
+            df = self._compute_price_eur(
+                df,
+                price_scale_factor=price_scale_factor,
+                sek_per_eur=sek_per_eur,
+                round_decimals=round_decimals,
+                overwrite_price_with_eur=overwrite_price_with_eur,
+                keep_aux_price_columns=keep_aux_price_columns,
+            )
+
+        # 5. Add quality flags
         df, quality_flags = self._add_transaction_quality_flags(df)
         report.data_quality_flags_added = quality_flags
         
-        # 5. Data type optimisation
+        # 6. Data type optimisation
         df = self._optimise_transaction_types(df)
         
         # Note: Duplicates in transactions are legitimate (multiple quantities)
@@ -640,6 +663,63 @@ class DataCleaner:
                         pl.col(col).cast(pl.Categorical).alias(col)
                     )
         
+        return df
+
+    def _compute_price_eur(
+        self,
+        df: pl.DataFrame,
+        price_scale_factor: float = 1000.0,
+        sek_per_eur: float = 10.5,
+        round_decimals: int = 2,
+        overwrite_price_with_eur: bool = True,
+        keep_aux_price_columns: bool = False,
+    ) -> pl.DataFrame:
+        """Compute SEK and EUR prices from anonymised `price`.
+
+        Assumptions:
+        - The anonymised `price` in the H&M dataset preserves relative ordering and is typically scaled down.
+        - We expose `price_scale_factor` and `sek_per_eur` as configurable to allow calibration.
+
+        Parameters
+        - price_scale_factor: multiply anonymised price by this factor to approximate SEK
+        - sek_per_eur: FX rate (SEK per 1 EUR). EUR = SEK / sek_per_eur
+        - round_decimals: rounding for output price columns
+        - overwrite_price_with_eur: if True, replace `price` with EUR value; otherwise add new columns
+        """
+        if 'price' not in df.columns:
+            return df
+
+        # Guard against zero or negative parameters
+        if price_scale_factor <= 0:
+            warnings.warn("price_scale_factor must be > 0. Skipping EUR conversion.")
+            return df
+        if sek_per_eur <= 0:
+            warnings.warn("sek_per_eur must be > 0. Skipping EUR conversion.")
+            return df
+
+        # Compute SEK and EUR
+        df = df.with_columns([
+            (pl.col('price') * pl.lit(price_scale_factor)).alias('price_sek_raw'),
+            ((pl.col('price') * pl.lit(price_scale_factor)) / pl.lit(sek_per_eur)).alias('price_eur_raw'),
+        ])
+
+        # Round and finalise columns
+        df = df.with_columns([
+            pl.col('price_sek_raw').round(round_decimals).cast(pl.Float64).alias('price_sek'),
+            pl.col('price_eur_raw').round(round_decimals).cast(pl.Float64).alias('price_eur'),
+        ]).drop(['price_sek_raw', 'price_eur_raw'])
+
+        # Optionally overwrite original price with EUR
+        if overwrite_price_with_eur:
+            df = df.with_columns(pl.col('price_eur').alias('price'))
+
+        # Optionally drop auxiliary price columns, keeping only `price` as EUR
+        if not keep_aux_price_columns:
+            # If we overwrote price, we can drop the intermediates
+            drop_cols = [c for c in ['price_sek', 'price_eur'] if c in df.columns]
+            if drop_cols:
+                df = df.drop(drop_cols)
+
         return df
     
     def generate_cleaning_report(self, output_path: Optional[str] = None) -> str:

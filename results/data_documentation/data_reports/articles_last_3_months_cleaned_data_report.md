@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-09 11:20:43
+**Generated on:** 2025-08-09 11:49:01
 **File:** articles_last_3_months_cleaned.parquet
 
 ## 📄 File Information
 - **File Path:** `..\data\cleaned\articles_last_3_months_cleaned.parquet`
 - **File Type:** PARQUET
-- **File Size:** 108.8 MB
-- **Last Modified:** 2025-08-09 11:20:39
+- **File Size:** 108.81 MB
+- **Last Modified:** 2025-08-09 11:48:57
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -72,129 +72,129 @@
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `DEAL Bobyn 2-PACK TOP`: 3 occurrences
-  - `PC Tina Turner`: 1 occurrences
-  - `J MYSA JOGGERS. CNY`: 1 occurrences
-  - `Regina SL Rib set (J)`: 2 occurrences
-  - `Sabrina set`: 1 occurrences
+  - `Venice melbourne`: 3 occurrences
+  - `ALVA Hood`: 1 occurrences
+  - `Mr Smith Coat`: 3 occurrences
+  - `TD Minidots`: 1 occurrences
+  - `LA-JS-W-AC BUCKET HAT`: 1 occurrences
 
 ### product_type_name
 - **Unique Values:** 124
 - **Top Values:**
-  - `Bra extender`: 1 occurrences
-  - `Tailored Waistcoat`: 23 occurrences
-  - `Alice band`: 6 occurrences
-  - `Other shoe`: 123 occurrences
-  - `Dress`: 4,863 occurrences
+  - `Cross-body bag`: 5 occurrences
+  - `Leg warmers`: 1 occurrences
+  - `Gloves`: 93 occurrences
+  - `Hat/beanie`: 308 occurrences
+  - `Outdoor overall`: 24 occurrences
 
 ### product_group_name
 - **Unique Values:** 18
 - **Top Values:**
   - `Unknown`: 111 occurrences
-  - `Bags`: 25 occurrences
   - `Garment and Shoe care`: 8 occurrences
-  - `Items`: 15 occurrences
-  - `Furniture`: 1 occurrences
+  - `Cosmetic`: 13 occurrences
+  - `Nightwear`: 631 occurrences
+  - `Accessories`: 4,179 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Top Values:**
-  - `Jacquard`: 258 occurrences
+  - `Treatment`: 160 occurrences
+  - `Transparent`: 45 occurrences
+  - `Chambray`: 101 occurrences
   - `All over pattern`: 6,351 occurrences
-  - `Check`: 878 occurrences
-  - `Colour blocking`: 533 occurrences
-  - `Solid`: 21,928 occurrences
+  - `Placement print`: 878 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Top Values:**
-  - `Light Orange`: 623 occurrences
-  - `Unknown`: 5 occurrences
-  - `Greyish Beige`: 129 occurrences
+  - `Other Yellow`: 117 occurrences
+  - `Purple`: 99 occurrences
+  - `Light Green`: 303 occurrences
+  - `Yellowish Brown`: 744 occurrences
   - `Other Green`: 71 occurrences
-  - `Bronze/Copper`: 30 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Top Values:**
-  - `Unknown`: 5 occurrences
-  - `Medium`: 1,748 occurrences
   - `Dusty Light`: 9,135 occurrences
   - `Light`: 6,424 occurrences
   - `Medium Dusty`: 5,777 occurrences
+  - `Undefined`: 29 occurrences
+  - `Unknown`: 5 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Top Values:**
-  - `Grey`: 2,892 occurrences
-  - `Pink`: 3,474 occurrences
-  - `Lilac Purple`: 518 occurrences
+  - `undefined`: 29 occurrences
+  - `Metal`: 1,023 occurrences
+  - `Turquoise`: 504 occurrences
   - `Green`: 1,339 occurrences
-  - `Beige`: 2,972 occurrences
+  - `Black`: 10,050 occurrences
 
 ### department_name
 - **Unique Values:** 238
 - **Top Values:**
-  - `Baby Socks`: 144 occurrences
-  - `Tops woven DS`: 42 occurrences
-  - `Underwear Woven`: 63 occurrences
-  - `Small Accessories Extended`: 76 occurrences
-  - `Outdoor/Blazers`: 311 occurrences
+  - `Light Basic Jersey`: 355 occurrences
+  - `Baby Boy Outdoor`: 62 occurrences
+  - `Other items`: 135 occurrences
+  - `Equatorial`: 2 occurrences
+  - `Kids Girl Denim`: 125 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
-  - `A`: 12,862 occurrences
   - `J`: 1,156 occurrences
-  - `F`: 4,717 occurrences
-  - `I`: 2,471 occurrences
+  - `D`: 7,111 occurrences
   - `H`: 2,832 occurrences
+  - `B`: 3,919 occurrences
+  - `C`: 3,474 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Top Values:**
-  - `Children Accessories, Swimwear`: 1,156 occurrences
   - `Ladies Accessories`: 3,474 occurrences
-  - `Lingeries/Tights`: 3,919 occurrences
-  - `Sport`: 1,328 occurrences
+  - `Children Sizes 92-140`: 2,832 occurrences
   - `Divided`: 7,111 occurrences
+  - `Menswear`: 4,717 occurrences
+  - `Sport`: 1,328 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Top Values:**
-  - `Baby/Children`: 8,887 occurrences
-  - `Sport`: 1,328 occurrences
-  - `Menswear`: 4,717 occurrences
-  - `Ladieswear`: 20,255 occurrences
   - `Divided`: 7,111 occurrences
+  - `Sport`: 1,328 occurrences
+  - `Ladieswear`: 20,255 occurrences
+  - `Menswear`: 4,717 occurrences
+  - `Baby/Children`: 8,887 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Top Values:**
-  - `Divided Complements Other`: 24 occurrences
-  - `Divided Collection`: 3,489 occurrences
-  - `Divided Selected`: 404 occurrences
-  - `Womens Trend`: 1,216 occurrences
+  - `Womens Tailoring`: 1,805 occurrences
+  - `Ladies Other`: 3 occurrences
+  - `Womens Small accessories`: 1,693 occurrences
+  - `EQ Divided`: 1 occurrences
   - `Divided Asia keys`: 133 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Top Values:**
-  - `Shorts`: 877 occurrences
-  - `Swimwear`: 1,683 occurrences
-  - `Dressed`: 385 occurrences
-  - `Trousers Denim`: 1,505 occurrences
-  - `Socks and Tights`: 947 occurrences
+  - `Trousers`: 3,132 occurrences
+  - `Knitwear`: 2,417 occurrences
+  - `Blouses`: 3,121 occurrences
+  - `Jersey Fancy`: 7,715 occurrences
+  - `Shoes`: 1,926 occurrences
 
 ### detail_desc
 - **Unique Values:** 19,739
 - **Top Values:**
-  - `Short dress in woven fabric with a V-neck and wrapover front with a visible button at one side and concealed ties at the other. Long sleeves and wide, buttoned cuffs. Lined at the top.`: 2 occurrences
-  - `Microfibre body with a gentle sculpting effect on the waist and bum. Adjustable shoulder straps and padded cups to shape the bust and provide good support. Lined gusset with press-studs and a high cut at the back with folded, glued edges. Mesh lining at the front.`: 1 occurrences
-  - `Oversized jumper in a soft knit containing some wool with dropped shoulders, long sleeves, a rounded hem and ribbing around the neckline, cuffs and hem. Longer at the back. The polyester content of the jumper is recycled.`: 2 occurrences
-  - `Short jersey top with a round neckline, short sleeves and an open back with ties at the hem.`: 2 occurrences
-  - `Platform ankle boots in imitation leather with a zip in one side. Jersey linings made from recycled polyester, and imitation leather insoles. Heel 9.5 cm.`: 1 occurrences
+  - `Fitted top in soft jersey made from a cotton blend with short, voluminous puff sleeves in a cotton weave. Square neckline front and back and elasticated edges over the shoulders and around the sleeves.`: 4 occurrences
+  - `Calf-length trousers in fast-drying functional fabric with a regular, elasticated drawstring waist, side pockets and straight, wide legs.`: 1 occurrences
+  - `Trousers in a cotton weave. High paper bag waist with pleats at the front, covered elastication at the back and a tie belt. Zip fly with concealed hook-and-eye fasteners, front pockets and wide, gently tapered, loose-fitting legs with flap pockets.`: 2 occurrences
+  - `Jacket in woven fabric with a ribbed stand-up collar, side pockets and ribbing at the cuffs and hem. Lined.`: 3 occurrences
+  - `Trousers in washed, stretch twill. High waist with a detachable belt, zip fly with hook-and-eye fasteners, side pockets, back pockets and slim legs.`: 1 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 6.2 MB
