@@ -207,11 +207,15 @@ class DataCleaner:
     
     def clean_articles(self, file_path: str, outlier_method: str = 'cap', save_csv: bool = False, csv_output_path: Optional[str] = None) -> Tuple[pl.DataFrame, CleaningReport]:
         """
-        Clean articles dataset with outlier treatment and duplicate removal.
+        Clean articles dataset with appropriate data quality handling.
+        
+        Note: Most statistical 'outliers' in product identifiers are actually valid 
+        business values representing H&M's diverse product catalog and are preserved.
+        Only clearly invalid values (like negative IDs) are corrected.
         
         Args:
             file_path: Path to articles parquet file
-            outlier_method: Method for outlier treatment ('cap', 'remove', 'flag')
+            outlier_method: Legacy parameter (maintained for compatibility, minimal impact)
             save_csv: Whether to save cleaned data as CSV file
             csv_output_path: Path for CSV output (optional)
             
@@ -460,39 +464,53 @@ class DataCleaner:
         return df, outliers_treated
     
     def _treat_articles_outliers(self, df: pl.DataFrame, method: str = 'cap') -> Tuple[pl.DataFrame, Dict[str, int]]:
-        """Treat outliers in articles numerical columns."""
+        """
+        Handle outliers in articles dataset.
+        
+        Note: Most 'outliers' in product identifiers (product_type_no, product_code, 
+        graphical_appearance_no) are actually valid business values representing 
+        H&M's diverse product catalog. These should NOT be treated as they are 
+        categorical identifiers, not continuous measurements.
+        
+        Only treating genuinely problematic values like negative IDs where appropriate.
+        """
         outliers_treated = {}
         
-        # Focus on high-priority outlier columns from analysis
-        outlier_columns = {
-            'product_type_no': (1, 300),  # Reasonable range for product types
-            'product_code': (485308, 1084636),  # From IQR analysis
-            'graphical_appearance_no': (1, 100),  # Reasonable range
-            'index_group_no': (1, 50)  # Reasonable range
-        }
+        # Only handle clearly invalid values (e.g., negative IDs where they shouldn't exist)
+        # Most statistical "outliers" in product codes are actually valid business values
         
-        for col, (lower_bound, upper_bound) in outlier_columns.items():
-            if col in df.columns:
-                outlier_count = df.filter(
-                    (pl.col(col) < lower_bound) | (pl.col(col) > upper_bound)
-                ).height
-                
-                if outlier_count > 0:
-                    if method == 'cap':
-                        df = df.with_columns([
-                            pl.when(pl.col(col) < lower_bound)
-                            .then(pl.lit(lower_bound))
-                            .when(pl.col(col) > upper_bound)
-                            .then(pl.lit(upper_bound))
-                            .otherwise(pl.col(col))
-                            .alias(col),
-                            
-                            # Add flag for capped values
-                            ((pl.col(col) < lower_bound) | (pl.col(col) > upper_bound))
-                            .alias(f'{col}_outlier_capped')
-                        ])
+        # Handle negative values in product_type_no if they exist (seems like missing data indicator)
+        if 'product_type_no' in df.columns:
+            negative_count = df.filter(pl.col('product_type_no') < 0).height
+            if negative_count > 0:
+                # Replace negative values with 0 (unknown/missing indicator)
+                df = df.with_columns([
+                    pl.when(pl.col('product_type_no') < 0)
+                    .then(pl.lit(0))
+                    .otherwise(pl.col('product_type_no'))
+                    .alias('product_type_no'),
                     
-                    outliers_treated[col] = outlier_count
+                    (pl.col('product_type_no') < 0).alias('product_type_no_negative_fixed')
+                ])
+                outliers_treated['product_type_no_negative'] = negative_count
+        
+        # Handle negative values in graphical_appearance_no if they exist
+        if 'graphical_appearance_no' in df.columns:
+            negative_count = df.filter(pl.col('graphical_appearance_no') < 0).height
+            if negative_count > 0:
+                # Replace negative values with 0 (unknown/missing indicator)
+                df = df.with_columns([
+                    pl.when(pl.col('graphical_appearance_no') < 0)
+                    .then(pl.lit(0))
+                    .otherwise(pl.col('graphical_appearance_no'))
+                    .alias('graphical_appearance_no'),
+                    
+                    (pl.col('graphical_appearance_no') < 0).alias('graphical_appearance_no_negative_fixed')
+                ])
+                outliers_treated['graphical_appearance_no_negative'] = negative_count
+        
+        # Note: product_code and other identifier columns are left untreated as 
+        # their wide ranges represent legitimate business variety, not data quality issues
         
         return df, outliers_treated
     
@@ -654,13 +672,18 @@ class DataCleaner:
         """Add data quality flags to articles."""
         quality_flags = []
         
-        # Add outlier flags for capped columns
-        outlier_columns = ['product_type_no', 'product_code', 'graphical_appearance_no', 'index_group_no']
-        for col in outlier_columns:
-            flag_name = f'{col}_outlier_capped'
-            if flag_name not in df.columns and col in df.columns:
-                df = df.with_columns(pl.lit(False).alias(flag_name))
-            quality_flags.append(flag_name)
+        # Add flags for negative value fixes (only for columns that actually had negative fixes)
+        if 'product_type_no_negative_fixed' in df.columns:
+            quality_flags.append('product_type_no_negative_fixed')
+        elif 'product_type_no' in df.columns:
+            df = df.with_columns(pl.lit(False).alias('product_type_no_negative_fixed'))
+            quality_flags.append('product_type_no_negative_fixed')
+            
+        if 'graphical_appearance_no_negative_fixed' in df.columns:
+            quality_flags.append('graphical_appearance_no_negative_fixed')
+        elif 'graphical_appearance_no' in df.columns:
+            df = df.with_columns(pl.lit(False).alias('graphical_appearance_no_negative_fixed'))
+            quality_flags.append('graphical_appearance_no_negative_fixed')
         
         if 'product_code_invalid' not in df.columns:
             df = df.with_columns(pl.lit(False).alias('product_code_invalid'))
@@ -1170,9 +1193,9 @@ class DataCleaner:
             'age_imputed': 'Indicates imputed age values'
         }
         
-        # Handle outlier capped flags
-        for col in ['product_type_no', 'product_code', 'graphical_appearance_no', 'index_group_no']:
-            descriptions[f'{col}_outlier_capped'] = f'Indicates {col} values that were capped due to outliers'
+        # Handle negative value fix flags
+        descriptions['product_type_no_negative_fixed'] = 'Indicates negative product_type_no values that were set to 0 (missing indicator)'
+        descriptions['graphical_appearance_no_negative_fixed'] = 'Indicates negative graphical_appearance_no values that were set to 0 (missing indicator)'
         
         return descriptions.get(flag, 'Quality tracking flag')
 

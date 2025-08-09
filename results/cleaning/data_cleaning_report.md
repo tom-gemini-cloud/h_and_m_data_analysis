@@ -1,6 +1,6 @@
 # Data Cleaning Report
 
-**Generated on:** 2025-08-09 13:02:42
+**Generated on:** 2025-08-09 14:55:05
 **Project:** H&M Customer Data Analytics
 
 ## 📋 Executive Summary
@@ -8,7 +8,7 @@
 **Datasets processed:** 3
 **Total records processed:** 4,471,764 → 4,471,764
 **Missing values handled:** 618,244
-**Outliers treated:** 238,637
+**Outliers treated:** 191,985
 **Duplicates removed:** 0
 
 ### Key Achievements
@@ -26,7 +26,7 @@
 - **Original shape:** 3,904,391 rows × 5 columns
 - **Cleaned shape:** 3,904,391 rows × 8 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 13:02:36
+- **Cleaning timestamp:** 2025-08-09 14:54:59
 
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
@@ -48,7 +48,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 525,075 rows × 7 columns
 - **Cleaned shape:** 525,075 rows × 14 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 13:02:38
+- **Cleaning timestamp:** 2025-08-09 14:55:01
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -76,9 +76,9 @@ The following columns were added to track data quality and cleaning operations:
 
 #### Overview
 - **Original shape:** 42,298 rows × 25 columns
-- **Cleaned shape:** 42,298 rows × 30 columns
+- **Cleaned shape:** 42,298 rows × 28 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 13:02:40
+- **Cleaning timestamp:** 2025-08-09 14:55:03
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -88,17 +88,14 @@ The following columns were added to track data quality and cleaning operations:
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
 | ------ | ------------- | ---------------- |
-| product_type_no | 3,198 | Statistical bounds capping |
-| product_code | 1,273 | Statistical bounds capping |
-| graphical_appearance_no | 42,298 | Statistical bounds capping |
+| product_type_no_negative | 111 | Statistical bounds capping |
+| graphical_appearance_no_negative | 6 | Statistical bounds capping |
 
 #### Quality Flags Added
 The following columns were added to track data quality and cleaning operations:
 
-- **product_type_no_outlier_capped**: Indicates product_type_no values that were capped due to outliers
-- **product_code_outlier_capped**: Indicates product_code values that were capped due to outliers
-- **graphical_appearance_no_outlier_capped**: Indicates graphical_appearance_no values that were capped due to outliers
-- **index_group_no_outlier_capped**: Indicates index_group_no values that were capped due to outliers
+- **product_type_no_negative_fixed**: Indicates negative product_type_no values that were set to 0 (missing indicator)
+- **graphical_appearance_no_negative_fixed**: Indicates negative graphical_appearance_no values that were set to 0 (missing indicator)
 - **product_code_invalid**: Flags potentially invalid product codes
 
 ---
