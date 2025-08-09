@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-09 15:12:54
+**Generated on:** 2025-08-09 15:31:46
 **File:** articles_last_3_months_cleaned.parquet
 
 ## 📄 File Information
 - **File Path:** `..\data\cleaned\articles_last_3_months_cleaned.parquet`
 - **File Type:** PARQUET
-- **File Size:** 108.79 MB
-- **Last Modified:** 2025-08-09 15:12:50
+- **File Size:** 108.8 MB
+- **Last Modified:** 2025-08-09 15:31:41
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -70,129 +70,129 @@
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `Rosalie dress`: 3 occurrences
-  - `Salmon basic denim`: 5 occurrences
-  - `Maran linen`: 5 occurrences
-  - `Marla 2pk`: 1 occurrences
-  - `MIAMI cargo shorts`: 1 occurrences
+  - `Danni dress (RW)`: 1 occurrences
+  - `Flirty Stella necklace`: 1 occurrences
+  - `Cypress cardigan`: 2 occurrences
+  - `SPEED Post dress`: 3 occurrences
+  - `OLLIE cap(1)`: 1 occurrences
 
 ### product_type_name
 - **Unique Values:** 124
 - **Top Values:**
-  - `Coat`: 169 occurrences
-  - `Tie`: 33 occurrences
-  - `Trousers`: 4,787 occurrences
-  - `Sneakers`: 543 occurrences
-  - `Bodysuit`: 371 occurrences
+  - `Pyjama bottom`: 117 occurrences
+  - `Straw hat`: 6 occurrences
+  - `Bra extender`: 1 occurrences
+  - `Garment Set`: 365 occurrences
+  - `Marker pen`: 4 occurrences
 
 ### product_group_name
 - **Unique Values:** 18
 - **Top Values:**
-  - `Underwear/nightwear`: 7 occurrences
-  - `Accessories`: 4,179 occurrences
-  - `Garment Upper body`: 15,635 occurrences
-  - `Nightwear`: 631 occurrences
-  - `Stationery`: 4 occurrences
+  - `Swimwear`: 1,820 occurrences
+  - `Socks & Tights`: 1,005 occurrences
+  - `Garment Full body`: 5,796 occurrences
+  - `Garment and Shoe care`: 8 occurrences
+  - `Unknown`: 111 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Top Values:**
-  - `Chambray`: 101 occurrences
-  - `Embroidery`: 477 occurrences
-  - `Melange`: 2,161 occurrences
-  - `Application/3D`: 365 occurrences
-  - `Glittering/Metallic`: 314 occurrences
+  - `Argyle`: 3 occurrences
+  - `Stripe`: 1,660 occurrences
+  - `Contrast`: 145 occurrences
+  - `Treatment`: 160 occurrences
+  - `Lace`: 557 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Top Values:**
-  - `Silver`: 318 occurrences
-  - `White`: 4,115 occurrences
-  - `Other Blue`: 22 occurrences
-  - `Light Orange`: 623 occurrences
-  - `Grey`: 1,359 occurrences
+  - `Red`: 754 occurrences
+  - `Transparent`: 12 occurrences
+  - `Light Grey`: 671 occurrences
+  - `Light Green`: 303 occurrences
+  - `Dark Red`: 751 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Top Values:**
-  - `Light`: 6,424 occurrences
-  - `Unknown`: 5 occurrences
   - `Dusty Light`: 9,135 occurrences
-  - `Bright`: 2,373 occurrences
+  - `Light`: 6,424 occurrences
+  - `Medium Dusty`: 5,777 occurrences
+  - `Unknown`: 5 occurrences
   - `Undefined`: 29 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Top Values:**
-  - `Green`: 1,339 occurrences
-  - `Metal`: 1,023 occurrences
+  - `Khaki green`: 1,374 occurrences
   - `Red`: 1,635 occurrences
-  - `Bluish Green`: 1 occurrences
-  - `Mole`: 705 occurrences
+  - `Orange`: 1,174 occurrences
+  - `Yellow`: 1,280 occurrences
+  - `Grey`: 2,892 occurrences
 
 ### department_name
 - **Unique Values:** 238
 - **Top Values:**
-  - `Trousers & Skirt`: 155 occurrences
-  - `AK Dresses & Outdoor`: 49 occurrences
-  - `Conscious Exclusive`: 58 occurrences
-  - `Baby basics`: 307 occurrences
-  - `Skirts DS`: 22 occurrences
+  - `Knit & Woven`: 206 occurrences
+  - `Tops Boys`: 10 occurrences
+  - `Baby Girl Local Relevance`: 2 occurrences
+  - `Read & React`: 14 occurrences
+  - `Denim Trousers`: 350 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
-  - `B`: 3,919 occurrences
   - `G`: 2,428 occurrences
-  - `C`: 3,474 occurrences
   - `D`: 7,111 occurrences
-  - `J`: 1,156 occurrences
+  - `B`: 3,919 occurrences
+  - `I`: 2,471 occurrences
+  - `C`: 3,474 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Top Values:**
-  - `Children Accessories, Swimwear`: 1,156 occurrences
-  - `Ladieswear`: 12,862 occurrences
-  - `Divided`: 7,111 occurrences
-  - `Menswear`: 4,717 occurrences
   - `Lingeries/Tights`: 3,919 occurrences
+  - `Children Sizes 134-170`: 2,471 occurrences
+  - `Sport`: 1,328 occurrences
+  - `Children Accessories, Swimwear`: 1,156 occurrences
+  - `Divided`: 7,111 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Top Values:**
+  - `Divided`: 7,111 occurrences
   - `Sport`: 1,328 occurrences
+  - `Menswear`: 4,717 occurrences
   - `Baby/Children`: 8,887 occurrences
   - `Ladieswear`: 20,255 occurrences
-  - `Menswear`: 4,717 occurrences
-  - `Divided`: 7,111 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Top Values:**
-  - `Womens Premium`: 487 occurrences
-  - `Ladies Other`: 3 occurrences
-  - `Collaborations`: 121 occurrences
-  - `Kids Accessories, Swimwear & D`: 526 occurrences
-  - `Womens Tailoring`: 1,805 occurrences
+  - `Men Accessories`: 418 occurrences
+  - `Baby Girl`: 476 occurrences
+  - `Contemporary Street`: 520 occurrences
+  - `Contemporary Smart`: 718 occurrences
+  - `Kids Sports`: 136 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Top Values:**
-  - `Dresses/Skirts girls`: 418 occurrences
-  - `Skirts`: 712 occurrences
+  - `Knitwear`: 2,417 occurrences
   - `Trousers`: 3,132 occurrences
-  - `Shirts`: 748 occurrences
-  - `Blouses`: 3,121 occurrences
+  - `Accessories`: 4,336 occurrences
+  - `Dresses/Skirts girls`: 418 occurrences
+  - `Jersey Fancy`: 7,715 occurrences
 
 ### detail_desc
 - **Unique Values:** 19,739
 - **Top Values:**
-  - `Leggings in stretch imitation leather. High waist with concealed elastication.`: 1 occurrences
-  - `Platform sandals with open toes, crossover foot straps and an adjustable ankle strap with concealed elastication and a round metal buckle. Imitation leather insoles. Platform front approx. 2 cm. Heel 9.5 cm.`: 1 occurrences
-  - `Short dress in soft jersey made from a viscose blend with a round neckline, long sleeves and side pockets. Unlined.`: 3 occurrences
-  - `Socks in a fine-knit cotton blend with a small motif at the top and elasticated tops.`: 1 occurrences
-  - `Sports bras in fast-drying functional fabric with a lined front, racer back with sections in ventilating mesh, and a wide elasticated hem. Medium support.`: 5 occurrences
+  - `Silk tie in a grosgrain weave. Width 7 cm.`: 2 occurrences
+  - `Blouse in a cotton weave with buttons down the front, a V-neck with a wide flounced trim, long puff sleeves with adjustable buttoning at the cuffs and a tapered waist.`: 1 occurrences
+  - `Dress in a soft, fine-knit cotton blend containing glittery threads with a ribbed neckline, sewn-on bow at the top and short sleeves.`: 2 occurrences
+  - `Ankle boots in suede with a soft shaft. Fabric linings and insoles. Heel 8 cm.`: 1 occurrences
+  - `Fully lined bikini bottoms with a low, V-shaped waist, narrow sides and a high cut at the back.`: 1 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 6.19 MB

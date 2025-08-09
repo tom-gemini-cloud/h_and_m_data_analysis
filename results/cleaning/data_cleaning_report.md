@@ -1,6 +1,6 @@
 # Data Cleaning Report
 
-**Generated on:** 2025-08-09 15:12:50
+**Generated on:** 2025-08-09 15:31:41
 **Project:** H&M Customer Data Analytics
 
 ## 📋 Executive Summary
@@ -27,7 +27,7 @@
 - **Original shape:** 3,904,391 rows × 5 columns
 - **Cleaned shape:** 3,904,391 rows × 8 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 15:12:43
+- **Cleaning timestamp:** 2025-08-09 15:31:34
 
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
@@ -41,6 +41,8 @@ The following columns were added to track data quality and cleaning operations:
 - **sales_channel_corrected**: Indicates sales channel IDs that were corrected
 - **price_percentile_calibrated**: Quality tracking flag
 
+#### Statistical Validation (Pre vs Post Cleaning)
+
 ---
 
 ### Customers Dataset
@@ -49,7 +51,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 525,075 rows × 7 columns
 - **Cleaned shape:** 525,075 rows × 14 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 15:12:45
+- **Cleaning timestamp:** 2025-08-09 15:31:36
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -71,6 +73,14 @@ The following columns were added to track data quality and cleaning operations:
 - **postal_code_imputed**: Quality tracking flag
 - **age_corrected**: Indicates ages that were corrected to valid ranges
 
+#### Statistical Validation (Pre vs Post Cleaning)
+
+##### Categorical Columns
+| Column | Unique (Pre) | Unique (Post) |
+| ------ | ------------- | -------------- |
+| club_member_status | 4 | 4 |
+| fashion_news_frequency | 4 | 3 |
+
 ---
 
 ### Articles Dataset
@@ -79,7 +89,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 42,298 rows × 25 columns
 - **Cleaned shape:** 42,298 rows × 28 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 15:12:47
+- **Cleaning timestamp:** 2025-08-09 15:31:38
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -98,6 +108,15 @@ The following columns were added to track data quality and cleaning operations:
 - **product_type_no_negative_fixed**: Indicates negative product_type_no values that were set to 0 (missing indicator)
 - **graphical_appearance_no_negative_fixed**: Indicates negative graphical_appearance_no values that were set to 0 (missing indicator)
 - **product_code_invalid**: Flags potentially invalid product codes
+
+#### Statistical Validation (Pre vs Post Cleaning)
+
+##### Categorical Columns
+| Column | Unique (Pre) | Unique (Post) |
+| ------ | ------------- | -------------- |
+| graphical_appearance_name | 30 | 30 |
+| index_group_name | 5 | 5 |
+| product_type_name | 124 | 124 |
 
 ---
 

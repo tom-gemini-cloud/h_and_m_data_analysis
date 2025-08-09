@@ -31,6 +31,9 @@ class CleaningReport:
     validation_issues_fixed: Dict[str, int] = field(default_factory=dict)
     data_quality_flags_added: List[str] = field(default_factory=list)
     cleaning_timestamp: str = field(default_factory=lambda: datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+    # New: pre/post stats for statistical validation sections
+    pre_cleaning_stats: Dict[str, Any] = field(default_factory=dict)
+    post_cleaning_stats: Dict[str, Any] = field(default_factory=dict)
 
 
 class DataCleaner:
@@ -102,6 +105,8 @@ class DataCleaner:
             original_shape=original_shape,
             cleaned_shape=original_shape 
         )
+        # Capture pre-cleaning stats
+        report.pre_cleaning_stats = self._compute_dataset_stats(df, dataset="transactions")
         
         # 1. Handle missing values (following cleaning_notes.md)
         df, missing_handled = self._handle_transactions_missing_values(df)
@@ -137,6 +142,8 @@ class DataCleaner:
         # so they don't get removed
         
         report.cleaned_shape = df.shape
+        # Capture post-cleaning stats
+        report.post_cleaning_stats = self._compute_dataset_stats(df, dataset="transactions")
         self.cleaning_reports['transactions'] = report
         
         # Save as CSV if requested
@@ -170,6 +177,8 @@ class DataCleaner:
             original_shape=original_shape,
             cleaned_shape=original_shape
         )
+        # Capture pre-cleaning stats
+        report.pre_cleaning_stats = self._compute_dataset_stats(df, dataset="customers")
         
         # 1. Remove duplicates first (though analysis showed 0 duplicates)
         initial_count = len(df)
@@ -193,6 +202,8 @@ class DataCleaner:
         df = self._optimise_customer_types(df)
         
         report.cleaned_shape = df.shape
+        # Capture post-cleaning stats
+        report.post_cleaning_stats = self._compute_dataset_stats(df, dataset="customers")
         self.cleaning_reports['customers'] = report
         
         # Save as CSV if requested
@@ -231,6 +242,8 @@ class DataCleaner:
             original_shape=original_shape,
             cleaned_shape=original_shape
         )
+        # Capture pre-cleaning stats
+        report.pre_cleaning_stats = self._compute_dataset_stats(df, dataset="articles")
         
         # 1. Remove duplicates first (though analysis showed 0 duplicates)
         initial_count = len(df)
@@ -258,6 +271,8 @@ class DataCleaner:
         df = self._optimise_article_types(df)
         
         report.cleaned_shape = df.shape
+        # Capture post-cleaning stats
+        report.post_cleaning_stats = self._compute_dataset_stats(df, dataset="articles")
         self.cleaning_reports['articles'] = report
         
         # Save as CSV if requested
@@ -764,6 +779,112 @@ class DataCleaner:
         
         return df
 
+    # =============================
+    # Statistical validation helpers
+    # =============================
+    def _compute_dataset_stats(self, df: pl.DataFrame, dataset: str) -> Dict[str, Any]:
+        """Compute summary statistics for key columns of a dataset.
+
+        Produces numeric distribution stats (count, mean, std, min, q1, median, q3, max)
+        and missing counts for selected columns per dataset.
+        """
+        numeric_cols: List[str] = []
+        category_cols: List[str] = []
+        if dataset == "transactions":
+            numeric_cols = [c for c in ["price"] if c in df.columns]
+        elif dataset == "customers":
+            numeric_cols = [c for c in ["age"] if c in df.columns]
+            category_cols = [c for c in ["club_member_status", "fashion_news_frequency"] if c in df.columns]
+        elif dataset == "articles":
+            # Only numeric that makes sense for distribution check here is sentinel-bearing codes
+            # but we avoid treating them as continuous; we report only missing/negative counts
+            numeric_cols = [c for c in ["product_type_no", "graphical_appearance_no"] if c in df.columns]
+            category_cols = [c for c in ["product_type_name", "graphical_appearance_name", "index_group_name"] if c in df.columns]
+
+        stats: Dict[str, Any] = {"numeric": {}, "categorical": {}}
+
+        # Numeric stats
+        for col in numeric_cols:
+            try:
+                series = df[col]
+                if pl.datatypes.is_numeric(series.dtype):
+                    stats["numeric"][col] = {
+                        "count": int(series.len()),
+                        "missing": int(series.null_count()),
+                        "min": float(series.min()) if series.len() > 0 else None,
+                        "q1": float(series.quantile(0.25)) if series.len() > 0 else None,
+                        "median": float(series.median()) if series.len() > 0 else None,
+                        "q3": float(series.quantile(0.75)) if series.len() > 0 else None,
+                        "max": float(series.max()) if series.len() > 0 else None,
+                        "mean": float(series.mean()) if series.len() > 0 else None,
+                        "std": float(series.std()) if series.len() > 1 else None,
+                        "negatives": int(df.filter(pl.col(col) < 0).height) if "articles" in dataset else 0,
+                    }
+            except Exception:
+                # Best-effort; skip problematic columns
+                continue
+
+        # Categorical snapshots (top counts)
+        for col in category_cols:
+            try:
+                value_counts = (
+                    df.select(pl.col(col).value_counts(sort=True).alias("vc")).to_dict(as_series=False)["vc"][0]
+                    if col in df.columns
+                    else {}
+                )
+                # value_counts is a struct; normalise into top 5 pairs
+                top_values: List[Tuple[Any, int]] = []
+                if isinstance(value_counts, dict) and "values" in value_counts and "counts" in value_counts:
+                    values = value_counts["values"]
+                    counts = value_counts["counts"]
+                    top_values = list(zip(values[:5], [int(c) for c in counts[:5]]))
+                stats["categorical"][col] = {
+                    "unique": int(df[col].n_unique()),
+                    "top": top_values,
+                }
+            except Exception:
+                continue
+
+        return stats
+
+    def _format_stats_comparison(self, report: CleaningReport) -> List[str]:
+        """Create markdown lines comparing pre/post stats for a dataset."""
+        lines: List[str] = []
+        pre = report.pre_cleaning_stats or {}
+        post = report.post_cleaning_stats or {}
+
+        if not pre or not post:
+            return lines
+
+        lines.extend(["#### Statistical Validation (Pre vs Post Cleaning)", ""])
+
+        # Numeric comparisons
+        numeric_cols = sorted(set(list(pre.get("numeric", {}).keys()) + list(post.get("numeric", {}).keys())))
+        if numeric_cols:
+            lines.extend(["##### Numeric Columns", "| Column | Metric | Pre | Post |", "| ------ | ------ | --- | ---- |"])
+            metrics_order = ["count", "missing", "min", "q1", "median", "q3", "max", "mean", "std", "negatives"]
+            for col in numeric_cols:
+                pre_stats = pre.get("numeric", {}).get(col, {})
+                post_stats = post.get("numeric", {}).get(col, {})
+                for metric in metrics_order:
+                    if metric in pre_stats or metric in post_stats:
+                        pre_val = pre_stats.get(metric, "-")
+                        post_val = post_stats.get(metric, "-")
+                        lines.append(f"| {col} | {metric} | {pre_val} | {post_val} |")
+            lines.append("")
+
+        # Categorical comparisons (unique counts only)
+        cat_cols = sorted(set(list(pre.get("categorical", {}).keys()) + list(post.get("categorical", {}).keys())))
+        if cat_cols:
+            lines.extend(["##### Categorical Columns", "| Column | Unique (Pre) | Unique (Post) |", "| ------ | ------------- | -------------- |"])
+            for col in cat_cols:
+                pre_u = pre.get("categorical", {}).get(col, {}).get("unique", "-")
+                post_u = post.get("categorical", {}).get(col, {}).get("unique", "-")
+                lines.append(f"| {col} | {pre_u} | {post_u} |")
+            lines.append("")
+
+        return lines
+
     def _compute_price_eur_percentile_based(
         self,
         df: pl.DataFrame,
@@ -1175,6 +1296,9 @@ class DataCleaner:
                 f"- **Method:** Complete row deduplication",
                 ""
             ])
+        
+        # Statistical validation section
+        lines.extend(self._format_stats_comparison(report))
         
         lines.extend(["---", ""])
         
