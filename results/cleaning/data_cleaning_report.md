@@ -1,6 +1,6 @@
 # Data Cleaning Report
 
-**Generated on:** 2025-08-09 14:59:59
+**Generated on:** 2025-08-09 15:12:50
 **Project:** H&M Customer Data Analytics
 
 ## 📋 Executive Summary
@@ -12,11 +12,12 @@
 **Duplicates removed:** 0
 
 ### Key Achievements
-✅ **Complete missing value imputation** using business-appropriate strategies
-✅ **Systematic outlier treatment** based on statistical analysis
-✅ **Data validation** with business logic constraints
-✅ **Quality flagging** for transparency and audit trails
-✅ **Performance optimisation** through type conversion and categorical encoding
+- ✅ **Complete missing value imputation** using business-appropriate strategies
+- ✅ **Identifier-safe handling**: preserved categorical codes; corrected only invalid negatives
+- ✅ **Outlier handling for continuous fields** (price) using IQR-based capping
+- ✅ **Data validation** with business logic constraints
+- ✅ **Quality flagging** for transparency and audit trails
+- ✅ **Performance optimisation** through type conversion and categorical encoding
 
 ## 🧹 Detailed Cleaning Results by Dataset
 
@@ -26,7 +27,7 @@
 - **Original shape:** 3,904,391 rows × 5 columns
 - **Cleaned shape:** 3,904,391 rows × 8 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 14:59:53
+- **Cleaning timestamp:** 2025-08-09 15:12:43
 
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
@@ -48,7 +49,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 525,075 rows × 7 columns
 - **Cleaned shape:** 525,075 rows × 14 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 14:59:54
+- **Cleaning timestamp:** 2025-08-09 15:12:45
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -78,7 +79,7 @@ The following columns were added to track data quality and cleaning operations:
 - **Original shape:** 42,298 rows × 25 columns
 - **Cleaned shape:** 42,298 rows × 28 columns
 - **Rows removed:** 0
-- **Cleaning timestamp:** 2025-08-09 14:59:56
+- **Cleaning timestamp:** 2025-08-09 15:12:47
 
 #### Missing Values Handled
 | Column | Missing Count | Treatment |
@@ -88,8 +89,8 @@ The following columns were added to track data quality and cleaning operations:
 #### Outliers Treated
 | Column | Outlier Count | Treatment Method |
 | ------ | ------------- | ---------------- |
-| product_type_no_negative | 111 | Statistical bounds capping |
-| graphical_appearance_no_negative | 6 | Statistical bounds capping |
+| product_type_no_negative | 111 | Negative value correction (set to 0) |
+| graphical_appearance_no_negative | 6 | Negative value correction (set to 0) |
 
 #### Quality Flags Added
 The following columns were added to track data quality and cleaning operations:
@@ -108,11 +109,11 @@ The following columns were added to track data quality and cleaning operations:
 - **Categorical fields**: Mode imputation or "UNKNOWN" placeholder
 - **Business context**: Domain-specific defaults (e.g., 'INACTIVE' for membership)
 
-### Outlier Treatment Approach
-- **Price data**: IQR-based capping to business-reasonable ranges
-- **Product codes**: Statistical bounds from outlier analysis
+### Outlier and Identifier Handling
+- **Price (continuous)**: IQR-based capping to business-reasonable ranges
+- **Identifiers (e.g., product_type_no, product_code, graphical_appearance_no)**: Preserved as-is; only clearly invalid negative values corrected to 0 (unknown)
 - **Validation**: Business logic checks for data consistency
-- **Preservation**: Outlier flags maintained for transparency
+- **Preservation**: Quality flags maintained for transparency
 
 ### Data Quality Assurance
 - **Duplicate removal**: Applied to reference data (customers, articles)

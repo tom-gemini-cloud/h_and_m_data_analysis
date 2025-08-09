@@ -413,7 +413,7 @@ class DataCleaner:
         # Categorical names: Fill with "UNKNOWN"
         categorical_cols = [col for col in df.columns if col.endswith('_name') or col.endswith('_desc')]
         for col in categorical_cols:
-            if col != 'detail_desc' and df[col].null_count() > 0:  # detail_desc handled above
+            if col != 'detail_desc' and df[col].null_count() > 0:  
                 missing_count = df[col].null_count()
                 df = df.with_columns(pl.col(col).fill_null("UNKNOWN"))
                 missing_handled[col] = missing_count
@@ -993,11 +993,11 @@ class DataCleaner:
             "- **Categorical fields**: Mode imputation or \"UNKNOWN\" placeholder",
             "- **Business context**: Domain-specific defaults (e.g., 'INACTIVE' for membership)",
             "",
-            "### Outlier Treatment Approach",
-            "- **Price data**: IQR-based capping to business-reasonable ranges",
-            "- **Product codes**: Statistical bounds from outlier analysis",
+            "### Outlier and Identifier Handling",
+            "- **Price (continuous)**: IQR-based capping to business-reasonable ranges",
+            "- **Identifiers (e.g., product_type_no, product_code, graphical_appearance_no)**: Preserved as-is; only clearly invalid negative values corrected to 0 (unknown)",
             "- **Validation**: Business logic checks for data consistency",
-            "- **Preservation**: Outlier flags maintained for transparency",
+            "- **Preservation**: Quality flags maintained for transparency",
             "",
             "### Data Quality Assurance",
             "- **Duplicate removal**: Applied to reference data (customers, articles)",
@@ -1073,11 +1073,12 @@ class DataCleaner:
             f"**Duplicates removed:** {total_duplicates_removed:,}",
             "",
             "### Key Achievements",
-            "✅ **Complete missing value imputation** using business-appropriate strategies",
-            "✅ **Systematic outlier treatment** based on statistical analysis",
-            "✅ **Data validation** with business logic constraints",
-            "✅ **Quality flagging** for transparency and audit trails",
-            "✅ **Performance optimisation** through type conversion and categorical encoding"
+            "- ✅ **Complete missing value imputation** using business-appropriate strategies",
+            "- ✅ **Identifier-safe handling**: preserved categorical codes; corrected only invalid negatives",
+            "- ✅ **Outlier handling for continuous fields** (price) using IQR-based capping",
+            "- ✅ **Data validation** with business logic constraints",
+            "- ✅ **Quality flagging** for transparency and audit trails",
+            "- ✅ **Performance optimisation** through type conversion and categorical encoding"
         ])
         
         return '\n'.join(lines)
@@ -1133,7 +1134,7 @@ class DataCleaner:
             ])
             
             for col, count in report.outliers_treated.items():
-                method = "IQR-based capping" if col == 'price' else "Statistical bounds capping"
+                method = self._get_outlier_treatment_label(col)
                 lines.append(f"| {col} | {count:,} | {method} |")
             
             lines.append("")
@@ -1198,6 +1199,19 @@ class DataCleaner:
         descriptions['graphical_appearance_no_negative_fixed'] = 'Indicates negative graphical_appearance_no values that were set to 0 (missing indicator)'
         
         return descriptions.get(flag, 'Quality tracking flag')
+
+    def _get_outlier_treatment_label(self, column_name: str) -> str:
+        """Return a human-friendly treatment label for outliers section.
+
+        - price → IQR-based capping (continuous)
+        - *_negative or *_negative_fixed → Negative value correction (set to 0)
+        - default → Statistical bounds capping (legacy wording)
+        """
+        if column_name == 'price':
+            return 'IQR-based capping'
+        if column_name.endswith('_negative') or column_name.endswith('_negative_fixed'):
+            return 'Negative value correction (set to 0)'
+        return 'Statistical bounds capping'
 
 
 def clean_all_datasets(transactions_path: str, customers_path: str, articles_path: str,
