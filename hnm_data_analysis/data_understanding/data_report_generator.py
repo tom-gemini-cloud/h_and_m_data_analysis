@@ -64,6 +64,53 @@ class DataReportGenerator:
         except Exception as e:
             raise RuntimeError(f"Error loading data: {str(e)}")
     
+    def _is_probable_id_column(self, column_name: str) -> bool:
+        """
+        Heuristic to detect identifier-like columns to exclude from numeric summaries.
+        A column is considered an ID if its name suggests identifiers or it has a
+        very high uniqueness ratio relative to the number of rows.
+        """
+        name = column_name.lower()
+        name_is_id_like = (
+            name == "id"
+            or name.endswith("_id")
+            or name.startswith("id_")
+            or name.endswith("id")
+            or "uuid" in name
+            or "guid" in name
+        )
+        total_rows = len(self.df) if self.df is not None else 0
+        try:
+            uniqueness_ratio = (self.df[column_name].n_unique() / total_rows) if total_rows > 0 else 0.0
+        except Exception:
+            uniqueness_ratio = 0.0
+        is_highly_unique = uniqueness_ratio >= 0.95
+        return name_is_id_like or is_highly_unique
+
+    def _find_project_root(self) -> Path:
+        """
+        Determine the repository/project root reliably across OS and execution contexts.
+        Preference order:
+        - Directory containing common repo markers: `.git`, `requirements.txt`, or `README.md`
+        - The parent directories of this module (`__file__`)
+        - Fallback to current working directory
+        """
+        # Start from the directory containing this module, not from the data file path
+        start_dir = Path(__file__).resolve().parent
+        repo_markers = {".git", "requirements.txt", "README.md"}
+        for parent in [start_dir, *start_dir.parents]:
+            try:
+                entries = {p.name for p in parent.iterdir()}
+            except Exception:
+                continue
+            if repo_markers.intersection(entries):
+                return parent
+        # Fallback: two levels up from this module (expected repo root structure)
+        try:
+            return start_dir.parents[1]
+        except Exception:
+            return Path.cwd().resolve()
+    
     def get_file_info(self) -> Dict[str, Any]:
         """Get basic file information."""
         file_stats = self.file_path.stat()
@@ -117,13 +164,19 @@ class DataReportGenerator:
     
     def get_statistical_summary(self) -> Dict[str, Any]:
         """Generate statistical summary for numeric columns."""
-        numeric_cols = [col for col in self.df.columns if self.df[col].dtype in [pl.Int8, pl.Int16, pl.Int32, pl.Int64, pl.Float32, pl.Float64]]
+        numeric_cols = [
+            col
+            for col in self.df.columns
+            if self.df[col].dtype in [pl.Int8, pl.Int16, pl.Int32, pl.Int64, pl.Float32, pl.Float64]
+        ]
+        # Exclude probable identifier columns from numeric summaries
+        summarizable_cols = [col for col in numeric_cols if not self._is_probable_id_column(col)]
         
-        if not numeric_cols:
+        if not summarizable_cols:
             return {'message': 'No numeric columns found for statistical analysis'}
         
         stats_summary = {}
-        for col in numeric_cols:
+        for col in summarizable_cols:
             try:
                 # Use individual methods instead of describe() to avoid access issues
                 col_series = self.df[col]
@@ -355,13 +408,8 @@ class DataReportGenerator:
             Path to the saved report file
         """
         if output_path is None:
-            # Default to results/data_documentation/data_reports directory
-            project_root = self.file_path
-            while project_root.parent != project_root:
-                if (project_root / "CLAUDE.md").exists():
-                    break
-                project_root = project_root.parent
-            
+            # Default to repository-level results/data_documentation/data_reports directory
+            project_root = self._find_project_root()
             results_dir = project_root / "results" / "data_documentation" / "data_reports"
             results_dir.mkdir(parents=True, exist_ok=True)
             output_path = results_dir / f"{self.file_path.stem}_data_report.md"

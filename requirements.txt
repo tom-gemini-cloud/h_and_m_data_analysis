@@ -13,6 +13,8 @@ plotly
 
 # Machine Learning & Analytics (for future segmentation work)
 scikit-learn
+spacy
+nltk
 
 # Performance Monitoring
 py4j

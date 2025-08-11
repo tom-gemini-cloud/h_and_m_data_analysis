@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-09 15:31:46
+**Generated on:** 2025-08-11 08:15:27
 **File:** articles_last_3_months_cleaned.parquet
 
 ## 📄 File Information
-- **File Path:** `..\data\cleaned\articles_last_3_months_cleaned.parquet`
+- **File Path:** `../data/cleaned/articles_last_3_months_cleaned.parquet`
 - **File Type:** PARQUET
-- **File Size:** 108.8 MB
-- **Last Modified:** 2025-08-09 15:31:41
+- **File Size:** 108.87 MB
+- **Last Modified:** 2025-08-11 08:15:25
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -53,13 +53,10 @@
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
-| article_id | 42298 | 767829371.9367 | N/A | 108775015 | N/A | N/A | N/A | 956217002 |
 | product_code | 42298 | 767829.3654 | N/A | 108775 | N/A | N/A | N/A | 956217 |
 | product_type_no | 42298 | 237.0751 | N/A | 0 | N/A | N/A | N/A | 762 |
 | graphical_appearance_no | 42298 | 1009869.993 | N/A | 0 | N/A | N/A | N/A | 1010029 |
 | colour_group_code | 42298 | 29.7211 | N/A | -1 | N/A | N/A | N/A | 93 |
-| perceived_colour_value_id | 42298 | 3.1079 | N/A | -1 | N/A | N/A | N/A | 7 |
-| perceived_colour_master_id | 42298 | 7.7332 | N/A | -1 | N/A | N/A | N/A | 20 |
 | department_no | 42298 | 3936.5935 | N/A | 1201 | N/A | N/A | N/A | 9989 |
 | index_group_no | 42298 | 2.8064 | N/A | 1 | N/A | N/A | N/A | 26 |
 | section_no | 42298 | 40.15 | N/A | 2 | N/A | N/A | N/A | 97 |
@@ -70,129 +67,129 @@
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `Danni dress (RW)`: 1 occurrences
-  - `Flirty Stella necklace`: 1 occurrences
-  - `Cypress cardigan`: 2 occurrences
-  - `SPEED Post dress`: 3 occurrences
-  - `OLLIE cap(1)`: 1 occurrences
+  - `Misses bucket`: 1 occurrences
+  - `Caroline tulle`: 1 occurrences
+  - `Pimento dress`: 1 occurrences
+  - `Stella Wireless top`: 1 occurrences
+  - `4p Elastic Headband (1)`: 1 occurrences
 
 ### product_type_name
 - **Unique Values:** 124
 - **Top Values:**
-  - `Pyjama bottom`: 117 occurrences
-  - `Straw hat`: 6 occurrences
-  - `Bra extender`: 1 occurrences
-  - `Garment Set`: 365 occurrences
-  - `Marker pen`: 4 occurrences
+  - `Watch`: 16 occurrences
+  - `Braces`: 3 occurrences
+  - `Eyeglasses`: 2 occurrences
+  - `Bra`: 1,089 occurrences
+  - `Mobile case`: 4 occurrences
 
 ### product_group_name
 - **Unique Values:** 18
 - **Top Values:**
   - `Swimwear`: 1,820 occurrences
-  - `Socks & Tights`: 1,005 occurrences
+  - `Nightwear`: 631 occurrences
+  - `Stationery`: 4 occurrences
   - `Garment Full body`: 5,796 occurrences
-  - `Garment and Shoe care`: 8 occurrences
-  - `Unknown`: 111 occurrences
+  - `Furniture`: 1 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Top Values:**
+  - `Melange`: 2,161 occurrences
+  - `Metallic`: 147 occurrences
+  - `Placement print`: 878 occurrences
   - `Argyle`: 3 occurrences
-  - `Stripe`: 1,660 occurrences
-  - `Contrast`: 145 occurrences
-  - `Treatment`: 160 occurrences
-  - `Lace`: 557 occurrences
+  - `Dot`: 305 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Top Values:**
-  - `Red`: 754 occurrences
-  - `Transparent`: 12 occurrences
-  - `Light Grey`: 671 occurrences
-  - `Light Green`: 303 occurrences
-  - `Dark Red`: 751 occurrences
+  - `Blue`: 1,383 occurrences
+  - `Purple`: 99 occurrences
+  - `Other Red`: 34 occurrences
+  - `Other Pink`: 218 occurrences
+  - `Yellowish Brown`: 744 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Top Values:**
   - `Dusty Light`: 9,135 occurrences
-  - `Light`: 6,424 occurrences
+  - `Medium`: 1,748 occurrences
   - `Medium Dusty`: 5,777 occurrences
-  - `Unknown`: 5 occurrences
-  - `Undefined`: 29 occurrences
+  - `Light`: 6,424 occurrences
+  - `Dark`: 16,807 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Top Values:**
-  - `Khaki green`: 1,374 occurrences
+  - `White`: 5,542 occurrences
+  - `Green`: 1,339 occurrences
   - `Red`: 1,635 occurrences
-  - `Orange`: 1,174 occurrences
-  - `Yellow`: 1,280 occurrences
-  - `Grey`: 2,892 occurrences
+  - `Yellowish Green`: 5 occurrences
+  - `Beige`: 2,972 occurrences
 
 ### department_name
 - **Unique Values:** 238
 - **Top Values:**
-  - `Knit & Woven`: 206 occurrences
-  - `Tops Boys`: 10 occurrences
-  - `Baby Girl Local Relevance`: 2 occurrences
-  - `Read & React`: 14 occurrences
-  - `Denim Trousers`: 350 occurrences
+  - `Hair Accessories`: 447 occurrences
+  - `Blouse & Dress`: 463 occurrences
+  - `AK Bottoms`: 57 occurrences
+  - `Light Basic Jersey`: 355 occurrences
+  - `Test Ladies`: 3 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
+  - `F`: 4,717 occurrences
+  - `J`: 1,156 occurrences
   - `G`: 2,428 occurrences
   - `D`: 7,111 occurrences
-  - `B`: 3,919 occurrences
-  - `I`: 2,471 occurrences
-  - `C`: 3,474 occurrences
+  - `S`: 1,328 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Top Values:**
-  - `Lingeries/Tights`: 3,919 occurrences
   - `Children Sizes 134-170`: 2,471 occurrences
-  - `Sport`: 1,328 occurrences
+  - `Lingeries/Tights`: 3,919 occurrences
   - `Children Accessories, Swimwear`: 1,156 occurrences
   - `Divided`: 7,111 occurrences
+  - `Menswear`: 4,717 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Top Values:**
-  - `Divided`: 7,111 occurrences
-  - `Sport`: 1,328 occurrences
-  - `Menswear`: 4,717 occurrences
   - `Baby/Children`: 8,887 occurrences
   - `Ladieswear`: 20,255 occurrences
+  - `Sport`: 1,328 occurrences
+  - `Divided`: 7,111 occurrences
+  - `Menswear`: 4,717 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Top Values:**
-  - `Men Accessories`: 418 occurrences
-  - `Baby Girl`: 476 occurrences
-  - `Contemporary Street`: 520 occurrences
-  - `Contemporary Smart`: 718 occurrences
-  - `Kids Sports`: 136 occurrences
+  - `Collaborations`: 121 occurrences
+  - `Men Other 2`: 7 occurrences
+  - `EQ Divided`: 1 occurrences
+  - `Men Project`: 25 occurrences
+  - `Men Suits & Tailoring`: 572 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Top Values:**
-  - `Knitwear`: 2,417 occurrences
-  - `Trousers`: 3,132 occurrences
-  - `Accessories`: 4,336 occurrences
+  - `Dresses Ladies`: 2,513 occurrences
+  - `Trousers Denim`: 1,505 occurrences
+  - `Shirts`: 748 occurrences
+  - `Woven/Jersey/Knitted mix Baby`: 558 occurrences
   - `Dresses/Skirts girls`: 418 occurrences
-  - `Jersey Fancy`: 7,715 occurrences
 
 ### detail_desc
 - **Unique Values:** 19,739
 - **Top Values:**
-  - `Silk tie in a grosgrain weave. Width 7 cm.`: 2 occurrences
-  - `Blouse in a cotton weave with buttons down the front, a V-neck with a wide flounced trim, long puff sleeves with adjustable buttoning at the cuffs and a tapered waist.`: 1 occurrences
-  - `Dress in a soft, fine-knit cotton blend containing glittery threads with a ribbed neckline, sewn-on bow at the top and short sleeves.`: 2 occurrences
-  - `Ankle boots in suede with a soft shaft. Fabric linings and insoles. Heel 8 cm.`: 1 occurrences
-  - `Fully lined bikini bottoms with a low, V-shaped waist, narrow sides and a high cut at the back.`: 1 occurrences
+  - `Pyjamas with a top and shorts in soft viscose jersey. Top with a slightly wider neckline and short, lace-trimmed raglan sleeves. The design includes a double layer at the top to help retain warmth while allowing easier nursing access. Short shorts with a low, wrapover waist with covered elastication, and lace-trimmed hems.`: 2 occurrences
+  - `5-pocket trousers in stretch cotton twill with a regular waist, zip fly and skinny legs.`: 6 occurrences
+  - `Fitted, long-sleeved top in ribbed cotton jersey with a V-neck and sewn-in wrapover at the front.`: 3 occurrences
+  - `Double-breasted trenchcoat in soft twill made from cotton and Tencel™ lyocell with wide peak lapels, gently dropped shoulders and long puff sleeves with a detachable, adjustable buttoned strap at the cuffs. Front pockets, a wide, detachable belt with metal eyelets at the waist, and a single back vent. Half-lined.`: 1 occurrences
+  - `Body in mesh and lace with a push-up bra. Underwired, padded cups for a larger bust and fuller cleavage, adjustable shoulder straps and a hook-and-eye fastening at the back. Lined gusset with concealed press-studs and cutaway coverage at the back.`: 2 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 6.19 MB
