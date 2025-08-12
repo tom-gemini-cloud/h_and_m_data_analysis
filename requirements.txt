@@ -19,6 +19,7 @@ nltk
 spacy-lookups-data
 sentence-transformers>=2.2.0
 torch>=1.13.0
+huggingface-hub
 
 # Performance Monitoring
 py4j

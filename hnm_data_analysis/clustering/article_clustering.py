@@ -323,6 +323,10 @@ class ArticleClusterer:
         plt.grid(True, alpha=0.3)
         
         if save_path:
+            # Ensure parent directory exists before saving
+            save_dir = os.path.dirname(save_path)
+            if save_dir:
+                os.makedirs(save_dir, exist_ok=True)
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
             print(f"Saved k selection plot to: {save_path}")
         plt.show()
@@ -561,6 +565,10 @@ class ArticleClusterer:
         plt.grid(True, alpha=0.3)
         
         if save_path:
+            # Ensure parent directory exists before saving
+            save_dir = os.path.dirname(save_path)
+            if save_dir:
+                os.makedirs(save_dir, exist_ok=True)
             plt.savefig(save_path, dpi=300, bbox_inches='tight')
             print(f"Saved cluster visualization to: {save_path}")
         plt.show()
@@ -586,14 +594,17 @@ class ArticleClusterer:
         joblib.dump(self.clustering_model, model_path)
         print(f"Saved clustering model to: {model_path}")
         
-        # Save results metadata
+        # Save results metadata (cast numpy types to native Python types)
         results_dict = {
-            "algorithm": self.results.algorithm,
-            "n_clusters": self.results.n_clusters,
-            "feature_shape": list(self.results.feature_shape),
-            "silhouette_score": self.results.silhouette,
-            "calinski_harabasz_score": self.results.calinski_harabasz,
-            "davies_bouldin_score": self.results.davies_bouldin,
+            "algorithm": str(self.results.algorithm),
+            "n_clusters": int(self.results.n_clusters),
+            "feature_shape": [int(self.results.feature_shape[0]), int(self.results.feature_shape[1])],
+            "silhouette_score": (float(self.results.silhouette)
+                                   if self.results.silhouette is not None else None),
+            "calinski_harabasz_score": (float(self.results.calinski_harabasz)
+                                         if self.results.calinski_harabasz is not None else None),
+            "davies_bouldin_score": (float(self.results.davies_bouldin)
+                                       if self.results.davies_bouldin is not None else None),
         }
         
         # Add cluster size distribution
