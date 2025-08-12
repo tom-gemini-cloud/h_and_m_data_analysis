@@ -2,8 +2,8 @@
 Article Clustering Module
 
 This module provides comprehensive clustering capabilities for H&M articles using
-combined TF-IDF text features and categorical features. Supports multiple clustering
-algorithms and evaluation metrics optimised for retail product analysis.
+pre-computed feature matrices (e.g., text TF-IDF/SVD embeddings). It supports multiple
+clustering algorithms and evaluation metrics optimised for retail product analysis.
 
 Key Features:
 - K-means clustering with automatic k selection
@@ -11,7 +11,8 @@ Key Features:
 - DBSCAN for density-based clustering
 - Gaussian Mixture Models for probabilistic clustering
 - Cluster evaluation and interpretation tools
-- Integration with both text and categorical features
+- Flexible feature loading from .npy (dense), .npz (sparse TF-IDF), or .parquet/.csv (with
+  feature columns and an `article_id` column, e.g., SVD embeddings saved by the text vectoriser)
 """
 
 from __future__ import annotations
@@ -116,31 +117,99 @@ class ArticleClusterer:
         self.clustering_model: Optional[Any] = None
         self.results: Optional[ClusteringResults] = None
         
-    def load_features(self, features_path: Optional[str] = None, 
-                     article_ids_path: Optional[str] = None) -> Tuple[np.ndarray, List[Any]]:
-        """Load feature matrix and corresponding article IDs."""
+    def load_features(self, features_path: Optional[str] = None,
+                      article_ids_path: Optional[str] = None) -> Tuple[np.ndarray, List[Any]]:
+        """Load feature matrix and corresponding article IDs.
+
+        Supports the following formats:
+        - .npy: Dense NumPy array (requires `article_ids_path` CSV mapping)
+        - .npz: Sparse matrix saved by scipy.sparse (will be densified; prefer SVD for efficiency)
+        - .parquet/.csv: Tabular file containing an `article_id` column and feature columns
+          (e.g., SVD embeddings `svd_###`). In this case, `article_ids_path` is optional.
+        """
         features_path = features_path or self.features_path
         article_ids_path = article_ids_path or self.article_ids_path
-        
-        if features_path is None or article_ids_path is None:
-            raise ValueError("Both features_path and article_ids_path must be provided")
-            
-        # Load features
+
+        if features_path is None:
+            raise ValueError("features_path must be provided")
+
         if not os.path.exists(features_path):
-            raise FileNotFoundError(f"Features file not found: {features_path}")
-        self.features = np.load(features_path)
-        
-        # Load article IDs
-        if not os.path.exists(article_ids_path):
-            raise FileNotFoundError(f"Article IDs file not found: {article_ids_path}")
-        ids_df = pl.read_csv(article_ids_path)
-        self.article_ids = ids_df.get_column("article_id").to_list()
-        
+            raise FileNotFoundError(f"Features file not found: {features_path}\n"
+                                   "If you intended to use SVD embeddings, ensure the file exists "
+                                   "(e.g., data/processed/features/svd_embeddings.parquet).")
+
+        _, ext = os.path.splitext(features_path)
+        ext = ext.lower()
+
+        # Case 1: Dense .npy matrix
+        if ext == ".npy":
+            self.features = np.load(features_path)
+            if article_ids_path is None:
+                raise ValueError("article_ids_path must be provided when loading from .npy")
+            if not os.path.exists(article_ids_path):
+                raise FileNotFoundError(f"Article IDs file not found: {article_ids_path}")
+            ids_df = pl.read_csv(article_ids_path)
+            self.article_ids = ids_df.get_column("article_id").to_list()
+
+        # Case 2: Sparse .npz matrix (densify with warning)
+        elif ext == ".npz":
+            try:
+                from scipy.sparse import load_npz
+            except Exception as exc:
+                raise ImportError("scipy is required to load .npz sparse matrices") from exc
+
+            sparse_matrix = load_npz(features_path)
+            warnings.warn(
+                "Loading a sparse .npz matrix; converting to dense may be memory intensive. "
+                "Prefer SVD embeddings for clustering."
+            )
+            self.features = sparse_matrix.toarray()
+            if article_ids_path is None:
+                raise ValueError("article_ids_path must be provided when loading from .npz")
+            if not os.path.exists(article_ids_path):
+                raise FileNotFoundError(f"Article IDs file not found: {article_ids_path}")
+            ids_df = pl.read_csv(article_ids_path)
+            self.article_ids = ids_df.get_column("article_id").to_list()
+
+        # Case 3: Tabular embeddings (.parquet or .csv) with article_id
+        elif ext in {".parquet", ".csv"}:
+            if ext == ".parquet":
+                df = pl.read_parquet(features_path)
+            else:
+                df = pl.read_csv(features_path)
+
+            if "article_id" not in df.columns:
+                raise ValueError("Expected an 'article_id' column in the features file")
+
+            # Choose feature columns: prefer columns starting with 'svd_' if present; otherwise
+            # use all numeric columns except the id column.
+            svd_cols = [c for c in df.columns if c.startswith("svd_")]
+            if svd_cols:
+                feature_cols = sorted(svd_cols)
+            else:
+                feature_cols = [
+                    c for c, dt in zip(df.columns, df.dtypes)
+                    if c != "article_id" and dt in {pl.Float64, pl.Float32, pl.Int64, pl.Int32}
+                ]
+                if not feature_cols:
+                    raise ValueError("No numeric feature columns found in the features file")
+
+            self.article_ids = df.get_column("article_id").to_list()
+            # Convert to float32 to reduce memory footprint
+            self.features = df.select(feature_cols).to_numpy().astype(np.float32, copy=False)
+
+        else:
+            raise ValueError(f"Unsupported features file extension: {ext}")
+
         print(f"Loaded features: {self.features.shape[0]:,} articles x {self.features.shape[1]:,} features")
-        
+
+        if self.article_ids is None:
+            raise ValueError("Failed to load article IDs")
         if len(self.article_ids) != self.features.shape[0]:
-            raise ValueError(f"Mismatch: {len(self.article_ids)} article IDs vs {self.features.shape[0]} feature rows")
-            
+            raise ValueError(
+                f"Mismatch: {len(self.article_ids)} article IDs vs {self.features.shape[0]} feature rows"
+            )
+
         return self.features, self.article_ids
         
     def load_articles_metadata(self, metadata_path: Optional[str] = None) -> pl.DataFrame:

@@ -2,7 +2,7 @@
 pyarrow
 polars
 pandas
-numpy
+numpy==1.24.3
 setuptools
 pyspark>=3.5.0
 
@@ -11,10 +11,12 @@ matplotlib
 seaborn
 plotly
 
-# Machine Learning & Analytics (for future segmentation work)
-scikit-learn
-spacy
+# Machine Learning and Analytics
+scipy==1.11.4
+scikit-learn==1.3.2
+spacy>=3.4.0
 nltk
+spacy-lookups-data
 
 # Performance Monitoring
 py4j
@@ -23,5 +25,5 @@ py4j
 jupyter
 ipykernel
 
-# Development & Utilities
+# Development and Utilities
 typing-extensions

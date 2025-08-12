@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-11 08:15:27
+**Generated on:** 2025-08-12 10:58:49
 **File:** articles_last_3_months_cleaned.parquet
 
 ## 📄 File Information
-- **File Path:** `../data/cleaned/articles_last_3_months_cleaned.parquet`
+- **File Path:** `..\data\cleaned\articles_last_3_months_cleaned.parquet`
 - **File Type:** PARQUET
-- **File Size:** 108.87 MB
-- **Last Modified:** 2025-08-11 08:15:25
+- **File Size:** 108.84 MB
+- **Last Modified:** 2025-08-12 10:58:45
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -67,129 +67,129 @@
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `Misses bucket`: 1 occurrences
-  - `Caroline tulle`: 1 occurrences
-  - `Pimento dress`: 1 occurrences
-  - `Stella Wireless top`: 1 occurrences
-  - `4p Elastic Headband (1)`: 1 occurrences
+  - `Denim Pauls LS Bandcollar`: 1 occurrences
+  - `Legend Inner bra cropped tank`: 3 occurrences
+  - `Tina(1)`: 2 occurrences
+  - `New Pluto Dress`: 4 occurrences
+  - `SHIRT WESTERN FRILL 79`: 1 occurrences
 
 ### product_type_name
 - **Unique Values:** 124
 - **Top Values:**
-  - `Watch`: 16 occurrences
-  - `Braces`: 3 occurrences
-  - `Eyeglasses`: 2 occurrences
-  - `Bra`: 1,089 occurrences
+  - `Dog wear`: 5 occurrences
   - `Mobile case`: 4 occurrences
+  - `Washing bag`: 1 occurrences
+  - `Skirt`: 1,310 occurrences
+  - `Pyjama jumpsuit/playsuit`: 106 occurrences
 
 ### product_group_name
 - **Unique Values:** 18
 - **Top Values:**
-  - `Swimwear`: 1,820 occurrences
-  - `Nightwear`: 631 occurrences
-  - `Stationery`: 4 occurrences
-  - `Garment Full body`: 5,796 occurrences
-  - `Furniture`: 1 occurrences
+  - `Bags`: 25 occurrences
+  - `Items`: 15 occurrences
+  - `Garment Upper body`: 15,635 occurrences
+  - `Garment Lower body`: 8,596 occurrences
+  - `Fun`: 2 occurrences
 
 ### graphical_appearance_name
 - **Unique Values:** 30
 - **Top Values:**
-  - `Melange`: 2,161 occurrences
-  - `Metallic`: 147 occurrences
-  - `Placement print`: 878 occurrences
-  - `Argyle`: 3 occurrences
+  - `Check`: 878 occurrences
+  - `Sequin`: 242 occurrences
+  - `Slub`: 46 occurrences
+  - `Neps`: 20 occurrences
   - `Dot`: 305 occurrences
 
 ### colour_group_name
 - **Unique Values:** 50
 - **Top Values:**
+  - `Dark Turquoise`: 135 occurrences
+  - `Dark Orange`: 422 occurrences
+  - `Transparent`: 12 occurrences
   - `Blue`: 1,383 occurrences
-  - `Purple`: 99 occurrences
-  - `Other Red`: 34 occurrences
-  - `Other Pink`: 218 occurrences
-  - `Yellowish Brown`: 744 occurrences
+  - `Light Grey`: 671 occurrences
 
 ### perceived_colour_value_name
 - **Unique Values:** 8
 - **Top Values:**
-  - `Dusty Light`: 9,135 occurrences
-  - `Medium`: 1,748 occurrences
-  - `Medium Dusty`: 5,777 occurrences
-  - `Light`: 6,424 occurrences
   - `Dark`: 16,807 occurrences
+  - `Light`: 6,424 occurrences
+  - `Medium Dusty`: 5,777 occurrences
+  - `Medium`: 1,748 occurrences
+  - `Dusty Light`: 9,135 occurrences
 
 ### perceived_colour_master_name
 - **Unique Values:** 20
 - **Top Values:**
-  - `White`: 5,542 occurrences
-  - `Green`: 1,339 occurrences
-  - `Red`: 1,635 occurrences
-  - `Yellowish Green`: 5 occurrences
-  - `Beige`: 2,972 occurrences
+  - `Unknown`: 355 occurrences
+  - `Orange`: 1,174 occurrences
+  - `Black`: 10,050 occurrences
+  - `Metal`: 1,023 occurrences
+  - `Turquoise`: 504 occurrences
 
 ### department_name
 - **Unique Values:** 238
 - **Top Values:**
-  - `Hair Accessories`: 447 occurrences
-  - `Blouse & Dress`: 463 occurrences
-  - `AK Bottoms`: 57 occurrences
-  - `Light Basic Jersey`: 355 occurrences
-  - `Test Ladies`: 3 occurrences
+  - `Kids Girl UW/NW`: 102 occurrences
+  - `Sneakers big girl inactive from s2`: 3 occurrences
+  - `EQ Divided Blue`: 1 occurrences
+  - `Bags`: 355 occurrences
+  - `Clean Lingerie`: 204 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
   - `F`: 4,717 occurrences
-  - `J`: 1,156 occurrences
-  - `G`: 2,428 occurrences
   - `D`: 7,111 occurrences
-  - `S`: 1,328 occurrences
+  - `I`: 2,471 occurrences
+  - `B`: 3,919 occurrences
+  - `H`: 2,832 occurrences
 
 ### index_name
 - **Unique Values:** 10
 - **Top Values:**
-  - `Children Sizes 134-170`: 2,471 occurrences
-  - `Lingeries/Tights`: 3,919 occurrences
-  - `Children Accessories, Swimwear`: 1,156 occurrences
-  - `Divided`: 7,111 occurrences
   - `Menswear`: 4,717 occurrences
+  - `Children Sizes 92-140`: 2,832 occurrences
+  - `Baby Sizes 50-98`: 2,428 occurrences
+  - `Ladieswear`: 12,862 occurrences
+  - `Lingeries/Tights`: 3,919 occurrences
 
 ### index_group_name
 - **Unique Values:** 5
 - **Top Values:**
   - `Baby/Children`: 8,887 occurrences
+  - `Divided`: 7,111 occurrences
   - `Ladieswear`: 20,255 occurrences
   - `Sport`: 1,328 occurrences
-  - `Divided`: 7,111 occurrences
   - `Menswear`: 4,717 occurrences
 
 ### section_name
 - **Unique Values:** 56
 - **Top Values:**
-  - `Collaborations`: 121 occurrences
-  - `Men Other 2`: 7 occurrences
-  - `EQ Divided`: 1 occurrences
-  - `Men Project`: 25 occurrences
-  - `Men Suits & Tailoring`: 572 occurrences
+  - `Womens Tailoring`: 1,805 occurrences
+  - `Womens Everyday Basics`: 807 occurrences
+  - `Divided Selected`: 404 occurrences
+  - `Boys Underwear & Basics`: 614 occurrences
+  - `Contemporary Smart`: 718 occurrences
 
 ### garment_group_name
 - **Unique Values:** 21
 - **Top Values:**
-  - `Dresses Ladies`: 2,513 occurrences
   - `Trousers Denim`: 1,505 occurrences
-  - `Shirts`: 748 occurrences
   - `Woven/Jersey/Knitted mix Baby`: 558 occurrences
-  - `Dresses/Skirts girls`: 418 occurrences
+  - `Trousers`: 3,132 occurrences
+  - `Under-, Nightwear`: 3,214 occurrences
+  - `Socks and Tights`: 947 occurrences
 
 ### detail_desc
 - **Unique Values:** 19,739
 - **Top Values:**
-  - `Pyjamas with a top and shorts in soft viscose jersey. Top with a slightly wider neckline and short, lace-trimmed raglan sleeves. The design includes a double layer at the top to help retain warmth while allowing easier nursing access. Short shorts with a low, wrapover waist with covered elastication, and lace-trimmed hems.`: 2 occurrences
-  - `5-pocket trousers in stretch cotton twill with a regular waist, zip fly and skinny legs.`: 6 occurrences
-  - `Fitted, long-sleeved top in ribbed cotton jersey with a V-neck and sewn-in wrapover at the front.`: 3 occurrences
-  - `Double-breasted trenchcoat in soft twill made from cotton and Tencel™ lyocell with wide peak lapels, gently dropped shoulders and long puff sleeves with a detachable, adjustable buttoned strap at the cuffs. Front pockets, a wide, detachable belt with metal eyelets at the waist, and a single back vent. Half-lined.`: 1 occurrences
-  - `Body in mesh and lace with a push-up bra. Underwired, padded cups for a larger bust and fuller cleavage, adjustable shoulder straps and a hook-and-eye fastening at the back. Lined gusset with concealed press-studs and cutaway coverage at the back.`: 2 occurrences
+  - `Halterneck balconette bra in microfibre and lace with underwired, thickly padded cups to maximise the bust and create a fuller cleavage. Adjustable strap at the back of the neck and a hook-and-eye fastening at the back.`: 1 occurrences
+  - `Double-breasted, straight-style coat in a felted wool blend with peak lapels, flap front pockets, two inner pockets and a single back vent. Lined. The wool content of the coat is recycled.`: 1 occurrences
+  - `Sports vest top in soft, fast-drying functional fabric with a racer back and a shorter top in airy fabric layered over the top.`: 4 occurrences
+  - `Short dress in woven fabric with a smocked bodice and square neckline with concealed elastication and a small frill trim. Short puff sleeves with smocking and a frill trim at the hems, a seam at the waist and a bell-shaped skirt. Unlined.`: 2 occurrences
+  - `Blouse in a viscose weave with a small stand-up collar and button placket. Gathered yoke at the back, long sleeves with a tab and button, and a rounded hem with short slits in the sides.`: 3 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 6.19 MB

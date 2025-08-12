@@ -7,10 +7,10 @@ embeddings. Outputs are saved under a specified directory for later use in
 clustering.
 
 Design choices:
-- Polars for I/O (consistent with existing preprocessing modules)
-- spaCy for lemmatisation (industrial-grade NLP)
+- Polars for data I/O
+- spaCy for lemmatisation
 - NLTK Snowball stemmer for optional stemming
-- scikit-learn TF-IDF and TruncatedSVD
+- scikit-learn for TF-IDF and TruncatedSVD
 
 Outputs (by default):
 - tfidf_features.npz            (sparse TF-IDF matrix)
@@ -89,13 +89,25 @@ def _load_spacy(language: str):
     try:
         nlp = spacy.load(model_name, disable=["ner", "parser", "textcat"])
     except Exception:
-        # Fallback to blank pipeline with lemmatizer if full model isn't available
+        # Fallback to a lightweight blank pipeline. Only add a lemmatiser if
+        # the required lookup tables are available to avoid runtime errors.
         nlp = spacy.blank(lang if len(lang) == 2 else "en")
-        if "lemmatizer" not in nlp.pipe_names:
-            try:
+        try:
+            # spacy-lookups-data provides the tables needed for rule-based lemmatisation
+            import spacy_lookups_data  # type: ignore
+
+            if "lemmatizer" not in nlp.pipe_names:
                 nlp.add_pipe("lemmatizer", config={"mode": "rule"})
+            # Initialise to load lookups
+            try:
+                nlp.initialize()
             except Exception:
-                pass
+                # If initialisation fails, remove the lemmatiser to keep pipeline usable
+                if "lemmatizer" in nlp.pipe_names:
+                    nlp.remove_pipe("lemmatizer")
+        except Exception:
+            # No lookups available; skip adding lemmatiser to prevent [E1004]
+            pass
     return nlp
 
 
@@ -272,13 +284,14 @@ class ArticleDescriptionVectoriser:
                 )
 
         cleaned_docs: List[str] = []
+        use_lemma = self.use_lemmatise and ("lemmatizer" in nlp.pipe_names)
         for doc in nlp.pipe(texts, batch_size=batch_size, n_process=n_process):
             tokens: List[str] = []
             for token in doc:
                 # Keep alphabetic tokens only, skip stopwords, very short tokens
                 if not token.is_alpha:
                     continue
-                lemma = token.lemma_.lower() if self.use_lemmatise else token.text.lower()
+                lemma = token.lemma_.lower() if use_lemma else token.text.lower()
                 if len(lemma) < 2:
                     continue
                 if lemma in stopwords:
@@ -509,7 +522,7 @@ def main(argv: Optional[Sequence[str]] = None) -> None:
     )
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__": 
     main()
 
  

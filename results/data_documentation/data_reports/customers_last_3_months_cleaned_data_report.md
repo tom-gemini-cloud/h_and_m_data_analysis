@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-11 08:15:26
+**Generated on:** 2025-08-12 10:58:48
 **File:** customers_last_3_months_cleaned.parquet
 
 ## 📄 File Information
-- **File Path:** `../data/cleaned/customers_last_3_months_cleaned.parquet`
+- **File Path:** `..\data\cleaned\customers_last_3_months_cleaned.parquet`
 - **File Type:** PARQUET
-- **File Size:** 70.23 MB
-- **Last Modified:** 2025-08-11 08:15:24
+- **File Size:** 70.21 MB
+- **Last Modified:** 2025-08-12 10:58:42
 
 ## 📊 Dataset Overview
 - **Rows:** 525,075
@@ -48,35 +48,35 @@
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `074cf76d8428363648b0ea54d3ff73012ea2cfd26e2b3fd86063988d1f28348f`: 1 occurrences
-  - `cc37e63e0bdb02d568abc87a2e12bb00428586f7f65f3e20ea8f9f50aca8396d`: 1 occurrences
-  - `5998cee76f6c06d2b661f02d2997e45178bb42490406e490511368e7519ea3a0`: 1 occurrences
-  - `5b7b7e965318f95e3b14cbb7bf69a82445346a108ab4e5245ad0d4fe066c4548`: 1 occurrences
-  - `f4ef20280543a284b2612c354cbfabc8f1c4b2e0d3c9c248400fdc997f8715ed`: 1 occurrences
+  - `3cf0fbb32bb6879c18b1e7edd70e383cdfd2daa571c49108a43c7f651f1960fd`: 1 occurrences
+  - `844f890a35f5f16edff61e0c229a4120b4be3faa050bf1d65448d06595df65c7`: 1 occurrences
+  - `225dab084fd8c37d784f1285853db2ee6d1b284e91421c95b7f6b24557fda200`: 1 occurrences
+  - `00e59bc10e162c83758a8ece0d6536d96fe2c7afdae9d5f97e58e16bd2a32619`: 1 occurrences
+  - `6bd7ec6c805702bb2742e24d14d7d3db3044569306fa59531d38dcf1c51ee07b`: 1 occurrences
 
 ### club_member_status
 - **Unique Values:** 4
 - **Top Values:**
   - `PRE-CREATE`: 10,707 occurrences
-  - `NONE`: 745 occurrences
   - `LEFT CLUB`: 65 occurrences
+  - `NONE`: 745 occurrences
   - `ACTIVE`: 513,558 occurrences
 
 ### fashion_news_frequency
 - **Unique Values:** 3
 - **Top Values:**
   - `Monthly`: 165 occurrences
-  - `Regularly`: 221,089 occurrences
   - `NONE`: 303,821 occurrences
+  - `Regularly`: 221,089 occurrences
 
 ### postal_code
 - **Unique Values:** 246,741
 - **Top Values:**
-  - `298996c342f37dbeaf89019c188c8926647c10a649c2b7bcbeff146ca948d441`: 4 occurrences
-  - `7c2eba8336f713d769800734cd657a753858093067949a10b94f11c36e77b3e5`: 4 occurrences
-  - `5ca1bbaaac1d64ecd494b13b0f06c8b24ab8b76c7d4ceeb618a0f6954b2869f8`: 2 occurrences
-  - `dd606ba4be1ee2dd4d1dceb5dadfb81117322e32e0d15612af3adcb7b58042dd`: 4 occurrences
-  - `4f1a605e9afbb4a75d663ec3447cb5cc5ac38b6bc9c11f675a615753baac1976`: 1 occurrences
+  - `029e1052f1b66d4e3e74ea6218d95186fc964cfd643b839ac603c24693c540ab`: 1 occurrences
+  - `7d73adf5f1950d79fce1fdb7d97fb3b4eeaeadb6cacbd09d0afe4870fe38ba2f`: 3 occurrences
+  - `2893122a9e32bcce47979b2627dd3cbf2f92ca3785c5e609d8cc55eccd1742b0`: 2 occurrences
+  - `890951edf804be6dd01a18481020ef5577d64696abebfdb6a338047a7ac1e05d`: 1 occurrences
+  - `959ff299883da9a25ae877063077be5ef22e356a35b1db30f87a5c1a05f12452`: 1 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 50.51 MB
