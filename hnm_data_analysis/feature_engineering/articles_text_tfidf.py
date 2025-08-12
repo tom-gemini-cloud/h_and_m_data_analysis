@@ -119,6 +119,23 @@ def _normalise_whitespace(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
 
 
+def _json_safe(value: Any) -> Any:
+    """Convert objects to JSON-safe representations (recursively)."""
+    try:
+        json.dumps(value)
+        return value
+    except TypeError:
+        pass
+    # Dict
+    if isinstance(value, dict):
+        return {k: _json_safe(v) for k, v in value.items()}
+    # List/Tuple/Set
+    if isinstance(value, (list, tuple, set)):
+        return [_json_safe(v) for v in value]
+    # Fallback to string representation
+    return str(value)
+
+
 @dataclass
 class TfidfConfig:
     max_features: int
@@ -207,7 +224,7 @@ class ArticleDescriptionVectoriser:
         # Filter out NO_DESCRIPTION rows (case-insensitive) and empties
         df = df.filter(
             (pl.col(self.text_column).str.to_lowercase() != "no_description")
-            & (pl.col(self.text_column).str.lengths() > 0)
+            & (pl.col(self.text_column).str.len_chars() > 0)
         )
 
         self.df = df
@@ -374,7 +391,7 @@ class ArticleDescriptionVectoriser:
             "language": self.language,
             "use_lemmatise": self.use_lemmatise,
             "use_stem": self.use_stem,
-            "tfidf_params": self.vectorizer.get_params(),
+            "tfidf_params": _json_safe(self.vectorizer.get_params()),
         }
         with open(config_path, "w", encoding="utf-8") as f:
             json.dump(cfg, f, indent=2)
