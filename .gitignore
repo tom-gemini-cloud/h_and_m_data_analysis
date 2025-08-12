@@ -49,8 +49,7 @@ spark-warehouse/
 *.xml
 *.xlsx
 *.xls
-data/raw/
-data/processed/
+data/
 
 # Model files
 *.pkl

@@ -449,7 +449,7 @@ class ArticleDescriptionVectoriser:
 
         if output_dir is None:
             base = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-            output_dir = os.path.join(base, "data", "processed", "articles_tfidf")
+            output_dir = os.path.join(base, "data", "features")
 
         self.save_features(output_dir)
         if include_svd and emb is not None:

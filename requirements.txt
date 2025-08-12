@@ -17,6 +17,8 @@ scikit-learn==1.3.2
 spacy>=3.4.0
 nltk
 spacy-lookups-data
+sentence-transformers>=2.2.0
+torch>=1.13.0
 
 # Performance Monitoring
 py4j
