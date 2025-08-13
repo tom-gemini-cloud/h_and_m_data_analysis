@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-13 09:21:52
+**Generated on:** 2025-08-13 09:32:44
 **File:** articles_features_final.parquet
 
 ## 📄 File Information
 - **File Path:** `data/features/final/articles_features_final.parquet`
 - **File Type:** PARQUET
 - **File Size:** 8.7 MB
-- **Last Modified:** 2025-08-13 09:21:52
+- **Last Modified:** 2025-08-13 09:32:44
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -49,7 +49,7 @@
 | product_type_no_negative_fixed | Boolean | 0 | 0.0% | 2 | 0.0% |
 | graphical_appearance_no_negative_fixed | Boolean | 0 | 0.0% | 2 | 0.0% |
 | product_code_invalid | Boolean | 0 | 0.0% | 1 | 0.0% |
-| cluster_label | Int64 | 69 | 0.16% | 33 | 0.08% |
+| bert_cluster | Int64 | 69 | 0.16% | 33 | 0.08% |
 
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
@@ -62,28 +62,28 @@
 | index_group_no | 42298 | 2.8064 | N/A | 1 | N/A | N/A | N/A | 26 |
 | section_no | 42298 | 40.15 | N/A | 2 | N/A | N/A | N/A | 97 |
 | garment_group_no | 42298 | 1010.9849 | N/A | 1001 | N/A | N/A | N/A | 1025 |
-| cluster_label | 42229 | 16.3208 | N/A | 0 | N/A | N/A | N/A | 31 |
+| bert_cluster | 42229 | 16.3208 | N/A | 0 | N/A | N/A | N/A | 31 |
 
 ## 📝 Categorical Column Analysis
 ### prod_name
 - **Unique Values:** 21,219
 - **Average Length:** 15.97 characters
 - **Top Values:**
-  - `Air mockneck jumper`: 2 occurrences
-  - `Lurex bolero`: 1 occurrences
-  - `PQ VISBY YAK POLO`: 1 occurrences
-  - `Pearl bag`: 1 occurrences
-  - `Kat sandalette`: 3 occurrences
+  - `Mom Fit Trash`: 4 occurrences
+  - `Portofino`: 2 occurrences
+  - `ANNA-LENA buckethat`: 1 occurrences
+  - `DORA COTTON PUFF SHIRT`: 1 occurrences
+  - `AMAZON LONG JUMPSUIT`: 2 occurrences
 
 ### index_code
 - **Unique Values:** 10
 - **Average Length:** 1.0 characters
 - **Top Values:**
-  - `H`: 2,832 occurrences
-  - `C`: 3,474 occurrences
-  - `D`: 7,111 occurrences
-  - `I`: 2,471 occurrences
+  - `A`: 12,862 occurrences
+  - `B`: 3,919 occurrences
   - `S`: 1,328 occurrences
+  - `H`: 2,832 occurrences
+  - `F`: 4,717 occurrences
 
 ## 💾 Memory Usage
 - **Estimated Total Memory:** 6.51 MB
@@ -119,7 +119,7 @@
 | product_type_no_negative_fixed | 0.0051 |
 | graphical_appearance_no_negative_fixed | 0.0051 |
 | product_code_invalid | 0.0051 |
-| cluster_label | 0.3278 |
+| bert_cluster | 0.3278 |
 
 ## 💡 Data Quality Recommendations
 - **Potential ID columns detected:** article_id - Verify if these should be used as identifiers
