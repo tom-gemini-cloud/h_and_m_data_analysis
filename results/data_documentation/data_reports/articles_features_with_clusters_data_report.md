@@ -1,21 +1,21 @@
 # Data Understanding Report
-**Generated on:** 2025-08-13 09:52:17
-**File:** articles_features_final.parquet
+**Generated on:** 2025-08-13 10:29:09
+**File:** articles_features_with_clusters.parquet
 
 ## 📄 File Information
-- **File Path:** `data/features/final/articles_features_final.parquet`
+- **File Path:** `data/features/final/articles_features_with_clusters.parquet`
 - **File Type:** PARQUET
-- **File Size:** 8.06 MB
-- **Last Modified:** 2025-08-13 09:52:17
+- **File Size:** 8.09 MB
+- **Last Modified:** 2025-08-13 10:19:00
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
-- **Columns:** 14
-- **Total Cells:** 592,172
+- **Columns:** 15
+- **Total Cells:** 634,470
 
 ## 🔍 Data Quality Summary
-- **Completeness Score:** 99.99%
-- **Missing Values:** 69 (0.01%)
+- **Completeness Score:** 99.98%
+- **Missing Values:** 138 (0.02%)
 - **Duplicate Rows:** 0 (0.0%)
 
 ## 📋 Schema Information
@@ -35,14 +35,16 @@
 | garment_group_name | Categorical(Categories("")) | 0 | 0.0% | 21 | 0.05% |
 | detail_desc | Categorical(Categories("")) | 0 | 0.0% | 19,739 | 46.67% |
 | bert_cluster | Int64 | 69 | 0.16% | 33 | 0.08% |
+| categorical_cluster | Int32 | 69 | 0.16% | 49 | 0.12% |
 
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
 | bert_cluster | 42229 | 16.3208 | N/A | 0 | N/A | N/A | N/A | 31 |
+| categorical_cluster | 42229 | 21.9726 | N/A | 0 | N/A | N/A | N/A | 47 |
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 2.59 MB
+- **Estimated Total Memory:** 2.75 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
@@ -61,6 +63,7 @@
 | garment_group_name | 0.1614 |
 | detail_desc | 0.1614 |
 | bert_cluster | 0.3278 |
+| categorical_cluster | 0.1664 |
 
 ## 💡 Data Quality Recommendations
 - **Potential ID columns detected:** article_id - Verify if these should be used as identifiers
