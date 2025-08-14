@@ -35,6 +35,7 @@ from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import NearestNeighbors
 
 
 @dataclass
@@ -52,6 +53,8 @@ class ClusteringConfig:
     # DBSCAN specific
     dbscan_eps: float = 0.5
     dbscan_min_samples: int = 5
+    dbscan_metric: str = "euclidean"  # e.g., 'euclidean', 'cosine', 'hamming'
+    dbscan_p: Optional[int] = None     # Minkowski p (used when metric='minkowski')
     
     # Hierarchical specific
     linkage: str = "ward"
@@ -373,7 +376,9 @@ class ArticleClusterer:
         elif config.algorithm == "dbscan":
             model = DBSCAN(
                 eps=config.dbscan_eps,
-                min_samples=config.dbscan_min_samples
+                min_samples=config.dbscan_min_samples,
+                metric=config.dbscan_metric,
+                p=config.dbscan_p
             )
         elif config.algorithm == "gmm":
             if config.n_clusters is None:
@@ -454,6 +459,77 @@ class ArticleClusterer:
             print(f"Davies-Bouldin Index: {davies_bouldin:.4f}")
             
         return self.results
+
+    def compute_k_distances(
+        self,
+        k: int,
+        metric: str = "euclidean",
+        p: Optional[int] = None,
+        sample_size: Optional[int] = None,
+        random_state: int = 42,
+    ) -> np.ndarray:
+        """Compute sorted k-distance profile used to choose eps for DBSCAN.
+
+        Args:
+            k: Neighbour rank to use (typically equals DBSCAN min_samples)
+            metric: Distance metric (e.g., 'euclidean', 'cosine', 'hamming', 'minkowski')
+            p: Minkowski power parameter if metric='minkowski'
+            sample_size: If provided, randomly sample this many points for speed
+            random_state: RNG seed for sampling
+
+        Returns:
+            Sorted array of k-distances (ascending)
+        """
+        if self.features is None:
+            raise ValueError("Features not loaded. Call load_features() first.")
+
+        rng = np.random.default_rng(random_state)
+        X = self.features
+        if sample_size is not None and sample_size < X.shape[0]:
+            indices = rng.choice(X.shape[0], size=sample_size, replace=False)
+            X = X[indices]
+
+        # n_neighbors=k because the first neighbour is the point itself
+        nn = NearestNeighbors(n_neighbors=k, metric=metric, p=p)
+        nn.fit(X)
+        distances, _ = nn.kneighbors(X)
+        # Take the k-th distance (last column)
+        k_distances = distances[:, -1]
+        return np.sort(k_distances)
+
+    def plot_k_distance(
+        self,
+        k: int,
+        metric: str = "euclidean",
+        p: Optional[int] = None,
+        sample_size: Optional[int] = None,
+        save_path: Optional[str] = None,
+        title_suffix: str = "",
+    ) -> np.ndarray:
+        """Plot and optionally save the sorted k-distance curve.
+
+        Returns the sorted k-distance array for further analysis.
+        """
+        k_distances_sorted = self.compute_k_distances(k=k, metric=metric, p=p, sample_size=sample_size)
+
+        plt.figure(figsize=(10, 6))
+        plt.plot(k_distances_sorted)
+        plt.xlabel("Points sorted by k-distance")
+        plt.ylabel(f"{metric} distance to {k}-th neighbour")
+        title = f"k-distance plot (k={k}, metric={metric})"
+        if title_suffix:
+            title += f" {title_suffix}"
+        plt.title(title)
+        plt.grid(True, alpha=0.3)
+
+        if save_path:
+            save_dir = os.path.dirname(save_path)
+            if save_dir:
+                os.makedirs(save_dir, exist_ok=True)
+            plt.savefig(save_path, dpi=300, bbox_inches='tight')
+            print(f"Saved k-distance plot to: {save_path}")
+        plt.show()
+        return k_distances_sorted
         
     def interpret_clusters(self, top_features: int = 10) -> Dict[int, Dict[str, Any]]:
         """
@@ -501,12 +577,18 @@ class ArticleClusterer:
                     
                     for col in categorical_cols:
                         if col in cluster_metadata.columns:
-                            top_values = (
-                                cluster_metadata[col]
-                                .value_counts()
+                            # Build a plain Python {category_value: count} dict
+                            vc_df = (
+                                cluster_metadata
+                                .group_by(col)
+                                .count()
+                                .sort("count", descending=True)
                                 .head(5)
-                                .to_dict()
                             )
+                            top_values: Dict[str, int] = {
+                                (str(val) if val is not None else "None"): int(cnt)
+                                for val, cnt in vc_df.iter_rows()
+                            }
                             summary[f"top_{col}"] = top_values
                             
             cluster_summaries[cluster_id] = summary
