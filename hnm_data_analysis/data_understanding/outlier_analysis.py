@@ -39,7 +39,7 @@ class OutlierSummary:
 
 class OutlierAnalyser:
     """
-    Comprehensive outlier detection and analysis for numerical datasets.
+    Outlier detection and analysis for numerical datasets.
     
     This class implements multiple statistical methods for outlier detection:
     - Interquartile Range (IQR) method
@@ -320,7 +320,7 @@ class OutlierAnalyser:
     
     def generate_markdown_report(self, output_path: Optional[str] = None) -> str:
         """
-        Generate comprehensive Markdown report for outlier analysis.
+        Generate Markdown report for outlier analysis.
         
         Args:
             output_path: Optional custom output directory path

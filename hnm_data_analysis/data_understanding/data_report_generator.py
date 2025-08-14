@@ -1,7 +1,7 @@
 """
 Data Report Generator Module
 
-This module provides functionality to generate comprehensive Markdown reports
+This module provides functionality to generate Markdown reports
 for data files (CSV and Parquet) to help understand dataset characteristics,
 quality, and structure.
 """
@@ -15,7 +15,7 @@ from datetime import datetime
 
 class DataReportGenerator:
     """
-    Generates comprehensive data understanding reports for CSV and Parquet files.
+    Generates data understanding reports for CSV and Parquet files.
     
     The report includes:
     - Dataset overview (shape, file info)
@@ -46,17 +46,23 @@ class DataReportGenerator:
             raise ValueError("File must be either CSV or Parquet format")
     
     def load_data(self) -> pl.DataFrame:
-        """Load data from file with optional sampling."""
+        """Load data from file with optional sampling.
+
+        For CSV files, when a `sample_size` is provided we only read the first N rows
+        using Polars' `n_rows` parameter to avoid loading the entire dataset into memory.
+        """
         try:
             if self.file_path.suffix.lower() == '.csv':
                 if self.sample_size:
-                    # Read with sampling for large CSV files
-                    self.df = pl.read_csv(self.file_path).sample(n=self.sample_size)
+                    # Read only the first N rows to keep memory usage reasonable on huge CSVs
+                    self.df = pl.read_csv(self.file_path, n_rows=self.sample_size)
                 else:
                     self.df = pl.read_csv(self.file_path)
             else:  # parquet
                 if self.sample_size:
-                    self.df = pl.read_parquet(self.file_path).sample(n=self.sample_size)
+                    # Parquet supports efficient row selection but Polars does not expose n_rows for parquet
+                    # so we read fully and then take the head N rows which is typically cheap for parquet
+                    self.df = pl.read_parquet(self.file_path).head(self.sample_size)
                 else:
                     self.df = pl.read_parquet(self.file_path)
             
@@ -262,7 +268,7 @@ class DataReportGenerator:
             return {'message': 'Memory usage estimation not available'}
     
     def generate_markdown_report(self) -> str:
-        """Generate comprehensive Markdown report."""
+        """Generate Markdown report for data understanding."""
         if self.df is None:
             self.load_data()
         
