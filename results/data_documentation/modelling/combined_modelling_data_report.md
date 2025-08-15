@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-15 12:59:42
+**Generated on:** 2025-08-15 13:59:52
 **File:** combined_modelling_data.parquet
 
 ## 📄 File Information
 - **File Path:** `c:\Users\tom\coding_projects\data_analytics_projects\h_and_m_data_analysis\notebooks\..\data\modelling_data\combined_modelling_data.parquet`
 - **File Type:** PARQUET
-- **File Size:** 2015.32 MB
-- **Last Modified:** 2025-08-15 12:59:31
+- **File Size:** 2014.39 MB
+- **Last Modified:** 2025-08-15 13:59:40
 
 ## 📊 Dataset Overview
 - **Rows:** 3,904,391
@@ -86,11 +86,11 @@
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `43a0e83b2fc76fc020fff0063610c1a8b841cd2626776d268f60af26394c71a8`: 2 occurrences
-  - `729cb04f181f230879aa3bd3c5ff65ada61298fa2e1ec4a3fc32558f779b431d`: 9 occurrences
-  - `879fed9c416e11cba9b77935e4f4de52a48301a863e3376c31f41ada2534c46b`: 4 occurrences
-  - `5ee0bef969ee86e6f5ed7a02a0d7423a81d6a3e4644f03eab3876085cc007334`: 11 occurrences
-  - `348ca71f6fe303d1f995f82446b3ec5a3acb84d889a1f21794ae20f6ccadfc0d`: 1 occurrences
+  - `3e0cd6f02c44be42993aa52ba0b69af17850ec138d19547de608242694464d85`: 10 occurrences
+  - `e099e04598ed4177e6d3dc8274bc99885a0fd025d5b13ed58ae3cc3b66298f83`: 11 occurrences
+  - `a16b47efaf83e2f8ed85d9039213886fc25c3de9d8b0fd178e8c0699dad6d151`: 12 occurrences
+  - `c1b9e20ee75737e52e06474b98497b383c550735cbb53664aa6e1c3ac6e517b1`: 1 occurrences
+  - `6508eb60ef07a09b0c6fc84a58bcb3ecc425258751465f2cbd188ab089a9d218`: 9 occurrences
 
 ### created_by
 - **Unique Values:** 1
@@ -102,15 +102,15 @@
 - **Unique Values:** 2
 - **Average Length:** 39.64 characters
 - **Top Values:**
-  - `Developing Customers (Moderate Activity)`: 2,502,162 occurrences
   - `Champions (High Value, High Engagement)`: 1,402,229 occurrences
+  - `Developing Customers (Moderate Activity)`: 2,502,162 occurrences
 
 ### preference_cluster_label
 - **Unique Values:** 2
 - **Average Length:** 27.83 characters
 - **Top Values:**
-  - `Moderate Preference Shoppers`: 3,579,175 occurrences
   - `Consistent Style Followers`: 325,216 occurrences
+  - `Moderate Preference Shoppers`: 3,579,175 occurrences
 
 ### hybrid_cluster_label
 - **Unique Values:** 2
