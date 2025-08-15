@@ -1,6 +1,6 @@
 # Model Evaluation Summary Report
 
-**Generated:** 2025-08-15 18:21:49
+**Generated:** 2025-08-15 19:40:29
 
 **Models Evaluated:** 2
 **Test Dataset Size:** 10,000 transactions
@@ -9,8 +9,8 @@
 ## Performance Rankings
 
 ### By Average Recommendation Score:
-  1. Content Based: 0.7448
-  2. Collaborative Filtering: 0.0237
+  1. Content Based: 0.4468
+  2. Collaborative Filtering: 0.1949
 
 ### By Customer Coverage:
   1. Collaborative Filtering: 100.00%
@@ -25,7 +25,7 @@
 
 | Model | Average Score | Coverage | Successful Recs | Total Tested |
 |-------|---------------|----------|-----------------|--------------|
-| Collaborative Filtering | 0.0237 | 100.00% | 20 | 20 |
-| Content Based | 0.7448 | 100.00% | 20 | 20 |
+| Collaborative Filtering | 0.1949 | 100.00% | 20 | 20 |
+| Content Based | 0.4468 | 100.00% | 20 | 20 |
 
 🎉 **Model evaluation completed successfully!** 🎉
