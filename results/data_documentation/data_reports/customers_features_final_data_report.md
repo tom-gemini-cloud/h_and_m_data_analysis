@@ -1,13 +1,13 @@
 # Data Understanding Report
-**Generated on:** 2025-08-14 12:11:41
+**Generated on:** 2025-08-15 10:36:07
 **File:** customers_features_final.parquet
 **Note:** Analysis based on sample of 50,000 records
 
 ## 📄 File Information
-- **File Path:** `..\data\features\final\customers_features_final.parquet`
+- **File Path:** `../data/features/final/customers_features_final.parquet`
 - **File Type:** PARQUET
-- **File Size:** 81.98 MB
-- **Last Modified:** 2025-08-14 12:11:41
+- **File Size:** 81.96 MB
+- **Last Modified:** 2025-08-15 10:36:07
 
 ## 📊 Dataset Overview
 - **Rows:** 50,000
@@ -27,71 +27,71 @@
 | Active | Float64 | 0 | 0.0% | 2 | 0.0% |
 | club_member_status | Categorical | 0 | 0.0% | 4 | 0.01% |
 | fashion_news_frequency | Categorical | 0 | 0.0% | 3 | 0.01% |
-| age | Float64 | 0 | 0.0% | 73 | 0.15% |
-| postal_code | Categorical | 0 | 0.0% | 43,603 | 87.21% |
+| age | Float64 | 0 | 0.0% | 72 | 0.14% |
+| postal_code | Categorical | 0 | 0.0% | 43,606 | 87.21% |
 | recency | Int64 | 0 | 0.0% | 91 | 0.18% |
-| frequency | UInt32 | 0 | 0.0% | 120 | 0.24% |
-| monetary | Float64 | 0 | 0.0% | 25,799 | 51.6% |
-| purchase_diversity_score | Float64 | 0 | 0.0% | 4,240 | 8.48% |
-| price_sensitivity_index | Float64 | 0 | 0.0% | 30,840 | 61.68% |
-| colour_preference_entropy | Float64 | 0 | 0.0% | 4,594 | 9.19% |
-| style_consistency_score | Float64 | 0 | 0.0% | 4,893 | 9.79% |
+| frequency | UInt32 | 0 | 0.0% | 126 | 0.25% |
+| monetary | Float64 | 0 | 0.0% | 26,050 | 52.1% |
+| purchase_diversity_score | Float64 | 0 | 0.0% | 4,313 | 8.63% |
+| price_sensitivity_index | Float64 | 0 | 0.0% | 31,061 | 62.12% |
+| colour_preference_entropy | Float64 | 0 | 0.0% | 4,689 | 9.38% |
+| style_consistency_score | Float64 | 0 | 0.0% | 5,068 | 10.14% |
 | dataset_created_at | String | 0 | 0.0% | 1 | 0.0% |
 | created_by | String | 0 | 0.0% | 1 | 0.0% |
 
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
-| FN | 50000 | 0.4184 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
-| Active | 50000 | 0.4124 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
-| age | 50000 | 35.052 | N/A | 16.0 | N/A | N/A | N/A | 95.0 |
-| recency | 50000 | 38.5158 | N/A | 1 | N/A | N/A | N/A | 91 |
-| monetary | 50000 | 201.2076 | N/A | 2.39 | N/A | N/A | N/A | 7359.5599999999895 |
-| purchase_diversity_score | 50000 | 0.9537 | N/A | -0.0 | N/A | N/A | N/A | 2.9394795182511317 |
-| price_sensitivity_index | 50000 | 0.4668 | N/A | 0.0 | N/A | N/A | N/A | 2.502406831175997 |
-| colour_preference_entropy | 50000 | 1.4452 | N/A | -0.0 | N/A | N/A | N/A | 4.3604286775872385 |
-| style_consistency_score | 50000 | 0.332 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
+| FN | 50000 | 0.4206 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
+| Active | 50000 | 0.4131 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
+| age | 50000 | 35.0329 | N/A | 16.0 | N/A | N/A | N/A | 92.0 |
+| recency | 50000 | 38.2717 | N/A | 1 | N/A | N/A | N/A | 91 |
+| monetary | 50000 | 204.6296 | N/A | 2.39 | N/A | N/A | N/A | 10500.579999999987 |
+| purchase_diversity_score | 50000 | 0.9613 | N/A | -0.0 | N/A | N/A | N/A | 3.0945884966423414 |
+| price_sensitivity_index | 50000 | 0.4689 | N/A | 0.0 | N/A | N/A | N/A | 2.502406831175997 |
+| colour_preference_entropy | 50000 | 1.4587 | N/A | -0.0 | N/A | N/A | N/A | 4.249743855419998 |
+| style_consistency_score | 50000 | 0.3288 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
 
 ## 📝 Categorical Column Analysis
 ### customer_id
 - **Unique Values:** 50,000
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `b10fe321b14fa7190de6c9255936111443fa1d43ee8b4d663a22e70ec51c1a5e`: 1 occurrences
-  - `0d8e2f3bf675e853eaded44267b50b94db081665a4d2cea784fc92c551a9b652`: 1 occurrences
-  - `980bc296cd74bbd100741b11abf1d474eb858c51e3dc1e7f1fea8c1335ad7cf0`: 1 occurrences
-  - `3bdec4f8787a9ee8805146e33229e5d12c08787718fc3607f5851ce0e7bd3b91`: 1 occurrences
-  - `a1b2e2bba03249efbc68644adfa19ec322aaadc3ed3b7103f0bf01d304849c5c`: 1 occurrences
+  - `8f63eefa9fc3494d2f3f928f844d82bb90ec67228e5f1936130bcc25f3314029`: 1 occurrences
+  - `da407fd151ba400c4a862cb288c1bf23dc194657bc5624b734995f188e45b7ef`: 1 occurrences
+  - `841debe23f0814c72889f2d06860a0c03b0ba83bdcb8acc0b77a3ceb95f875d6`: 1 occurrences
+  - `30bc92b2be8b8bac4ed7e13ed792c81e9f817c4966eba86ac5a8dbf20594318b`: 1 occurrences
+  - `19124a9a81b38a6613616530fc8641f022afeb69ad806e93b3ac377d57788d54`: 1 occurrences
 
 ### club_member_status
 - **Unique Values:** 4
 - **Top Values:**
-  - `PRE-CREATE`: 1,031 occurrences
-  - `NONE`: 67 occurrences
-  - `ACTIVE`: 48,895 occurrences
-  - `LEFT CLUB`: 7 occurrences
+  - `PRE-CREATE`: 1,032 occurrences
+  - `NONE`: 71 occurrences
+  - `ACTIVE`: 48,891 occurrences
+  - `LEFT CLUB`: 6 occurrences
 
 ### fashion_news_frequency
 - **Unique Values:** 3
 - **Top Values:**
-  - `Regularly`: 20,975 occurrences
-  - `Monthly`: 12 occurrences
-  - `NONE`: 29,013 occurrences
+  - `NONE`: 28,921 occurrences
+  - `Regularly`: 21,065 occurrences
+  - `Monthly`: 14 occurrences
 
 ### postal_code
-- **Unique Values:** 43,603
+- **Unique Values:** 43,606
 - **Top Values:**
-  - `313be0957c4b4d16cff29b3a06340014cc123113d156e4e1ec545102ac1ea184`: 1 occurrences
-  - `2efd7249f292d89bdc248d29e87c4357f31b07b91e10edb45b946e06e6ca2d01`: 1 occurrences
-  - `bc4be0c75909d56bc3c45cc020f72e816c09a8dd6fe73602c0910abfae71ee4e`: 1 occurrences
-  - `d915f97611002a65ce45762f2b934916a22b967c7661c6f10b49eb300d0d2d04`: 1 occurrences
-  - `c22dd5e6cc124b23faa826ac50f675c516e442f6cc0569a95bf190baa599dfa1`: 1 occurrences
+  - `3fd2eda3b3f66968326c67880a29ab535292bcf0e0936bfb600578a2e00da574`: 1 occurrences
+  - `b5abadfee071957e251067b7107cd53fca8550c6e3eab4756a2f7682fec05e33`: 1 occurrences
+  - `6538541e5bd329c67e6760ecc086fc67f888e799d57f6b314ee4f3989c03fc89`: 1 occurrences
+  - `b4f4a1cf68d98daebc3351c17c761c0f71847bf88d54845c8ffcb88ffaa5c666`: 1 occurrences
+  - `0075c1895df52a4aa06d72e904f18bac2fa36277d55855dc28ab3576412122cf`: 1 occurrences
 
 ### dataset_created_at
 - **Unique Values:** 1
 - **Average Length:** 26.0 characters
 - **Top Values:**
-  - `2025-08-14T12:11:39.236351`: 50,000 occurrences
+  - `2025-08-15T10:36:06.677491`: 50,000 occurrences
 
 ### created_by
 - **Unique Values:** 1
