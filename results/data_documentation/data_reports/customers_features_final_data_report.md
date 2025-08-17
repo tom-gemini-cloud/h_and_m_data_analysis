@@ -1,13 +1,13 @@
 # Data Understanding Report
-**Generated on:** 2025-08-15 10:36:07
+**Generated on:** 2025-08-16 09:44:26
 **File:** customers_features_final.parquet
 **Note:** Analysis based on sample of 50,000 records
 
 ## 📄 File Information
 - **File Path:** `../data/features/final/customers_features_final.parquet`
 - **File Type:** PARQUET
-- **File Size:** 81.96 MB
-- **Last Modified:** 2025-08-15 10:36:07
+- **File Size:** 81.92 MB
+- **Last Modified:** 2025-08-16 09:44:25
 
 ## 📊 Dataset Overview
 - **Rows:** 50,000
@@ -32,10 +32,10 @@
 | recency | Int64 | 0 | 0.0% | 91 | 0.18% |
 | frequency | UInt32 | 0 | 0.0% | 126 | 0.25% |
 | monetary | Float64 | 0 | 0.0% | 26,050 | 52.1% |
-| purchase_diversity_score | Float64 | 0 | 0.0% | 4,313 | 8.63% |
+| purchase_diversity_score | Float64 | 0 | 0.0% | 4,283 | 8.57% |
 | price_sensitivity_index | Float64 | 0 | 0.0% | 31,061 | 62.12% |
-| colour_preference_entropy | Float64 | 0 | 0.0% | 4,689 | 9.38% |
-| style_consistency_score | Float64 | 0 | 0.0% | 5,068 | 10.14% |
+| colour_preference_entropy | Float64 | 0 | 0.0% | 4,722 | 9.44% |
+| style_consistency_score | Float64 | 0 | 0.0% | 5,072 | 10.14% |
 | dataset_created_at | String | 0 | 0.0% | 1 | 0.0% |
 | created_by | String | 0 | 0.0% | 1 | 0.0% |
 
@@ -47,9 +47,9 @@
 | age | 50000 | 35.0329 | N/A | 16.0 | N/A | N/A | N/A | 92.0 |
 | recency | 50000 | 38.2717 | N/A | 1 | N/A | N/A | N/A | 91 |
 | monetary | 50000 | 204.6296 | N/A | 2.39 | N/A | N/A | N/A | 10500.579999999987 |
-| purchase_diversity_score | 50000 | 0.9613 | N/A | -0.0 | N/A | N/A | N/A | 3.0945884966423414 |
+| purchase_diversity_score | 50000 | 0.9613 | N/A | 0.0 | N/A | N/A | N/A | 3.094588496642342 |
 | price_sensitivity_index | 50000 | 0.4689 | N/A | 0.0 | N/A | N/A | N/A | 2.502406831175997 |
-| colour_preference_entropy | 50000 | 1.4587 | N/A | -0.0 | N/A | N/A | N/A | 4.249743855419998 |
+| colour_preference_entropy | 50000 | 1.4587 | N/A | 0.0 | N/A | N/A | N/A | 4.2497438554199976 |
 | style_consistency_score | 50000 | 0.3288 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
 
 ## 📝 Categorical Column Analysis
@@ -57,41 +57,41 @@
 - **Unique Values:** 50,000
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `8f63eefa9fc3494d2f3f928f844d82bb90ec67228e5f1936130bcc25f3314029`: 1 occurrences
-  - `da407fd151ba400c4a862cb288c1bf23dc194657bc5624b734995f188e45b7ef`: 1 occurrences
-  - `841debe23f0814c72889f2d06860a0c03b0ba83bdcb8acc0b77a3ceb95f875d6`: 1 occurrences
-  - `30bc92b2be8b8bac4ed7e13ed792c81e9f817c4966eba86ac5a8dbf20594318b`: 1 occurrences
-  - `19124a9a81b38a6613616530fc8641f022afeb69ad806e93b3ac377d57788d54`: 1 occurrences
+  - `4017d21726158975c550acdad2957bbb5450e3421e77cde7bfe419c3cd32b793`: 1 occurrences
+  - `332dd3f90e5d6280d46223d2956ac1b7896f9817b5678f327b4d76f61aca0a7c`: 1 occurrences
+  - `a4890af0f2e898f07a5ad328571a4f2a85caca8b124888adb92891d9b4689169`: 1 occurrences
+  - `1f8b8bd935cdda11ecc0c1697e92f38ec343f3355ed73502832c44bcad661f40`: 1 occurrences
+  - `79fcce86e225b33da80150476edd9da9b14d56b3b1f0bae17c7cdabf57bd1f6d`: 1 occurrences
 
 ### club_member_status
 - **Unique Values:** 4
 - **Top Values:**
-  - `PRE-CREATE`: 1,032 occurrences
-  - `NONE`: 71 occurrences
-  - `ACTIVE`: 48,891 occurrences
   - `LEFT CLUB`: 6 occurrences
+  - `PRE-CREATE`: 1,032 occurrences
+  - `ACTIVE`: 48,891 occurrences
+  - `NONE`: 71 occurrences
 
 ### fashion_news_frequency
 - **Unique Values:** 3
 - **Top Values:**
-  - `NONE`: 28,921 occurrences
-  - `Regularly`: 21,065 occurrences
   - `Monthly`: 14 occurrences
+  - `Regularly`: 21,065 occurrences
+  - `NONE`: 28,921 occurrences
 
 ### postal_code
 - **Unique Values:** 43,606
 - **Top Values:**
-  - `3fd2eda3b3f66968326c67880a29ab535292bcf0e0936bfb600578a2e00da574`: 1 occurrences
-  - `b5abadfee071957e251067b7107cd53fca8550c6e3eab4756a2f7682fec05e33`: 1 occurrences
-  - `6538541e5bd329c67e6760ecc086fc67f888e799d57f6b314ee4f3989c03fc89`: 1 occurrences
-  - `b4f4a1cf68d98daebc3351c17c761c0f71847bf88d54845c8ffcb88ffaa5c666`: 1 occurrences
-  - `0075c1895df52a4aa06d72e904f18bac2fa36277d55855dc28ab3576412122cf`: 1 occurrences
+  - `e15b70acce0a1519369bcbb58ac68000373c76731e19f9837fecfdd862f36b23`: 1 occurrences
+  - `aa81dbdac04f8d9683d3eb6ecf80f11101f8b0e288604e14cfcfe953a0b77dcc`: 1 occurrences
+  - `6011cb45b14d6a4b0d432c20843143fd9f851fa9bdeb12c49559edf8bc90c6d8`: 1 occurrences
+  - `6e01db77ab1cb6f857e650d3b940a88c252b67fd47c3a672311b886b35f6da37`: 1 occurrences
+  - `1b313f0b24f44f558685b2d10c1274001a524f9f49a7a1eb34923a5ec749edf7`: 2 occurrences
 
 ### dataset_created_at
 - **Unique Values:** 1
 - **Average Length:** 26.0 characters
 - **Top Values:**
-  - `2025-08-15T10:36:06.677491`: 50,000 occurrences
+  - `2025-08-16T09:44:24.967209`: 50,000 occurrences
 
 ### created_by
 - **Unique Values:** 1

@@ -1,17 +1,17 @@
 # Data Understanding Report
-**Generated on:** 2025-08-15 12:59:42
+**Generated on:** 2025-08-15 18:35:38
 **File:** combined_modelling_data.parquet
 
 ## 📄 File Information
-- **File Path:** `c:\Users\tom\coding_projects\data_analytics_projects\h_and_m_data_analysis\notebooks\..\data\modelling_data\combined_modelling_data.parquet`
+- **File Path:** `/Users/tom/Data Analysis Projects/h_and_m_data_analysis/notebooks/../data/modelling_data/combined_modelling_data.parquet`
 - **File Type:** PARQUET
-- **File Size:** 2015.32 MB
-- **Last Modified:** 2025-08-15 12:59:31
+- **File Size:** 2011.22 MB
+- **Last Modified:** 2025-08-15 18:35:32
 
 ## 📊 Dataset Overview
 - **Rows:** 3,904,391
-- **Columns:** 40
-- **Total Cells:** 156,175,640
+- **Columns:** 32
+- **Total Cells:** 124,940,512
 
 ## 🔍 Data Quality Summary
 - **Completeness Score:** 100.0%
@@ -35,19 +35,11 @@
 | recency | Int64 | 0 | 0.0% | 91 | 0.0% |
 | frequency | UInt32 | 0 | 0.0% | 197 | 0.01% |
 | monetary | Float64 | 0 | 0.0% | 131,356 | 3.36% |
-| purchase_diversity_score | Float64 | 0 | 0.0% | 21,386 | 0.55% |
+| purchase_diversity_score | Float64 | 0 | 0.0% | 21,353 | 0.55% |
 | price_sensitivity_index | Float64 | 0 | 0.0% | 269,264 | 6.9% |
-| colour_preference_entropy | Float64 | 0 | 0.0% | 24,257 | 0.62% |
-| style_consistency_score | Float64 | 0 | 0.0% | 26,861 | 0.69% |
+| colour_preference_entropy | Float64 | 0 | 0.0% | 24,261 | 0.62% |
+| style_consistency_score | Float64 | 0 | 0.0% | 26,821 | 0.69% |
 | created_by | String | 0 | 0.0% | 1 | 0.0% |
-| rfm_cluster | Int32 | 0 | 0.0% | 2 | 0.0% |
-| preference_cluster | Int32 | 0 | 0.0% | 2 | 0.0% |
-| hybrid_cluster | Int32 | 0 | 0.0% | 2 | 0.0% |
-| behavioural_cluster | Int32 | 0 | 0.0% | 6 | 0.0% |
-| rfm_cluster_label | String | 0 | 0.0% | 2 | 0.0% |
-| preference_cluster_label | String | 0 | 0.0% | 2 | 0.0% |
-| hybrid_cluster_label | String | 0 | 0.0% | 2 | 0.0% |
-| behavioural_cluster_label | String | 0 | 0.0% | 1 | 0.0% |
 | product_type_name | Categorical(Categories("")) | 0 | 0.0% | 124 | 0.0% |
 | product_group_name | Categorical(Categories("")) | 0 | 0.0% | 18 | 0.0% |
 | graphical_appearance_name | Categorical(Categories("")) | 0 | 0.0% | 30 | 0.0% |
@@ -60,7 +52,7 @@
 | section_name | Categorical(Categories("")) | 0 | 0.0% | 56 | 0.0% |
 | garment_group_name | Categorical(Categories("")) | 0 | 0.0% | 21 | 0.0% |
 | detail_desc | Categorical(Categories("")) | 0 | 0.0% | 19,739 | 0.51% |
-| bert_cluster | Int32 | 2,460 | 0.06% | 33 | 0.0% |
+| bert_cluster | Int64 | 2,460 | 0.06% | 33 | 0.0% |
 
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
@@ -71,26 +63,22 @@
 | age | 3904391 | 35.0048 | N/A | 16.0 | N/A | N/A | N/A | 99.0 |
 | recency | 3904391 | 30.1863 | N/A | 1 | N/A | N/A | N/A | 91 |
 | monetary | 3904391 | 508.6834 | N/A | 2.39 | N/A | N/A | N/A | 19342.120000000024 |
-| purchase_diversity_score | 3904391 | 1.4317 | N/A | -0.0 | N/A | N/A | N/A | 3.1395722619867232 |
+| purchase_diversity_score | 3904391 | 1.4317 | N/A | -0.0 | N/A | N/A | N/A | 3.139572261986723 |
 | price_sensitivity_index | 3904391 | 0.633 | N/A | 0.0 | N/A | N/A | N/A | 2.7934880166020273 |
-| colour_preference_entropy | 3904391 | 2.1974 | N/A | -0.0 | N/A | N/A | N/A | 4.747015200541309 |
+| colour_preference_entropy | 3904391 | 2.1974 | N/A | -0.0 | N/A | N/A | N/A | 4.747015200541311 |
 | style_consistency_score | 3904391 | 0.1858 | N/A | 0.0 | N/A | N/A | N/A | 1.0 |
-| rfm_cluster | 3904391 | 0.3591 | N/A | 0 | N/A | N/A | N/A | 1 |
-| preference_cluster | 3904391 | 0.9167 | N/A | 0 | N/A | N/A | N/A | 1 |
-| hybrid_cluster | 3904391 | 0.089 | N/A | 0 | N/A | N/A | N/A | 1 |
-| behavioural_cluster | 3904391 | 1.5117 | N/A | 0 | N/A | N/A | N/A | 5 |
-| bert_cluster | 3901931 | 15.3364 | N/A | 0 | N/A | N/A | N/A | 31 |
+| bert_cluster | 3901931 | 16.2387 | N/A | 0 | N/A | N/A | N/A | 31 |
 
 ## 📝 Categorical Column Analysis
 ### customer_id
 - **Unique Values:** 525,075
 - **Average Length:** 64.0 characters
 - **Top Values:**
-  - `43a0e83b2fc76fc020fff0063610c1a8b841cd2626776d268f60af26394c71a8`: 2 occurrences
-  - `729cb04f181f230879aa3bd3c5ff65ada61298fa2e1ec4a3fc32558f779b431d`: 9 occurrences
-  - `879fed9c416e11cba9b77935e4f4de52a48301a863e3376c31f41ada2534c46b`: 4 occurrences
-  - `5ee0bef969ee86e6f5ed7a02a0d7423a81d6a3e4644f03eab3876085cc007334`: 11 occurrences
-  - `348ca71f6fe303d1f995f82446b3ec5a3acb84d889a1f21794ae20f6ccadfc0d`: 1 occurrences
+  - `a7a6d967223cf33aae2d345e8840b3716380a9ce3499609ef1b53f15f7803702`: 1 occurrences
+  - `6285ee21fa6fa5653e3204671b543a77eb5fbbe2ecbc1567c80b7a529c7d6cd4`: 5 occurrences
+  - `4e5992993c3a2f87f3d165357f77416e476d57be5651679f95397859a4ddf035`: 50 occurrences
+  - `96c27089edb4f90d31ef7a757d11b499ca5fa373786ca7e225c43b51cc3512cb`: 6 occurrences
+  - `10fe02a6042f5819e0bc6f0ac821ea075a333f931d9c05a57b40793126e2db7b`: 22 occurrences
 
 ### created_by
 - **Unique Values:** 1
@@ -98,35 +86,8 @@
 - **Top Values:**
   - `customer_feature_engineering.ipynb`: 3,904,391 occurrences
 
-### rfm_cluster_label
-- **Unique Values:** 2
-- **Average Length:** 39.64 characters
-- **Top Values:**
-  - `Developing Customers (Moderate Activity)`: 2,502,162 occurrences
-  - `Champions (High Value, High Engagement)`: 1,402,229 occurrences
-
-### preference_cluster_label
-- **Unique Values:** 2
-- **Average Length:** 27.83 characters
-- **Top Values:**
-  - `Moderate Preference Shoppers`: 3,579,175 occurrences
-  - `Consistent Style Followers`: 325,216 occurrences
-
-### hybrid_cluster_label
-- **Unique Values:** 2
-- **Average Length:** 20.47 characters
-- **Top Values:**
-  - `Diverse Style Seekers`: 3,556,839 occurrences
-  - `Casual Shoppers`: 347,552 occurrences
-
-### behavioural_cluster_label
-- **Unique Values:** 1
-- **Average Length:** 18.0 characters
-- **Top Values:**
-  - `Standard Customers`: 3,904,391 occurrences
-
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 1444.97 MB
+- **Estimated Total Memory:** 1005.82 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
@@ -150,14 +111,6 @@
 | colour_preference_entropy | 29.7881 |
 | style_consistency_score | 29.7881 |
 | created_by | 126.5996 |
-| rfm_cluster | 14.8941 |
-| preference_cluster | 14.8941 |
-| hybrid_cluster | 14.8941 |
-| behavioural_cluster | 14.8941 |
-| rfm_cluster_label | 147.6034 |
-| preference_cluster_label | 103.6382 |
-| hybrid_cluster_label | 76.2052 |
-| behavioural_cluster_label | 67.0233 |
 | product_type_name | 14.8941 |
 | product_group_name | 14.8941 |
 | graphical_appearance_name | 14.8941 |
@@ -170,11 +123,11 @@
 | section_name | 14.8941 |
 | garment_group_name | 14.8941 |
 | detail_desc | 14.8941 |
-| bert_cluster | 15.3595 |
+| bert_cluster | 30.2536 |
 
 ## 💡 Data Quality Recommendations
 - **Significant duplicates found** - Review and consider deduplication
-- **Low cardinality columns:** sales_channel_id, FN, Active, club_member_status, fashion_news_frequency, rfm_cluster, preference_cluster, hybrid_cluster, behavioural_cluster, rfm_cluster_label, preference_cluster_label, hybrid_cluster_label, perceived_colour_value_name, index_name, index_group_name - Good candidates for categorical encoding
+- **Low cardinality columns:** sales_channel_id, FN, Active, club_member_status, fashion_news_frequency, perceived_colour_value_name, index_name, index_group_name - Good candidates for categorical encoding
 
 ---
 *Report generated using HnM Data Analytics - Data Understanding Module*
