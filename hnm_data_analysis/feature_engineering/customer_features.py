@@ -163,21 +163,42 @@ class CustomerFeatures:
         """
         self.logger.info("Calculating RFM features...")
         
+        # Log extreme values for monitoring
+        price_stats = transactions.select([
+            pl.col("price").min().alias("min_price"),
+            pl.col("price").max().alias("max_price"),
+            pl.col("price").quantile(0.99).alias("p99_price")
+        ]).to_dict(as_series=False)
+        
+        self.logger.info(f"Price range: £{price_stats['min_price'][0]:.2f} - £{price_stats['max_price'][0]:.2f}")
+        self.logger.info(f"99th percentile: £{price_stats['p99_price'][0]:.2f}")
+        
         rfm_features = (
             transactions
             .group_by("customer_id")
             .agg([
-                # Recency: days since last purchase
+                # Recency: days since last purchase (ensure it's within data bounds)
                 (pl.lit(self.reference_date) - pl.col("t_dat").max()).dt.total_days()
-                .alias("recency"),
+                .cast(pl.Int64).clip(1, None).alias("recency"),
                 
                 # Frequency: total number of transactions
                 pl.len().alias("frequency"),
                 
-                # Monetary: total spend
+                # Monetary: total spend (validate extreme values)
                 pl.col("price").sum().alias("monetary")
             ])
         )
+        
+        # Log extreme customer behavior for validation
+        freq_stats = rfm_features.select([
+            pl.col("frequency").max().alias("max_freq"),
+            pl.col("frequency").quantile(0.99).alias("p99_freq"),
+            pl.col("monetary").max().alias("max_monetary"),
+            pl.col("monetary").quantile(0.99).alias("p99_monetary")
+        ]).to_dict(as_series=False)
+        
+        self.logger.info(f"Customer frequency max: {freq_stats['max_freq'][0]} (99th percentile: {freq_stats['p99_freq'][0]:.0f})")
+        self.logger.info(f"Customer monetary max: £{freq_stats['max_monetary'][0]:.2f} (99th percentile: £{freq_stats['p99_monetary'][0]:.2f})")
         
         return rfm_features
     
@@ -214,10 +235,11 @@ class CustomerFeatures:
             .group_by("customer_id")
             .agg([
                 # Calculate Shannon entropy: -sum(p * log2(p))
+                # Use abs() to ensure non-negative values and handle edge cases
                 (
                     -(pl.col("group_count") / pl.col("group_count").sum()) *
                     (pl.col("group_count") / pl.col("group_count").sum()).log(2)
-                ).sum().fill_nan(0.0).alias("purchase_diversity_score")
+                ).sum().fill_nan(0.0).abs().alias("purchase_diversity_score")
             ])
         )
         
@@ -286,10 +308,11 @@ class CustomerFeatures:
             .group_by("customer_id")
             .agg([
                 # Calculate Shannon entropy: -sum(p * log2(p))
+                # Use abs() to ensure non-negative values and handle edge cases
                 (
                     -(pl.col("colour_count") / pl.col("colour_count").sum()) *
                     (pl.col("colour_count") / pl.col("colour_count").sum()).log(2)
-                ).sum().fill_nan(0.0).alias("colour_preference_entropy")
+                ).sum().fill_nan(0.0).abs().alias("colour_preference_entropy")
             ])
         )
         
@@ -331,11 +354,11 @@ class CustomerFeatures:
             .agg(pl.len().alias("garment_count"))
             .group_by("customer_id")
             .agg([
-                # Calculate Shannon entropy
+                # Calculate Shannon entropy with proper handling of edge cases
                 (
                     -(pl.col("garment_count") / pl.col("garment_count").sum()) *
                     (pl.col("garment_count") / pl.col("garment_count").sum()).log(2)
-                ).sum().alias("entropy"),
+                ).sum().fill_nan(0.0).alias("entropy"),
                 
                 # Count number of distinct categories for normalisation
                 pl.len().alias("num_categories")
@@ -394,8 +417,11 @@ class CustomerFeatures:
         )
         
         # Handle missing values for customers with no transactions
+        # Calculate proper recency for customers with no transactions (use max days in dataset + 1)
+        max_recency = (self.reference_date - transactions.select(pl.col("t_dat").min()).item()).days
+        
         combined_features = combined_features.with_columns([
-            pl.col("recency").fill_null(999),  # High recency for no purchases
+            pl.col("recency").fill_null(max_recency + 1),  # Proper max recency for no purchases
             pl.col("frequency").fill_null(0),  # Zero frequency 
             pl.col("monetary").fill_null(0.0),  # Zero monetary value
             pl.col("purchase_diversity_score").fill_null(0.0),  # No diversity
