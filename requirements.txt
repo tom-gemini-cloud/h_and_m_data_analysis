@@ -20,6 +20,8 @@ spacy-lookups-data
 sentence-transformers>=2.2.0
 torch>=1.13.0
 huggingface-hub
+umap-learn
+hdbscan
 
 # Performance Monitoring
 py4j
