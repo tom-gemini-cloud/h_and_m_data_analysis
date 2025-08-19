@@ -1,12 +1,12 @@
 # Data Understanding Report
-**Generated on:** 2025-08-15 18:31:07
+**Generated on:** 2025-08-19 11:09:54
 **File:** articles_features_final.parquet
 
 ## 📄 File Information
-- **File Path:** `data/features/final/articles_features_final.parquet`
+- **File Path:** `data\features\final\articles_features_final.parquet`
 - **File Type:** PARQUET
-- **File Size:** 8.06 MB
-- **Last Modified:** 2025-08-15 18:31:07
+- **File Size:** 8.07 MB
+- **Last Modified:** 2025-08-19 11:09:54
 
 ## 📊 Dataset Overview
 - **Rows:** 42,298
@@ -34,15 +34,15 @@
 | section_name | Categorical(Categories("")) | 0 | 0.0% | 56 | 0.13% |
 | garment_group_name | Categorical(Categories("")) | 0 | 0.0% | 21 | 0.05% |
 | detail_desc | Categorical(Categories("")) | 0 | 0.0% | 19,739 | 46.67% |
-| bert_cluster | Int64 | 69 | 0.16% | 33 | 0.08% |
+| bert_cluster | Int32 | 69 | 0.16% | 32 | 0.08% |
 
 ## 📈 Statistical Summary (Numeric Columns)
 | Column | Count | Mean | Std | Min | 25% | 50% | 75% | Max |
 |--------|-------|------|-----|-----|-----|-----|-----|-----|
-| bert_cluster | 42229 | 16.3208 | N/A | 0 | N/A | N/A | N/A | 31 |
+| bert_cluster | 42229 | 14.632 | N/A | 0 | N/A | N/A | N/A | 30 |
 
 ## 💾 Memory Usage
-- **Estimated Total Memory:** 2.59 MB
+- **Estimated Total Memory:** 2.43 MB
 
 ### Memory by Column
 | Column | Memory (MB) |
@@ -60,7 +60,7 @@
 | section_name | 0.1614 |
 | garment_group_name | 0.1614 |
 | detail_desc | 0.1614 |
-| bert_cluster | 0.3278 |
+| bert_cluster | 0.1664 |
 
 ## 💡 Data Quality Recommendations
 - **Potential ID columns detected:** article_id - Verify if these should be used as identifiers
