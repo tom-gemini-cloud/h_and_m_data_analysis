@@ -2,25 +2,26 @@
 Data Modelling Module
 
 This module contains different recommendation system approaches for H&M customer data:
-- Collaborative filtering with matrix factorization
-- Content-based filtering using product features
-- Purchase prediction classification models
-- Hybrid recommendation systems
-- Comprehensive model evaluation framework
+- BERT4Rec sequential recommendation model
 
 Each model type is implemented in separate modules for modularity and reusability.
 """
 
-from .collaborative_filtering import CollaborativeFilteringModel
-from .content_based_filtering import ContentBasedFilteringModel
-from .purchase_prediction import PurchasePredictionModel
-from .hybrid_recommender import HybridRecommenderModel
-from .model_evaluation import ModelEvaluator
+from .bert4rec_modelling import (
+    SequenceOptions, prepare_sequences_with_polars,
+    build_dataloaders_for_bert4rec, BERT4RecModel, TrainConfig,
+    train_bert4rec, evaluate_next_item_topk, set_all_seeds,
+    MaskingOptions
+)
 
 __all__ = [
-    'CollaborativeFilteringModel',
-    'ContentBasedFilteringModel', 
-    'PurchasePredictionModel',
-    'HybridRecommenderModel',
-    'ModelEvaluator'
+    'SequenceOptions',
+    'prepare_sequences_with_polars',
+    'build_dataloaders_for_bert4rec',
+    'BERT4RecModel',
+    'TrainConfig',
+    'train_bert4rec',
+    'evaluate_next_item_topk',
+    'set_all_seeds',
+    'MaskingOptions'
 ]
